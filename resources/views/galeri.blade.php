@@ -22,32 +22,10 @@
     ];
 @endphp
 
-<!-- Header Banner -->
-<header class="tasty-sub-header flex flex-col z-10">
-    <img src="{{ asset('asset/Group 70@2x.avif') }}" class="tasty-sub-header-bg" alt="Header Background">
-    <div class="tasty-sub-header-overlay"></div>
-
-    <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-8 flex justify-between items-center">
-        <a href="{{ route('home') }}" class="text-2xl font-black tracking-wider uppercase text-white">
-            TASTY FOOD
-        </a>
-        <div class="hidden md:flex space-x-8 lg:space-x-10 text-xs lg:text-sm font-bold tracking-wider text-white">
-            <a href="{{ route('home') }}" class="hover:text-gray-300 transition duration-200">HOME</a>
-            <a href="{{ route('tentang') }}" class="hover:text-gray-300 transition duration-200">TENTANG</a>
-            <a href="{{ route('berita') }}" class="hover:text-gray-300 transition duration-200">BERITA</a>
-            <a href="{{ route('galeri') }}" class="hover:text-gray-300 transition duration-200 border-b-2 border-white pb-1">GALERI</a>
-            <a href="{{ route('kontak') }}" class="hover:text-gray-300 transition duration-200">KONTAK</a>
-        </div>
-    </div>
-
-    <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 flex-grow flex items-center pb-6">
-        <h1 class="text-4xl lg:text-5xl font-black tracking-wide text-white uppercase">
-            GALERI KAMI
-        </h1>
-    </div>
-</header>
-
 <style>
+    /* ========================================================================= */
+    /* STRUCTURAL & RESPONSIVE CAROUSEL STYLES                                   */
+    /* ========================================================================= */
     .tasty-carousel-frame {
         width: 100%;
         height: 420px; 
@@ -66,7 +44,76 @@
             height: 240px;
         }
     }
+
+    /* ========================================================================= */
+    /* ANIMASI KHUSUS SUB-PAGE HEADER (Elegant, Simple & Fast)                  */
+    /* ========================================================================= */
+    @keyframes subPageFadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(15px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .anim-sub-entry {
+        opacity: 0;
+        animation: subPageFadeUp 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .anim-sub-delay-1 {
+        animation-delay: 150ms;
+    }
 </style>
+
+<header class="tasty-sub-header flex flex-col z-10">
+    <img src="{{ asset('asset/Group 70@2x.avif') }}" class="tasty-sub-header-bg" alt="Header Background">
+    <div class="tasty-sub-header-overlay"></div>
+
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-8 flex justify-between md:justify-start items-center gap-16 lg:gap-20 anim-sub-entry">
+        <a href="{{ route('home') }}" class="text-2xl font-black tracking-wider uppercase text-white z-50">
+            TASTY FOOD
+        </a>
+        
+        <div class="hidden md:flex space-x-8 lg:space-x-10 text-xs lg:text-sm font-bold tracking-wider text-white">
+            <a href="{{ route('home') }}" class="hover:text-gray-300 transition duration-200">HOME</a>
+            <a href="{{ route('tentang') }}" class="hover:text-gray-300 transition duration-200">TENTANG</a>
+            <a href="{{ route('berita') }}" class="hover:text-gray-300 transition duration-200">BERITA</a>
+            <a href="{{ route('galeri') }}" class="hover:text-gray-300 transition duration-200 border-b-2 border-white pb-1">GALERI</a>
+            <a href="{{ route('kontak') }}" class="hover:text-gray-300 transition duration-200">KONTAK</a>
+        </div>
+
+        <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none z-50 p-1" aria-label="Toggle Menu">
+            <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-7 h-7 transition-transform duration-300">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </button>
+    </div>
+
+    <div id="mobile-menu" class="fixed top-0 bottom-0 right-0 w-3/4 bg-white/95 backdrop-blur-md shadow-2xl border-l border-gray-100/50 z-40 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col items-center justify-center space-y-8 text-xl font-black tracking-widest text-gray-950 md:hidden">
+        
+        <button id="mobile-menu-close" class="absolute top-10 right-6 text-gray-950 focus:outline-none p-1 hover:scale-110 transition duration-200" aria-label="Close Menu">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-7 h-7">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+
+        <a href="{{ route('home') }}" class="hover:text-amber-600 transition duration-200">HOME</a>
+        <a href="{{ route('tentang') }}" class="hover:text-amber-600 transition duration-200">TENTANG</a>
+        <a href="{{ route('berita') }}" class="hover:text-amber-600 transition duration-200">BERITA</a>
+        <a href="{{ route('galeri') }}" class="text-amber-600 transition duration-200 border-b-2 border-amber-600 pb-1">GALERI</a>
+        <a href="{{ route('kontak') }}" class="hover:text-amber-600 transition duration-200">KONTAK</a>
+    </div>
+
+    <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 flex-grow flex items-center pb-6 anim-sub-entry anim-sub-delay-1">
+        <h1 class="text-4xl lg:text-5xl font-black tracking-wide text-white uppercase">
+            GALERI KAMI
+        </h1>
+    </div>
+</header>
 
 @php
     $carouselSlides = [
@@ -76,53 +123,49 @@
     ];
 @endphp
 
-<section class="py-24 px-6 lg:px-24 bg-white">
+<section class="py-24 px-6 lg:px-24 bg-white select-none">
     <div class="max-w-7xl mx-auto">
         
-        <!-- BINGKAI UTAMA CAROUSEL -->
-        <div class="relative w-full mb-20 px-2 sm:px-0">
-            
-            <!-- Wadah Gambar (Tiga gambar ditumpuk secara absolut untuk mendukung animasi transisi) -->
+        <div class="relative w-full mb-20 px-2 sm:px-0 reveal-on-scroll">
             <div class="tasty-carousel-frame w-full rounded-[28px] overflow-hidden shadow-sm relative z-0">
-                
                 @foreach ($carouselSlides as $index => $slidePath)
                     <img src="{{ asset($slidePath) }}" 
                          class="carousel-item absolute inset-0 w-full h-full object-cover object-center select-none pointer-events-none transition-opacity duration-500 ease-in-out {{ $index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0' }}" 
                          alt="Featured Food Gallery Showcase">
                 @endforeach
-                
             </div>
 
-            <!-- TOMBOL NAVIGASI KIRI (Ditambahkan fungsi onclick="prevSlide()") -->
             <button onclick="prevSlide()" class="absolute left-0 sm:left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-11 h-11 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center tasty-arrow-shadow text-gray-900 hover:bg-gray-50 hover:scale-105 transition-all duration-200 z-20 focus:outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4 sm:w-5 sm:h-5 text-black">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                 </svg>
             </button>
 
-            <!-- TOMBOL NAVIGASI KANAN (Ditambahkan fungsi onclick="nextSlide()") -->
             <button onclick="nextSlide()" class="absolute right-0 sm:right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-11 h-11 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center tasty-arrow-shadow text-gray-900 hover:bg-gray-50 hover:scale-105 transition-all duration-200 z-20 focus:outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-4 h-4 sm:w-5 sm:h-5 text-black">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                 </svg>
             </button>
-
         </div>
 
-        <!-- Portfolio Grid bawah tetap dibiarkan utuh tanpa perubahan -->
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             @foreach ($galleryItems as $item)
-            <div class="aspect-square bg-gray-200 rounded-2xl overflow-hidden shadow border border-gray-100 hover:scale-105 transition duration-300 cursor-pointer">
-                <img src="{{ asset($item['image']) }}" class="w-full h-full object-cover" alt="Tasty Food Gallery Asset">
-            </div>
+                @php
+                    $step = $loop->index % 4;
+                    $delayClass = $step === 1 ? 'delay-100' : ($step === 2 ? 'delay-200' : ($step === 3 ? 'delay-300' : ''));
+                @endphp
+                
+                <div class="aspect-square bg-gray-200 rounded-2xl overflow-hidden shadow border border-gray-100 hover:scale-105 transition duration-300 cursor-pointer reveal-on-scroll {{ $delayClass }}">
+                    <img src="{{ asset($item['image']) }}" loading="lazy" class="w-full h-full object-cover" alt="Tasty Food Gallery Asset">
+                </div>
             @endforeach
         </div>
         
     </div>
 </section>
 
-<!-- SCRIPT PENGGERAK CAROUSEL INTERAKTIF -->
 <script>
+    // 1. Logika Penggerak Slide Carousel
     let currentSlideIndex = 0;
     const carouselItems = document.querySelectorAll('.carousel-item');
     const totalCarouselSlides = carouselItems.length;
@@ -148,5 +191,40 @@
         currentSlideIndex = (currentSlideIndex - 1 + totalCarouselSlides) % totalCarouselSlides;
         renderActiveSlide(currentSlideIndex);
     }
+
+    // 2. Logika Penggerak Hamburger Menu Mobile (Drawer 3/4)
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const menuCloseBtn = document.getElementById('mobile-menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        
+        function closeMenu() {
+            mobileMenu.classList.remove('translate-x-0');
+            mobileMenu.classList.add('translate-x-full');
+            hamburgerIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />';
+        }
+
+        function openMenu() {
+            mobileMenu.classList.remove('translate-x-full');
+            mobileMenu.classList.add('translate-x-0');
+        }
+        
+        menuBtn.addEventListener('click', function() {
+            const isOpen = mobileMenu.classList.contains('translate-x-0');
+            if (isOpen) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
+        });
+
+        menuCloseBtn.addEventListener('click', closeMenu);
+
+        const menuLinks = mobileMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    });
 </script>
 @endsection
