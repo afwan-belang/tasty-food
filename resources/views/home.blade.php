@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<!-- Hero Section (HOME.png) -->
 <style>
     .tasty-home-hero {
         background-color: #f4f4f4; 
@@ -78,7 +77,7 @@
         
     </div>
 
-    <img src="{{ asset('asset/img-4-2000x2000.png') }}" 
+    <img src="{{ asset('asset/img-4-2000x2000.avif') }}" 
          class="tasty-hero-plate-exact" 
          alt="Tasty Food Main Plate Layout">
 
@@ -101,7 +100,7 @@
         position: relative;
     }
     
-    /* Pada layar komputer/tablet, tinggi spanduk mengikuti proporsi asli Group 70.png agar tidak terpotong */
+    /* Pada layar komputer/tablet, tinggi spanduk mengikuti proporsi asli Group 70.avif agar tidak terpotong */
     @media (min-width: 1024px) {
         .tasty-fluid-banner {
             aspect-ratio: 12 / 4.9; 
@@ -122,17 +121,17 @@
     <section class="relative w-full tasty-fluid-banner overflow-visible flex items-center justify-center">
         
         <div class="absolute inset-0 z-0 pointer-events-none select-none">
-            <img src="{{ asset('asset/Group 70.png') }}" 
+            <img src="{{ asset('asset/Group 70.avif') }}" 
                  class="w-full h-full object-cover object-center" 
                  alt="Tasty Food Background Master Banner">
         </div>
 
         @php
             $foods = [
-                ['image' => 'asset/img-1.png', 'title' => 'LOREM IPSUM', 'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellusornare, augue eu rutrum commodo,'],
-                ['image' => 'asset/img-2.png', 'title' => 'LOREM IPSUM', 'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellusornare, augue eu rutrum commodo,'],
-                ['image' => 'asset/img-3.png', 'title' => 'LOREM IPSUM', 'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellusornare, augue eu rutrum commodo,'],
-                ['image' => 'asset/img-4.png', 'title' => 'LOREM IPSUM', 'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellusornare, augue eu rutrum commodo,']
+                ['image' => 'asset/img-1.avif', 'title' => 'LOREM IPSUM', 'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellusornare, augue eu rutrum commodo,'],
+                ['image' => 'asset/img-2.avif', 'title' => 'LOREM IPSUM', 'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellusornare, augue eu rutrum commodo,'],
+                ['image' => 'asset/img-3.avif', 'title' => 'LOREM IPSUM', 'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellusornare, augue eu rutrum commodo,'],
+                ['image' => 'asset/img-4.avif', 'title' => 'LOREM IPSUM', 'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellusornare, augue eu rutrum commodo,']
             ];
         @endphp
 
@@ -152,11 +151,11 @@
     </section>
 </div>
 
-<!-- Berita Kami Section (HOME.png) -->
+<!-- Berita Kami Section (HOME.avif) -->
 @php
     // 1. Data untuk Berita Utama (Featured)
     $featuredNews = [
-        'image' => 'asset/fathul-abrar-T-qI_MI2EMA-unsplash.jpg', // Ganti dengan nama file gambar Anda
+        'image' => 'asset/fathul-abrar-T-qI_MI2EMA-unsplash.avif', // Ganti dengan nama file gambar Anda
         'title' => 'LOREM IPSUM DOLOR SIT AMET, CONSECTETUR ADIPISCING ELIT',
         'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce scelerisque magna aliquet cursus tempus. Duis viverra metus et turpis elementum elementum. Aliquam rutrum placerat tellus et suscipit.'
     ];
@@ -164,22 +163,22 @@
     // 2. Data untuk 4 Berita Lebih Kecil di Sampingnya
     $otherNews = [
         [
-            'image' => 'asset/sanket-shah-SVA7TyHxojY-unsplash.jpg',
+            'image' => 'asset/sanket-shah-SVA7TyHxojY-unsplash.avif',
             'title' => 'LOREM IPSUM 1',
             'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare, augue eu rutrum commodo.'
         ],
         [
-            'image' => 'asset/sebastian-coman-photography-eBmyH7oO5wY-unsplash.jpg',
+            'image' => 'asset/sebastian-coman-photography-eBmyH7oO5wY-unsplash.avif',
             'title' => 'LOREM IPSUM 2',
             'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare, augue eu rutrum commodo.'
         ],
         [
-            'image' => 'asset/jimmy-dean-Jvw3pxgeiZw-unsplash.jpg',
+            'image' => 'asset/jimmy-dean-Jvw3pxgeiZw-unsplash.avif',
             'title' => 'LOREM IPSUM 3',
             'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare, augue eu rutrum commodo.'
         ],
         [
-            'image' => 'asset/luisa-brimble-HvXEbkcXjSk-unsplash.jpg',
+            'image' => 'asset/luisa-brimble-HvXEbkcXjSk-unsplash.avif',
             'title' => 'LOREM IPSUM 4',
             'desc' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare, augue eu rutrum commodo.'
         ]
@@ -247,15 +246,15 @@
     </div>
 </section>
 
-<!-- Galeri Kami Section (HOME.png) -->
+<!-- Galeri Kami Section (HOME.avif) -->
 @php
     $gallery = [
-        ['image' => 'asset/brooke-lark-oaz0raysASk-unsplash.jpg'],
-        ['image' => 'asset/ella-olsson-mmnKI8kMxpc-unsplash.jpg'],
-        ['image' => 'asset/eiliv-aceron-ZuIDLSz3XLg-unsplash.jpg'],
-        ['image' => 'asset/jonathan-borba-Gkc_xM3VY34-unsplash.jpg'],
-        ['image' => 'asset/mariana-medvedeva-iNwCO9ycBlc-unsplash.jpg'],
-        ['image' => 'asset/monika-grabkowska-P1aohbiT-EY-unsplash.jpg'],
+        ['image' => 'asset/brooke-lark-oaz0raysASk-unsplash.avif'],
+        ['image' => 'asset/ella-olsson-mmnKI8kMxpc-unsplash.avif'],
+        ['image' => 'asset/eiliv-aceron-ZuIDLSz3XLg-unsplash.avif'],
+        ['image' => 'asset/jonathan-borba-Gkc_xM3VY34-unsplash.avif'],
+        ['image' => 'asset/mariana-medvedeva-iNwCO9ycBlc-unsplash.avif'],
+        ['image' => 'asset/monika-grabkowska-P1aohbiT-EY-unsplash.avif'],
     ];
 @endphp
 

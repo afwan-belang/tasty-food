@@ -3,24 +3,24 @@
 @section('content')
 @php
     $mainNews = [
-        'image' => 'asset/eiliv-aceron-ZuIDLSz3XLg-unsplash.jpg'
+        'image' => 'asset/eiliv-aceron-ZuIDLSz3XLg-unsplash.avif'
     ];
 
     $beritaLainnya = [
-        ['image' => 'asset/sanket-shah-SVA7TyHxojY-unsplash.jpg'],
-        ['image' => 'asset/sebastian-coman-photography-eBmyH7oO5wY-unsplash.jpg'],
-        ['image' => 'asset/jimmy-dean-Jvw3pxgeiZw-unsplash.jpg'],
-        ['image' => 'asset/luisa-brimble-HvXEbkcXjSk-unsplash.jpg'],
-      ['image' => 'asset/sanket-shah-SVA7TyHxojY-unsplash.jpg'],
-        ['image' => 'asset/sebastian-coman-photography-eBmyH7oO5wY-unsplash.jpg'],
-        ['image' => 'asset/jimmy-dean-Jvw3pxgeiZw-unsplash.jpg'],
-        ['image' => 'asset/luisa-brimble-HvXEbkcXjSk-unsplash.jpg']
+        ['image' => 'asset/sanket-shah-SVA7TyHxojY-unsplash.avif'],
+        ['image' => 'asset/sebastian-coman-photography-eBmyH7oO5wY-unsplash.avif'],
+        ['image' => 'asset/jimmy-dean-Jvw3pxgeiZw-unsplash.avif'],
+        ['image' => 'asset/luisa-brimble-HvXEbkcXjSk-unsplash.avif'],
+      ['image' => 'asset/sanket-shah-SVA7TyHxojY-unsplash.avif'],
+        ['image' => 'asset/sebastian-coman-photography-eBmyH7oO5wY-unsplash.avif'],
+        ['image' => 'asset/jimmy-dean-Jvw3pxgeiZw-unsplash.avif'],
+        ['image' => 'asset/luisa-brimble-HvXEbkcXjSk-unsplash.avif']
     ];
 @endphp
 
 <!-- Header Banner -->
 <header class="tasty-sub-header flex flex-col z-10">
-    <img src="{{ asset('asset/Group 70@2x.png') }}" class="tasty-sub-header-bg" alt="Header Background">
+    <img src="{{ asset('asset/Group 70@2x.avif') }}" class="tasty-sub-header-bg" alt="Header Background">
     <div class="tasty-sub-header-overlay"></div>
 
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-8 flex justify-between items-center">
@@ -45,7 +45,6 @@
 
 <section class="py-24 px-6 lg:px-24 bg-gray-50">
     <div class="max-w-7xl mx-auto">
-        <!-- Main Highlighted News (BERITA.png) -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24 bg-white rounded-3xl p-6 lg:p-10 shadow-xl border border-gray-100">
             
             <img src="{{ asset($mainNews['image']) }}" 

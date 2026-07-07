@@ -3,28 +3,28 @@
 @section('content')
 @php
     $mainSlider = [
-        'image' => 'asset/ella-olsson-mmnKI8kMxpc-unsplash.jpg'
+        'image' => 'asset/ella-olsson-mmnKI8kMxpc-unsplash.avif'
     ];
 
     $galleryItems = [
-        ['image' => 'asset/anh-nguyen-kcA-c3f_3FE-unsplash.jpg'],
-        ['image' => 'asset/anna-pelzer-IGfIGP5ONV0-unsplash.jpg'],
-        ['image' => 'asset/brooke-lark-1Rm9GLHV0UA-unsplash.jpg'],
-        ['image' => 'asset/brooke-lark-nBtmglfY0HU-unsplash.jpg'],
-        ['image' => 'asset/brooke-lark-oaz0raysASk-unsplash.jpg'],
-        ['image' => 'asset/eiliv-aceron-ZuIDLSz3XLg-unsplash.jpg'],
-        ['image' => 'asset/fathul-abrar-T-qI_MI2EMA-unsplash.jpg'],
-        ['image' => 'asset/jimmy-dean-Jvw3pxgeiZw-unsplash.jpg'],
-        ['image' => 'asset/luisa-brimble-HvXEbkcXjSk-unsplash.jpg'],
-        ['image' => 'asset/sebastian-coman-photography-eBmyH7oO5wY-unsplash.jpg'],
-        ['image' => 'asset/sanket-shah-SVA7TyHxojY-unsplash.jpg'],
-        ['image' => 'asset/luisa-brimble-HvXEbkcXjSk-unsplash.jpg'],
+        ['image' => 'asset/anh-nguyen-kcA-c3f_3FE-unsplash.avif'],
+        ['image' => 'asset/anna-pelzer-IGfIGP5ONV0-unsplash.avif'],
+        ['image' => 'asset/brooke-lark-1Rm9GLHV0UA-unsplash.avif'],
+        ['image' => 'asset/brooke-lark-nBtmglfY0HU-unsplash.avif'],
+        ['image' => 'asset/brooke-lark-oaz0raysASk-unsplash.avif'],
+        ['image' => 'asset/eiliv-aceron-ZuIDLSz3XLg-unsplash.avif'],
+        ['image' => 'asset/fathul-abrar-T-qI_MI2EMA-unsplash.avif'],
+        ['image' => 'asset/jimmy-dean-Jvw3pxgeiZw-unsplash.avif'],
+        ['image' => 'asset/luisa-brimble-HvXEbkcXjSk-unsplash.avif'],
+        ['image' => 'asset/sebastian-coman-photography-eBmyH7oO5wY-unsplash.avif'],
+        ['image' => 'asset/sanket-shah-SVA7TyHxojY-unsplash.avif'],
+        ['image' => 'asset/luisa-brimble-HvXEbkcXjSk-unsplash.avif'],
     ];
 @endphp
 
 <!-- Header Banner -->
 <header class="tasty-sub-header flex flex-col z-10">
-    <img src="{{ asset('asset/Group 70@2x.png') }}" class="tasty-sub-header-bg" alt="Header Background">
+    <img src="{{ asset('asset/Group 70@2x.avif') }}" class="tasty-sub-header-bg" alt="Header Background">
     <div class="tasty-sub-header-overlay"></div>
 
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-8 flex justify-between items-center">
@@ -70,9 +70,9 @@
 
 @php
     $carouselSlides = [
-        'asset/ella-olsson-mmnKI8kMxpc-unsplash.jpg',
-        'asset/luisa-brimble-HvXEbkcXjSk-unsplash.jpg',
-        'asset/anna-pelzer-IGfIGP5ONV0-unsplash.jpg'
+        'asset/ella-olsson-mmnKI8kMxpc-unsplash.avif',
+        'asset/luisa-brimble-HvXEbkcXjSk-unsplash.avif',
+        'asset/anna-pelzer-IGfIGP5ONV0-unsplash.avif'
     ];
 @endphp
 

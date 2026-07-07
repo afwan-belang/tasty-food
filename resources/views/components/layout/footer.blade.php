@@ -6,13 +6,12 @@
             <p class="text-gray-400 text-xs lg:text-sm leading-relaxed font-normal text-justify">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
-            
             <div class="flex space-x-3 pt-2">
                 <a href="#" class="hover:opacity-80 transition duration-200">
-                    <img src="{{ asset('asset/001-facebook.png') }}" class="w-9 h-9 object-contain" alt="Facebook Tasty Food">
+                    <img src="{{ asset('asset/001-facebook.avif') }}" class="w-9 h-9 object-contain" alt="Facebook Tasty Food">
                 </a>
                 <a href="#" class="hover:opacity-80 transition duration-200">
-                    <img src="{{ asset('asset/002-twitter.png') }}" class="w-9 h-9 object-contain" alt="Twitter Tasty Food">
+                    <img src="{{ asset('asset/002-twitter.avif') }}" class="w-9 h-9 object-contain" alt="Twitter Tasty Food">
                 </a>
             </div>
         </div>
@@ -42,17 +41,17 @@
             <ul class="space-y-4 text-xs lg:text-sm text-gray-300 font-medium">
                 
                 <li class="flex items-center gap-3">
-                    <img src="{{ asset('asset/ic_markunread_24px.png') }}" class="w-[18px] h-[18px] object-contain flex-shrink-0" alt="Email Icon">
+                    <img src="{{ asset('asset/ic_markunread_24px.avif') }}" class="w-[18px] h-[18px] object-contain flex-shrink-0" alt="Email Icon">
                     <span>tastyfood@gmail.com</span>
                 </li>
                 
                 <li class="flex items-center gap-3">
-                    <img src="{{ asset('asset/ic_call_24px.png') }}" class="w-[18px] h-[18px] object-contain flex-shrink-0" alt="Phone Icon">
+                    <img src="{{ asset('asset/ic_call_24px.avif') }}" class="w-[18px] h-[18px] object-contain flex-shrink-0" alt="Phone Icon">
                     <span>+62 812 3456 7890</span>
                 </li>
                 
                 <li class="flex items-center gap-3">
-                    <img src="{{ asset('asset/ic_place_24px.png') }}" class="w-[18px] h-[18px] object-contain flex-shrink-0" alt="Location Icon">
+                    <img src="{{ asset('asset/ic_place_24px.avif') }}" class="w-[18px] h-[18px] object-contain flex-shrink-0" alt="Location Icon">
                     <span>Kota Bandung, Jawa Barat</span>
                 </li>
                 

@@ -3,17 +3,17 @@
 @section('content')
 @php
     $aboutImages = [
-        'detail_1' => 'asset/brooke-lark-oaz0raysASk-unsplash.jpg',
-        'detail_2' => 'asset/sebastian-coman-photography-eBmyH7oO5wY-unsplash.jpg',
-        'visi_1'   => 'asset/fathul-abrar-T-qI_MI2EMA-unsplash.jpg',
-        'visi_2'   => 'asset/michele-blackwell-rAyCBQTH7ws-unsplash.jpg',
-        'misi'     => 'asset/sanket-shah-SVA7TyHxojY-unsplash.jpg',
+        'detail_1' => 'asset/brooke-lark-oaz0raysASk-unsplash.avif',
+        'detail_2' => 'asset/sebastian-coman-photography-eBmyH7oO5wY-unsplash.avif',
+        'visi_1'   => 'asset/fathul-abrar-T-qI_MI2EMA-unsplash.avif',
+        'visi_2'   => 'asset/michele-blackwell-rAyCBQTH7ws-unsplash.avif',
+        'misi'     => 'asset/sanket-shah-SVA7TyHxojY-unsplash.avif',
     ];
 @endphp
 
 <!-- Header Banner -->
 <header class="tasty-sub-header flex flex-col z-10">
-    <img src="{{ asset('asset/Group 70@2x.png') }}" class="tasty-sub-header-bg" alt="Header Background">
+    <img src="{{ asset('asset/Group 70@2x.avif') }}" class="tasty-sub-header-bg" alt="Header Background">
     <div class="tasty-sub-header-overlay"></div>
 
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-8 flex justify-between items-center">
