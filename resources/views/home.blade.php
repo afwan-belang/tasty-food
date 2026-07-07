@@ -104,6 +104,20 @@
             <a href="{{ route('berita') }}" class="hover:text-gray-600 transition duration-200">BERITA</a>
             <a href="{{ route('galeri') }}" class="hover:text-gray-600 transition duration-200">GALERI</a>
             <a href="{{ route('kontak') }}" class="hover:text-gray-600 transition duration-200">KONTAK</a>
+            @auth
+        <form action="{{ route('logout') }}" method="POST" class="inline-flex items-center ml-4">
+            @csrf
+            <button type="submit" class="text-xs lg:text-sm font-bold tracking-wider text-red-500 hover:text-red-700 uppercase transition duration-200 focus:outline-none cursor-pointer">
+                LOGOUT
+            </button>
+        </form>
+    @endauth
+            @guest
+        <a href="{{ route('login') }}" class="hover:text-gray-600 transition duration-200 pt-0.5 ml-4">LOGIN</a>
+        <a href="{{ route('register') }}" class="bg-black text-white px-5 py-1.5 rounded-full hover:bg-gray-800 transition duration-200 text-xs -mt-1 font-black tracking-widest">
+            REGISTER
+        </a>
+    @endguest
         </div>
 
         <button id="mobile-menu-btn" class="md:hidden text-gray-950 focus:outline-none z-50 p-1" aria-label="Toggle Menu">
@@ -126,6 +140,25 @@
     <a href="{{ route('berita') }}" class="hover:text-amber-600 transition duration-200">BERITA</a>
     <a href="{{ route('galeri') }}" class="hover:text-amber-600 transition duration-200">GALERI</a>
     <a href="{{ route('kontak') }}" class="hover:text-amber-600 transition duration-200">KONTAK</a>
+
+    @auth
+        <hr class="w-1/2 border-gray-200 my-2">
+        <form action="{{ route('logout') }}" method="POST" class="w-full text-center">
+            @csrf
+            <button type="submit" class="text-lg font-black tracking-widest text-red-600 hover:text-red-800 uppercase transition duration-200 focus:outline-none cursor-pointer">
+                LOGOUT
+            </button>
+        </form>
+    @endauth
+
+    @guest
+        <hr class="w-1/2 border-gray-200 my-2">
+        <a href="{{ route('login') }}" class="hover:text-amber-600 transition duration-200">LOGIN</a>
+        <a href="{{ route('register') }}" class="bg-black text-white px-6 py-3 rounded-xl hover:bg-gray-800 transition duration-200 w-3/4 text-center text-sm font-black tracking-widest">
+            REGISTER
+        </a>
+    @endguest
+
 </div>
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 flex-grow flex flex-col items-start justify-center pt-8 pb-20 md:pb-16">
         
