@@ -34,7 +34,7 @@
 </head>
 <body class="font-sans antialiased text-gray-800 bg-gray-50 flex flex-col min-h-screen">
 
-    @if(!request()->routeIs(['home', 'tentang', 'berita', 'galeri', 'kontak', 'login', 'register', 'admin.food.edit', 'admin.food.create']))
+    @if(!request()->routeIs(['home', 'tentang', 'berita', 'galeri', 'kontak', 'login', 'register', 'admin.food.create', 'admin.food.edit', 'berita.detail']))
         <x-layout.navbar />
     @endif
 
@@ -134,17 +134,10 @@
             </div>
 
             <div class="pt-5 mt-4 border-t border-gray-100 flex justify-between items-center bg-white">
-                <button onclick="closeGalleryModal()" class="text-xs font-black tracking-widest text-gray-400 hover:text-gray-950 uppercase transition focus:outline-none cursor-pointer flex items-center gap-1.5">
-                    ✕ EXIT
-                </button>
-
+                <button onclick="closeGalleryModal()" class="text-xs font-black tracking-widest text-gray-400 hover:text-gray-950 uppercase transition focus:outline-none cursor-pointer flex items-center gap-1.5">✕ EXIT</button>
                 <div id="gallery-modal-admin-actions" class="hidden flex space-x-4">
-                    <button id="gallery-modal-edit-btn" class="text-xs font-black tracking-widest text-amber-600 hover:text-amber-800 uppercase transition focus:outline-none cursor-pointer flex items-center gap-1">
-                        ✏️ EDIT
-                    </button>
-                    <button id="gallery-modal-delete-btn" class="text-xs font-black tracking-widest text-red-600 hover:text-red-800 uppercase transition focus:outline-none cursor-pointer flex items-center gap-1">
-                        🗑️ DELETE
-                    </button>
+                    <button id="gallery-modal-edit-btn" class="text-xs font-black tracking-widest text-amber-600 hover:text-amber-800 uppercase transition focus:outline-none cursor-pointer flex items-center gap-1">✏️ EDIT</button>
+                    <button id="gallery-modal-delete-btn" class="text-xs font-black tracking-widest text-red-600 hover:text-red-800 uppercase transition focus:outline-none cursor-pointer flex items-center gap-1">🗑️ DELETE</button>
                 </div>
             </div>
         </div>
@@ -178,7 +171,6 @@
         fetch(`/api/food/${foodId}`)
             .then(response => { if (!response.ok) throw new Error(); return response.json(); })
             .then(data => {
-                // KONDISI A: JIKA COMPONENT BER-KATEGORI GALLERY -> TEMBAK MODAL SPLIT 2-KOLOM (LEBAR & KOTAK TEGAS)
                 if (data.category === 'gallery') {
                     const modal = document.getElementById('gallery-detail-modal');
                     const modalBox = modal.querySelector('.transform');
@@ -201,7 +193,6 @@
 
                     setTimeout(() => { skeleton.classList.remove('opacity-100'); skeleton.classList.add('opacity-0', 'pointer-events-none'); }, 350);
 
-                // KONDISI B: JIKA KATEGORI CARD/NEWS -> TEMBAK MODAL KUSTOM SEPERTI BIASA
                 } else {
                     const modal = document.getElementById('food-detail-modal');
                     const modalBox = modal.querySelector('.transform');
@@ -242,6 +233,19 @@
         modalBox.classList.remove('scale-100'); modalBox.classList.add('scale-95');
     }
 
+    // FIX: LOGIKA MENUTUP POP-UP SAAT DIKLIK DI LUAR AREA KONTEN (BACKDROP LAYER)
+    window.addEventListener('click', function(event) {
+        const foodModal = document.getElementById('food-detail-modal');
+        const galleryModal = document.getElementById('gallery-detail-modal');
+        
+        if (event.target === foodModal) {
+            closeFoodModal();
+        }
+        if (event.target === galleryModal) {
+            closeGalleryModal();
+        }
+    });
+
     function executeDeleteData(id) {
         if (confirm('Apakah Anda yakin ingin menghapus menu ini secara permanen?')) {
             fetch(`/admin/food/${id}`, {
@@ -259,7 +263,6 @@
         }
     }
 
-    // 3. AUTO LAUNCHER UNTUK FLASH SESSION DARI BACKEND CONTROLLER
     @if(session('success')) document.addEventListener('DOMContentLoaded', () => showToast("{{ session('success') }}", 'success')); @endif
     @if(session('error') || $errors->any()) document.addEventListener('DOMContentLoaded', () => showToast("{{ session('error') ?? $errors->first() }}", 'error')); @endif
 </script>
