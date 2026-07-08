@@ -1,6 +1,7 @@
 <?php
 
-namespace database\seeders;
+// ✅ PERBAIKAN: Mengubah ke huruf kapital murni agar lolos dari error Case-Sensitive di Linux
+namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;

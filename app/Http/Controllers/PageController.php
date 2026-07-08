@@ -60,4 +60,11 @@ class PageController extends Controller
     {
         return view('kontak');
     }
+    public function detailBerita($id)
+    {
+        // Mencari data kuliner yang berkategori 'news' berdasarkan ID-nya
+        $news = \App\Models\Food::where('category', 'news')->findOrFail($id);
+        
+        return view('detail-berita', compact('news'));
+    }
 }

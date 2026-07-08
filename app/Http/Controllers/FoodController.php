@@ -8,86 +8,89 @@ use Illuminate\Support\Facades\Storage;
 
 class FoodController extends Controller
 {
-    /**
-     * 1. API ENDPOINT (AJAX FETCH)
-     * Mengambil satu data makanan berdasarkan ID dan mengembalikannya dalam bentuk JSON.
-     * Fungsi ini akan dipanggil oleh JavaScript (Fase 4) untuk menampilkan Pop-Up Modal.
-     */
     public function getFoodDetail($id)
     {
         $food = Food::find($id);
-
         if (!$food) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Data kuliner tidak ditemukan.'
-            ], 404);
+            return response()->json(['success' => false, 'message' => 'Data tidak ditemukan'], 404);
         }
-
         return response()->json($food);
     }
 
-    /**
-     * 2. TAMPILKAN FORM TAMBAH DATA
-     * Mengarahkan Admin ke halaman form tambah data makanan/konten baru.
-     */
     public function create()
     {
         return view('admin.create-food');
     }
 
-    /**
-     * 3. SIMPAN DATA BARU (CREATE)
-     * Memvalidasi input dari form admin, mengupload file gambar fisik, 
-     * dan menyimpannya ke dalam database.
-     */
     public function store(Request $request)
     {
-        // Validasi input secara ketat untuk mencegah data corup/ilegal masuk ke database
+        // 🔄 PERBAIKAN BULLETPROOF: Mengubah 'image' menjadi 'file' agar bersahabat dengan AVIF/WebP di PHP lokal
         $request->validate([
-            'title' => ['required', 'string', 'max:255'],
+            'title'    => ['required', 'string', 'max:255'],
             'category' => ['required', 'in:card,news,gallery'],
-            'image' => ['required', 'image', 'mimes:jpeg,png,jpg,webp,avif', 'max:2048'], // Maksimal 2MB
-            'desc' => ['required', 'string'],
+            'image'    => ['required', 'file', 'mimes:jpeg,png,jpg,webp,avif', 'max:2048'], // Menggunakan 'file' + 'mimes'
+            'desc'     => ['required', 'string'],
         ]);
 
-        // Proses enkripsi dan upload gambar ke folder: storage/app/public/foods
         $imagePath = $request->file('image')->store('foods', 'public');
 
-        // Insert data ke dalam tabel 'foods' melalui Model Eloquent
         Food::create([
-            'title' => $request->title,
+            'title'    => $request->title,
             'category' => $request->category,
-            'image' => 'storage/' . $imagePath, // Path publik yang bisa diakses oleh fungsi asset() di Blade
-            'desc' => $request->desc,
+            'image'    => 'storage/' . $imagePath,
+            'desc'     => $request->desc,
         ]);
 
-        // Redirect kembali ke halaman home dengan membawa alert notifikasi sukses
-        return redirect()->route('home')->with('success', 'Menu kuliner premium baru berhasil diterbitkan!');
+        return redirect()->route('admin.dashboard')->with('success', 'Artikel baru berhasil dipublikasikan ke web utama!');
     }
 
-    /**
-     * 4. HAPUS DATA PERMANEN (DELETE)
-     * Menghapus file gambar fisik dari server penyimpanan lokal,
-     * kemudian menghapus data barisnya di dalam database melalui request AJAX.
-     */
+    public function edit($id)
+    {
+        $food = Food::findOrFail($id);
+        return view('admin.edit-food', compact('food'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $food = Food::findOrFail($id);
+
+        // 🔄 PERBAIKAN BULLETPROOF: Mengubah 'image' menjadi 'file' agar bersahabat dengan AVIF/WebP di PHP lokal
+        $request->validate([
+            'title'    => ['required', 'string', 'max:255'],
+            'category' => ['required', 'in:card,news,gallery'],
+            'image'    => ['nullable', 'file', 'mimes:jpeg,png,jpg,webp,avif', 'max:2048'], // Menggunakan 'file' + 'mimes'
+            'desc'     => ['required', 'string'],
+        ]);
+
+        $food->title = $request->title;
+        $food->category = $request->category;
+        $food->desc = $request->desc;
+
+        if ($request->hasFile('image')) {
+            $oldPath = str_replace('storage/', '', $food->image);
+            if (Storage::disk('public')->exists($oldPath)) {
+                Storage::disk('public')->delete($oldPath);
+            }
+
+            $newImagePath = $request->file('image')->store('foods', 'public');
+            $food->image = 'storage/' . $newImagePath;
+        }
+
+        $food->save();
+        return redirect()->route('admin.dashboard')->with('success', 'Aset konten berhasil diperbarui dari ruang redaksi!');
+    }
+
     public function destroy($id)
     {
         $food = Food::findOrFail($id);
 
-        // Membersihkan string path agar bisa dibaca oleh Disk Storage Laravel
-        // Mengubah dari 'storage/foods/namafile.avif' menjadi 'foods/namafile.avif'
-        $cleanStoragePath = str_replace('storage/', '', $food->image);
-
-        // Hapus file gambar fisik dari folder storage
-        if (Storage::disk('public')->exists($cleanStoragePath)) {
-            Storage::disk('public')->delete($cleanStoragePath);
+        $cleanPath = str_replace('storage/', '', $food->image);
+        if (Storage::disk('public')->exists($cleanPath)) {
+            Storage::disk('public')->delete($cleanPath);
         }
 
-        // Hapus data dari tabel database
         $food->delete();
 
-        // Mengembalikan response sukses dalam format JSON untuk dibaca oleh script Fetch AJAX
         return response()->json([
             'success' => true,
             'message' => 'Data kuliner berhasil dihapus secara permanen dari server!'
