@@ -12,9 +12,6 @@
 @endphp
 
 <style>
-    /* ========================================================================= */
-    /* ANIMASI KHUSUS SUB-PAGE HEADER (Elegant, Simple & Fast)                  */
-    /* ========================================================================= */
     @keyframes subPageFadeUp {
         from {
             opacity: 0;
@@ -48,11 +45,11 @@
         </a>
         
         <div class="hidden md:flex space-x-8 lg:space-x-10 text-xs lg:text-sm font-bold tracking-wider text-white">
-            <a href="{{ route('home') }}" class="hover:text-gray-300 transition duration-200">HOME</a>
-            <a href="{{ route('tentang') }}" class="hover:text-gray-300 transition duration-200 border-b-2 border-white pb-1">TENTANG</a>
-            <a href="{{ route('berita') }}" class="hover:text-gray-300 transition duration-200">BERITA</a>
-            <a href="{{ route('galeri') }}" class="hover:text-gray-300 transition duration-200">GALERI</a>
-            <a href="{{ route('kontak') }}" class="hover:text-gray-300 transition duration-200">KONTAK</a>
+            <a href="{{ route('home') }}" class="transition duration-200 {{ request()->routeIs('home') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">HOME</a>
+    <a href="{{ route('tentang') }}" class="transition duration-200 {{ request()->routeIs('tentang') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">TENTANG</a>
+    <a href="{{ route('berita') }}" class="transition duration-200 {{ request()->routeIs('berita') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">BERITA</a>
+    <a href="{{ route('galeri') }}" class="transition duration-200 {{ request()->routeIs('galeri') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">GALERI</a>
+    <a href="{{ route('kontak') }}" class="transition duration-200 {{ request()->routeIs('kontak') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">KONTAK</a>
             @auth
         <form action="{{ route('logout') }}" method="POST" class="inline-flex items-center ml-4">
             @csrf
