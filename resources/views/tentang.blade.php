@@ -2,6 +2,7 @@
 
 @section('content')
 @php
+    // ASSET GAMBAR EDITORIAL TASTY FOOD SINKRON DENGAN DATABASE STORAGE & REFERENSI
     $aboutImages = [
         'detail_1' => 'asset/brooke-lark-oaz0raysASk-unsplash.avif',
         'detail_2' => 'asset/sebastian-coman-photography-eBmyH7oO5wY-unsplash.avif',
@@ -12,6 +13,9 @@
 @endphp
 
 <style>
+    /* ========================================================================= */
+    /* FINE-TUNING PREMIUM: HIGH-FIDELITY INTERACTION & HARDWARE ACCELERATION    */
+    /* ========================================================================= */
     @keyframes subPageFadeUp {
         from {
             opacity: 0;
@@ -33,6 +37,43 @@
     .anim-sub-delay-1 {
         animation-delay: 150ms;
     }
+
+    /* Akselerasi GPU Murni Untuk Transisi Hover Gambar Ringan Anti Patah */
+    .tasty-gpu-smooth {
+        backface-visibility: hidden;
+        transform: translateZ(0);
+        will-change: transform, box-shadow;
+    }
+    
+    /* Efek Smooth Image Zoom saat Wadah di-Hover */
+    .tasty-hover-zoom-trigger {
+        transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .tasty-image-container:hover .tasty-hover-zoom-trigger {
+        transform: scale(1.05);
+    }
+
+    /* Kustomisasi Elevasi Bayangan Halus Sesuai Karakter Gambar Referensi TENTANG.png */
+    .tasty-premium-shadow {
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.03), 0 4px 12px rgba(0, 0, 0, 0.01);
+    }
+    .tasty-premium-shadow:hover {
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.06), 0 6px 16px rgba(0, 0, 0, 0.02);
+        transform: translateY(-4px);
+        transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 500ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    /* Aturan transisi khusus agar seksi teratas wajib menunggu scroll nyata */
+.manual-reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1000ms cubic-bezier(0.21, 1.02, 0.43, 1.01), 
+                transform 1000ms cubic-bezier(0.21, 1.02, 0.43, 1.01);
+    will-change: opacity, transform;
+}
+.manual-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 </style>
 
 <header class="tasty-sub-header flex flex-col z-10">
@@ -79,61 +120,114 @@
     </div>
 </header>
 
-<section class="py-24 px-6 lg:px-24 max-w-7xl mx-auto select-none">
+<section class="py-24 px-6 lg:px-24 max-w-7xl mx-auto select-none bg-white">
     
+    <!-- SEKSI 1: SEJARAH TASTY FOOD (FORMASI ASIMETRIS KANAN BERTUMPUK) -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
-        <div class="reveal-on-scroll">
-            <h2 class="text-3xl font-black mb-6 uppercase text-gray-900 tracking-wide">TASTY FOOD</h2>
-            <p class="font-bold text-gray-800 mb-6 text-sm lg:text-base leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare, augue eu rutrum commodo, dui diam convallis arcu, eget consectetur ex sem eget lacus.</p>
-            <p class="text-gray-600 text-sm lg:text-base leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare, augue eu rutrum commodo, dui diam convallis arcu, eget consectetur ex sem eget lacus. Nullam vitae dignissim neque, vel luctus ex. Fusce sit amet viverra ante.</p>
-        </div>
+    
+    <div class="order-1 lg:order-1 manual-reveal">
+        <h2 class="text-2xl lg:text-3xl font-black mb-6 uppercase text-gray-950 tracking-wider">TASTY FOOD</h2>
+        <p class="font-bold text-gray-900 mb-6 text-sm lg:text-base leading-relaxed text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare, augue eu rutrum commodo, dui diam convallis arcu, eget consectetur ex sem eget lacus.</p>
+        <p class="text-gray-500 text-sm lg:text-base leading-relaxed text-justify font-normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare, augue eu rutrum commodo, dui diam convallis arcu, eget consectetur ex sem eget lacus. Nullam vitae dignissim neque, vel luctus ex. Fusce sit amet viverra ante.</p>
+    </div>
+    
+    <div class="grid grid-cols-2 gap-4 sm:gap-6 order-2 lg:order-2">
         
-        <div class="grid grid-cols-2 gap-6">
-            <img src="{{ asset($aboutImages['detail_1']) }}" 
-                 loading="lazy"
-                 class="w-full h-[240px] sm:h-[320px] rounded-2xl shadow-md object-cover reveal-on-scroll" 
+        <div class="tasty-image-container w-full h-[200px] sm:h-[300px] rounded-[24px] border border-gray-100 overflow-hidden tasty-premium-shadow tasty-gpu-smooth manual-reveal">
+            <img src="{{ asset($aboutImages['detail_1']) }}"  
+                 class="w-full h-full object-cover tasty-hover-zoom-trigger select-none pointer-events-none"  
                  alt="Tasty Food Detail 1">
-                 
-            <img src="{{ asset($aboutImages['detail_2']) }}" 
+        </div>
+             
+        <div class="tasty-image-container w-full h-[200px] sm:h-[300px] rounded-[24px] border border-gray-100 overflow-hidden tasty-premium-shadow tasty-gpu-smooth -mt-12 manual-reveal delay-100">
+            <img src="{{ asset($aboutImages['detail_2']) }}"  
                  loading="lazy"
-                 class="w-full h-[240px] sm:h-[320px] rounded-2xl shadow-md mt-12 object-cover reveal-on-scroll delay-100" 
+                 class="w-full h-full object-cover tasty-hover-zoom-trigger select-none pointer-events-none"  
                  alt="Tasty Food Detail 2">
         </div>
     </div>
 
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const manualElements = document.querySelectorAll('.manual-reveal');
+        
+        if (manualElements.length > 0) {
+            const triggerSectionScroll = () => {
+                // Memicu kelancaran animasi hanya jika layar terdeteksi bergeser ke bawah
+                if (window.scrollY > 15) {
+                    manualElements.forEach(element => {
+                        element.classList.add('is-visible');
+                    });
+                    window.removeEventListener('scroll', triggerSectionScroll);
+                }
+            };
+            window.addEventListener('scroll', triggerSectionScroll);
+        }
+    });
+</script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const firstImageWrapper = document.getElementById('first-about-img');
+        
+        if (firstImageWrapper) {
+            // Fungsi internal untuk memantau pergerakan scroll pertama kali
+            const triggerScrollCheck = () => {
+                if (window.scrollY > 10) {
+                    // Berikan sedikit jeda waktu halus agar transisi gerakan terasa sangat ringan dan natural
+                    setTimeout(() => {
+                        firstImageWrapper.classList.add('is-visible');
+                    }, 50);
+                    window.removeEventListener('scroll', triggerScrollCheck);
+                }
+            };
+            window.addEventListener('scroll', triggerScrollCheck);
+        }
+    });
+</script>
+    <!-- SEKSI 2: VISI KAMI (FORMASI REVERSE ASIMETRIS KIRI BERTUMPUK) -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
-        <div class="grid grid-cols-2 gap-6 order-2 lg:order-1">
-            <img src="{{ asset($aboutImages['visi_1']) }}" 
-                 loading="lazy"
-                 class="w-full h-[200px] sm:h-[280px] rounded-2xl shadow-md object-cover reveal-on-scroll" 
-                 alt="Visi 1">
+        <div class="grid grid-cols-2 gap-4 sm:gap-6 order-2 lg:order-1">
+            <div class="tasty-image-container w-full h-[200px] sm:h-[300px] rounded-[24px] border border-gray-100 overflow-hidden tasty-premium-shadow tasty-gpu-smooth reveal-on-scroll">
+                <img src="{{ asset($aboutImages['visi_1']) }}" 
+                     loading="lazy"
+                     class="w-full h-full object-cover tasty-hover-zoom-trigger select-none pointer-events-none" 
+                     alt="Visi 1">
+            </div>
                  
-            <img src="{{ asset($aboutImages['visi_2']) }}" 
-                 loading="lazy"
-                 class="w-full h-[200px] sm:h-[280px] rounded-2xl shadow-md -mt-12 object-cover reveal-on-scroll delay-100" 
-                 alt="Visi 2">
+            <div class="tasty-image-container w-full h-[200px] sm:h-[300px] rounded-[24px] border border-gray-100 overflow-hidden tasty-premium-shadow tasty-gpu-smooth -mt-12 reveal-on-scroll delay-100">
+                <img src="{{ asset($aboutImages['visi_2']) }}" 
+                     loading="lazy"
+                     class="w-full h-full object-cover tasty-hover-zoom-trigger select-none pointer-events-none" 
+                     alt="Visi 2">
+            </div>
         </div>
         
         <div class="order-1 lg:order-2 reveal-on-scroll">
-            <h2 class="text-3xl font-black mb-6 uppercase text-gray-900 tracking-wide">VISI</h2>
-            <p class="text-gray-600 text-sm lg:text-base leading-relaxed text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce scelerisque magna aliquet cursus tempus. Duis viverra metus et turpis elementum elementum. Aliquam rutrum placerat tellus et suscipit. Curabitur facilisis lectus vitae eros malesuada eleifend. Morbi vel nunc tortor. Nulla facilisi.</p>
+            <h2 class="text-2xl lg:text-3xl font-black mb-6 uppercase text-gray-950 tracking-wider">VISI</h2>
+            <p class="text-gray-500 text-sm lg:text-base leading-relaxed text-justify font-normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce scelerisque magna aliquet cursus tempus. Duis viverra metus et turpis elementum elementum. Aliquam rutrum placerat tellus et suscipit. Curabitur facilisis lectus vitae eros malesuada eleifend. Morbi vel nunc tortor. Nulla facilisi.</p>
         </div>
     </div>
 
+    <!-- SEKSI 3: MISI KAMI (FORMASI KANAN LANSKAP LEBAR SEPERTI CETAK BIRU ASLI) -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div class="reveal-on-scroll">
-            <h2 class="text-3xl font-black mb-6 uppercase text-gray-900 tracking-wide">MISI</h2>
-            <p class="text-gray-600 text-sm lg:text-base leading-relaxed text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce scelerisque magna aliquet cursus tempus. Duis viverra metus et turpis elementum elementum. Aliquam rutrum placerat tellus et suscipit. Curabitur facilisis lectus vitae eros malesuada eleifend. Morbi vel nunc tortor. Nulla facilisi. In tempor imperdiet erat vel leo rutrum lobortis.</p>
+            <h2 class="text-2xl lg:text-3xl font-black mb-6 uppercase text-gray-950 tracking-wider">MISI</h2>
+            <p class="text-gray-500 text-sm lg:text-base leading-relaxed text-justify font-normal">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce scelerisque magna aliquet cursus tempus. Duis viverra metus et turpis elementum elementum. Aliquam rutrum placerat tellus et suscipit. Curabitur facilisis lectus vitae eros malesuada eleifend. Morbi vel nunc tortor. Nulla facilisi. In tempor imperdiet erat vel leo rutrum lobortis.</p>
         </div>
         
-        <img src="{{ asset($aboutImages['misi']) }}" 
-             loading="lazy"
-             class="w-full h-[260px] sm:h-[380px] rounded-2xl shadow-md object-cover reveal-on-scroll delay-100" 
-             alt="Misi Tasty Food">
+        <div class="tasty-image-container w-full h-[240px] sm:h-[360px] rounded-[24px] border border-gray-100 overflow-hidden tasty-premium-shadow tasty-gpu-smooth reveal-on-scroll delay-100">
+            <img src="{{ asset($aboutImages['misi']) }}" 
+                 loading="lazy"
+                 class="w-full h-full object-cover tasty-hover-zoom-trigger select-none pointer-events-none" 
+                 alt="Misi Tasty Food">
+        </div>
     </div>
     
 </section>
 
+<!-- ENGINE INTERAKSI DROPDOWN RESPONSIVE NAVBAR PADA PERANGKAT MOBILE (100% UTUH) -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const menuBtn = document.getElementById('mobile-menu-btn');
