@@ -3,76 +3,111 @@
 namespace App\Http\Controllers;
 
 use App\Models\Food;
+use App\Models\CompanySection; // Memanggil model seksi dinamis baru
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AdminDashboardController extends Controller
 {
     /**
-     * MENU 1: DASHBOARD UTAMA
-     * Menampilkan semua campuran data asset kuliner untuk monitoring global.
+     * MENU 1: DASHBOARD UTAMA + ENGINE CMS CONTROL EDITOR PANEL
      */
     public function index()
     {
-        // 1. Hitung statistik dinamis dari database untuk Top Cards Widget
         $totalKonten = Food::count();
         $totalCard   = Food::where('category', 'card')->count();
         $totalBerita = Food::where('category', 'news')->count();
         $totalGaleri = Food::where('category', 'gallery')->count();
-
-        // 2. Ambil semua data makanan untuk tabel monitoring utama
         $allFoods = Food::latest()->get();
 
+        // Menarik muatan data CMS untuk dioperasikan ke komponen Form Control Editor
+        $cmsHero    = CompanySection::where('key', 'home_hero')->first();
+        $cmsSejarah = CompanySection::where('key', 'about_sejarah')->first();
+        $cmsVisi    = CompanySection::where('key', 'about_visi')->first();
+        $cmsMisi    = CompanySection::where('key', 'about_misi')->first();
+
         return view('admin.dashboard', compact(
-            'totalKonten', 'totalCard', 'totalBerita', 'totalGaleri', 'allFoods'
+            'totalKonten', 'totalCard', 'totalBerita', 'totalGaleri', 'allFoods',
+            'cmsHero', 'cmsSejarah', 'cmsVisi', 'cmsMisi'
         ));
     }
 
     /**
-     * MENU 2: CARD MANAGEMENT
-     * Monitoring khusus seksi Fluid Banner Card Home.
+     * ENGINE CMS: PROSES UPDATE TEKS DAN VALIDASI UPLOAD GAMBAR SEKSI UTAMA LANDING PAGE
      */
+    public function updateSection(Request $request)
+    {
+        $request->validate([
+            'key'      => ['required', 'string', 'in:home_hero,about_sejarah,about_visi,about_misi'],
+            'title'    => ['required', 'string', 'max:255'],
+            'subtitle' => ['nullable', 'string', 'max:255'],
+            'desc'     => ['required', 'string'],
+            'image_1'  => ['nullable', 'file', 'mimes:jpeg,png,jpg,webp,avif', 'max:2048'], // Selaras penuh dengan FoodController
+            'image_2'  => ['nullable', 'file', 'mimes:jpeg,png,jpg,webp,avif', 'max:2048'],
+        ]);
+
+        $section = CompanySection::where('key', $request->key)->firstOrFail();
+        
+        $section->title    = $request->title;
+        $section->subtitle = $request->subtitle;
+        $section->desc     = $request->desc;
+
+        // Manajemen Aset File Gambar ke-1 (Hapus file usang di storage jika ada upload baru)
+        if ($request->hasFile('image_1')) {
+            if ($section->image_1 && !str_starts_with($section->image_1, 'asset/')) {
+                Storage::disk('public')->delete(str_replace('storage/', '', $section->image_1));
+            }
+            $path1 = $request->file('image_1')->store('company', 'public');
+            $section->image_1 = 'storage/' . $path1;
+        }
+
+        // Manajemen Aset File Gambar ke-2 (Hapus file usang di storage jika ada upload baru)
+        if ($request->hasFile('image_2')) {
+            if ($section->image_2 && !str_starts_with($section->image_2, 'asset/')) {
+                Storage::disk('public')->delete(str_replace('storage/', '', $section->image_2));
+            }
+            $path2 = $request->file('image_2')->store('company', 'public');
+            $section->image_2 = 'storage/' . $path2;
+        }
+
+        $section->save();
+
+        return back()->with('success', 'Narasi materi teks web utama publik berhasil diperbarui secara dinamis!');
+    }
+
     public function card()
     {
         $cards = Food::where('category', 'card')->latest()->get();
         return view('admin.card', compact('cards'));
     }
 
-    /**
-     * MENU 3: BERITA MANAGEMENT
-     * Monitoring khusus seksi Berita Kami.
-     */
     public function berita()
     {
         $berita = Food::where('category', 'news')->latest()->get();
         return view('admin.berita-index', compact('berita'));
     }
 
-    /**
-     * MENU 4: GALERI MANAGEMENT
-     * Monitoring khusus seksi Galeri Foto Portfolio.
-     */
+    public function col_galeri() // Menggunakan pembeda internal untuk internal routing
+    {
+        return Food::where('category', 'gallery')->latest()->get();
+    }
+
     public function galeri()
     {
-        $galeri = Food::where('category', 'gallery')->latest()->get();
+        $galeri = $this->col_galeri();
         return view('admin.galeri-index', compact('galeri'));
     }
 
-    /**
-     * MENU 5: SETTINGS PORTAL
-     * Menampilkan halaman formulir pengaturan profil dan keamanan admin.
-     */
     public function settings()
     {
         return view('admin.settings');
     }
 
-    /**
-     * PROSES UPDATE PROFIL ADMIN
-     */
     public function updateProfile(Request $request)
     {
+        /** @var \App\Models\User $user */
         $user = Auth::user();
 
         $request->validate([
@@ -88,9 +123,6 @@ class AdminDashboardController extends Controller
         return back()->with('success', 'Profil administrasi berhasil diperbarui!');
     }
 
-    /**
-     * PROSES UPDATE PASSWORD ADMIN
-     */
     public function updatePassword(Request $request)
     {
         $request->validate([
@@ -98,6 +130,7 @@ class AdminDashboardController extends Controller
             'password'         => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
+        /** @var \App\Models\User $user */
         $user = Auth::user();
 
         if (!Hash::check($request->current_password, $user->password)) {
@@ -111,9 +144,6 @@ class AdminDashboardController extends Controller
         return back()->with('success', 'Password portal redaksi berhasil diganti!');
     }
 
-    /**
-     * PROSES TOGGLE TEMA (DARK / LIGHT MODE VIA SESSION)
-     */
     public function toggleTheme(Request $request)
     {
         $currentTheme = session('admin_theme', 'light');

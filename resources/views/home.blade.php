@@ -96,16 +96,36 @@
     </div>
 
     <!-- HERO TEXT WRAPPER SINKRONISASI TINGGI LAYAR -->
+    <!-- HERO TEXT WRAPPER SINKRONISASI KONTEN DINAMIS DATABASE -->
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 flex-grow flex flex-col items-start justify-center pt-8 pb-20 md:pb-16">
         <div class="tasty-hero-line mb-8 anim-hero-entry anim-delay-1"></div>
-        <h1 class="text-3xl sm:text-4xl lg:text-6xl font-light tracking-wide text-gray-950 uppercase mb-1 anim-hero-entry anim-delay-1">HEALTHY</h1>
-        <h2 class="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight text-gray-950 uppercase mb-8 anim-hero-entry anim-delay-2 leading-tight">TASTY FOOD</h2>
-        <p class="text-gray-500 text-sm lg:text-base leading-relaxed max-w-xl mb-10 font-normal anim-hero-entry anim-delay-3 text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare, augue eu rutrum commodo, dui diam convallis arcu, eget consectetur ex sem eget lacus. Nullam vitae dignissim neque, vel luctus ex.</p>
-        <div class="anim-hero-entry anim-delay-4"><x-ui.button href="{{ route('tentang') }}" class="rounded-none bg-black text-white hover:bg-gray-900 px-10 py-4 font-bold tracking-widest transition duration-300 hover:bg-white hover:text-gray-950 border border-black">TENTANG KAMI</x-ui.button></div>
+        
+        <!-- Teks Subtitle Dinamis (e.g., HEALTHY) -->
+        <h1 class="text-3xl sm:text-4xl lg:text-6xl font-light tracking-wide text-gray-950 uppercase mb-1 anim-hero-entry anim-delay-1">
+            {{ $hero->subtitle ?? 'HEALTHY' }}
+        </h1>
+        
+        <!-- Teks Judul Utama Dinamis (e.g., TASTY FOOD) -->
+        <h2 class="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight text-gray-950 uppercase mb-8 anim-hero-entry anim-delay-2 leading-tight">
+            {{ $hero->title ?? 'TASTY FOOD' }}
+        </h2>
+        
+        <!-- Paragraf Deskripsi Dinamis -->
+        <p class="text-gray-500 text-sm lg:text-base leading-relaxed max-w-xl mb-10 font-normal anim-hero-entry anim-delay-3 text-justify">
+            {{ $hero->desc ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...' }}
+        </p>
+        
+        <div class="anim-hero-entry anim-delay-4">
+            <x-ui.button href="{{ route('tentang') }}" class="rounded-none bg-black text-white hover:bg-gray-900 px-10 py-4 font-bold tracking-widest transition duration-300 hover:bg-white hover:text-gray-950 border border-black">
+                TENTANG KAMI
+            </x-ui.button>
+        </div>
     </div>
     
+    <!-- Aset Gambar Utama Dinamis Berbasis Database Media Server -->
+    <img src="{{ asset($hero->image_1 ?? 'asset/img-4-2000x2000.avif') }}" class="tasty-hero-plate-exact anim-hero-plate" alt="Main Plate Layout">
+    
     <!-- PERFORMA MAKSIMAL: Gambar Pertama Dilarang Menggunakan Lazy-Load Agar LCP Score Chrome Sempurna -->
-    <img src="{{ asset('asset/img-4-2000x2000.avif') }}" class="tasty-hero-plate-exact anim-hero-plate" alt="Main Plate Layout Layout">
 </section>
 
 <!-- ========================================================================= -->

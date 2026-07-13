@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Food;
+use App\Models\CompanySection; // Memanggil model seksi dinamis baru
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -12,14 +13,15 @@ class PageController extends Controller
      */
     public function home()
     {
-        // Menarik data kuliner berdasarkan kategori penempatan masing-masing
         $foods = Food::where('category', 'card')->get();
-        $featuredNews = Food::where('category', 'news')->first(); // Berita utama (ambil 1 data teratas)
-        $otherNews = Food::where('category', 'news')->skip(1)->take(4)->get(); // 4 Berita kecil di sampingnya
-        $gallery = Food::where('category', 'gallery')->take(6)->get(); // Ambil 6 foto teratas untuk galeri home
+        $featuredNews = Food::where('category', 'news')->first(); 
+        $otherNews = Food::where('category', 'news')->skip(1)->take(4)->get(); 
+        $gallery = Food::where('category', 'gallery')->take(6)->get(); 
 
-        // Lempar semua variabel data di atas ke dalam file home.blade.php
-        return view('home', compact('foods', 'featuredNews', 'otherNews', 'gallery'));
+        // Mengambil muatan data CMS khusus seksi Hero Banner Beranda
+        $hero = CompanySection::where('key', 'home_hero')->first();
+
+        return view('home', compact('foods', 'featuredNews', 'otherNews', 'gallery', 'hero'));
     }
 
     /**
@@ -27,7 +29,12 @@ class PageController extends Controller
      */
     public function tentang()
     {
-        return view('tentang');
+        // Mengambil muatan data CMS khusus tiga seksi utama halaman tentang kami
+        $sejarah = CompanySection::where('key', 'about_sejarah')->first();
+        $visi    = CompanySection::where('key', 'about_visi')->first();
+        $misi    = CompanySection::where('key', 'about_misi')->first();
+
+        return view('tentang', compact('sejarah', 'visi', 'misi'));
     }
 
     /**
@@ -36,7 +43,6 @@ class PageController extends Controller
     public function berita()
     {
         $featuredNews = Food::where('category', 'news')->first();
-        // Mengambil maksimal 8 baris data berita lainnya untuk grid bawah halaman berita
         $beritaLainnya = Food::where('category', 'news')->skip(1)->take(8)->get();
         
         return view('berita', compact('featuredNews', 'beritaLainnya'));
@@ -47,23 +53,19 @@ class PageController extends Controller
      */
     public function galeri()
     {
-        // Mengambil seluruh aset gambar yang dikategorikan sebagai item galeri portfolio
         $galleryItems = Food::where('category', 'gallery')->get();
         
         return view('galeri', compact('galleryItems'));
     }
 
-    /**
-     * MENAMPILKAN HALAMAN KONTAK KAMI
-     */
     public function kontak()
     {
         return view('kontak');
     }
+
     public function detailBerita($id)
     {
-        // Mencari data kuliner yang berkategori 'news' berdasarkan ID-nya
-        $news = \App\Models\Food::where('category', 'news')->findOrFail($id);
+        $news = Food::where('category', 'news')->findOrFail($id);
         
         return view('detail-berita', compact('news'));
     }

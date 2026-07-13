@@ -75,4 +75,6 @@ Route::middleware(['auth', 'AdminMiddleware'])->prefix('portal-admin')->name('ad
     
     // Aksi Delete: Menghapus Data Konten Secara Permanen dari Server
     Route::delete('/food/{id}', [FoodController::class, 'destroy'])->name('food.destroy');
+
+    Route::post('/sections/update', [AdminDashboardController::class, 'updateSection'])->name('sections.update');
 });
