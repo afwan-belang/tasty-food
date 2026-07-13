@@ -4,9 +4,6 @@
 
 @section('admin_content')
 
-<!-- ========================================================================= -->
-<!-- 1. TOP STATS CARDS: SUDUT BULAT TUMPUL ELEGAN (`rounded-2xl`)             -->
-<!-- ========================================================================= -->
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
     <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between min-h-[130px] transition duration-200 hover:shadow-md">
         <div class="flex items-center justify-between">
@@ -41,9 +38,6 @@
     </div>
 </div>
 
-<!-- ========================================================================= -->
-<!-- 2. DATA TABLE MONITORING: BULAT TUMPUL MODERATION PANEL (`rounded-2xl`)   -->
-<!-- ========================================================================= -->
 <div class="bg-white border border-gray-100 shadow-sm rounded-2xl overflow-hidden transition-all duration-300 mb-10">
     <div class="p-6 sm:p-8 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white">
         <div>
@@ -55,29 +49,29 @@
         </a>
     </div>
 
-    <div class="overflow-x-auto w-full tasty-scrollbar">
+    <div class="overflow-x-auto w-full tasty-scrollbar relative">
         <table class="w-full text-left border-collapse min-w-[750px]">
             <thead>
                 <tr class="bg-gray-50/80 border-b border-gray-100 text-[10px] font-black tracking-wider text-gray-400 uppercase">
                     <th class="py-5 px-6 w-24 text-center">PREVIEW</th>
                     <th class="py-5 px-6">JUDUL ARTIKEL & KETERANGAN MATERI</th>
                     <th class="py-5 px-6 w-40 text-center">ALOKASI HALAMAN</th>
-                    <th class="py-5 px-6 w-36 text-center">MANIPULASI DATA</th>
+                    <th class="py-5 px-6 w-36 text-center sticky right-0 bg-gray-50 z-20 border-l border-gray-100/70 shadow-[-6px_0_10px_rgba(0,0,0,0.015)]">MANIPULASI DATA</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100 text-sm">
                 @forelse($allFoods as $food)
-                    <tr class="hover:bg-gray-50/40 transition duration-150">
-                        <td class="py-4 px-6 text-center">
+                    <tr class="hover:bg-gray-50/40 transition duration-150 group">
+                        <td class="py-4 px-6 text-center bg-white">
                             <div class="w-12 h-12 bg-gray-100 rounded-xl overflow-hidden inline-block shadow-inner border border-gray-100">
                                 <img src="/{{ $food->image }}" loading="lazy" class="w-full h-full object-cover select-none pointer-events-none" alt="Asset">
                             </div>
                         </td>
-                        <td class="py-4 px-6">
+                        <td class="py-4 px-6 bg-white">
                             <h4 class="font-black text-gray-950 uppercase text-xs sm:text-sm tracking-wide leading-snug">{{ $food->title }}</h4>
                             <p class="text-gray-400 text-xs mt-1 font-medium truncate max-w-md lg:max-w-2xl">{{ $food->desc }}</p>
                         </td>
-                        <td class="py-4 px-6 text-center whitespace-nowrap">
+                        <td class="py-4 px-6 text-center whitespace-nowrap bg-white">
                             @if($food->category === 'card')
                                 <span class="text-[9px] font-black tracking-wider bg-blue-50 text-blue-600 px-3 py-1.5 rounded-full border border-blue-100 uppercase">• CARDS</span>
                             @elseif($food->category === 'news')
@@ -86,7 +80,7 @@
                                 <span class="text-[9px] font-black tracking-wider bg-purple-50 text-purple-600 px-3 py-1.5 rounded-full border border-purple-100 uppercase">• GALLERY</span>
                             @endif
                         </td>
-                        <td class="py-4 px-6 text-center whitespace-nowrap">
+                        <td class="py-4 px-6 text-center whitespace-nowrap sticky right-0 bg-white z-10 border-l border-gray-100 shadow-[-6px_0_10px_rgba(0,0,0,0.015)]">
                             <div class="flex items-center justify-center gap-4">
                                 <a href="{{ route('admin.food.edit', $food->id) }}" class="text-xs font-black text-amber-600 hover:text-amber-800 uppercase tracking-wider transition">EDIT</a>
                                 <button onclick="triggerAdminDelete({{ $food->id }})" class="text-xs font-black text-red-500 hover:text-red-700 uppercase tracking-wider transition focus:outline-none cursor-pointer">DELETE</button>
@@ -103,9 +97,6 @@
     </div>
 </div>
 
-<!-- ========================================================================= -->
-<!-- 3. PANEL CMS KONTROL EDITOR BANNER & SEKSI HALAMAN TENTANG KAMI           -->
-<!-- ========================================================================= -->
 <div class="bg-white border border-gray-100 shadow-sm rounded-2xl overflow-hidden p-6 sm:p-8 mb-10">
     <div class="mb-8">
         <h3 class="text-sm font-black text-gray-950 uppercase tracking-wider">CMS ENGINE: WEB PAGE LANDING MANAGER</h3>
@@ -114,7 +105,6 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         
-        <!-- FORM HERO HOME BANNER -->
         <div class="bg-gray-50/50 p-6 rounded-xl border border-gray-100">
             <span class="text-[9px] font-black tracking-widest text-amber-600 uppercase block mb-1">COMPONENTS SEKSI 1</span>
             <h4 class="text-xs font-black text-gray-950 uppercase mb-4">HERO HOME TEXT BANNER</h4>
@@ -140,7 +130,6 @@
             </form>
         </div>
 
-        <!-- FORM SEKSI SEJARAH -->
         <div class="bg-gray-50/50 p-6 rounded-xl border border-gray-100">
             <span class="text-[9px] font-black tracking-widest text-amber-600 uppercase block mb-1">COMPONENTS SEKSI 2</span>
             <h4 class="text-xs font-black text-gray-950 uppercase mb-4">SEJARAH SECTION PANEL</h4>
@@ -172,7 +161,6 @@
             </form>
         </div>
 
-        <!-- FORM SEKSI VISI -->
         <div class="bg-gray-50/50 p-6 rounded-xl border border-gray-100">
             <span class="text-[9px] font-black tracking-widest text-amber-600 uppercase block mb-1">COMPONENTS SEKSI 3</span>
             <h4 class="text-xs font-black text-gray-950 uppercase mb-4">VISI KAMI SECTION PANEL</h4>
@@ -204,7 +192,6 @@
             </form>
         </div>
 
-        <!-- FORM SEKSI MISI -->
         <div class="bg-gray-50/50 p-6 rounded-xl border border-gray-100">
             <span class="text-[9px] font-black tracking-widest text-amber-600 uppercase block mb-1">COMPONENTS SEKSI 4</span>
             <h4 class="text-xs font-black text-gray-950 uppercase mb-4">MISI KAMI SECTION PANEL</h4>

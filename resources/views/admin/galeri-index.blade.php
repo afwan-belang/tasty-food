@@ -10,28 +10,28 @@
         <p class="text-xs text-gray-400 font-semibold uppercase tracking-wide mt-1">Pemantauan visualisasi estetik flat-lay foto kuliner resolusi tinggi yang tayang di pop-up galeri lebar.</p>
     </div>
 
-    <div class="overflow-x-auto w-full tasty-scrollbar">
+    <div class="overflow-x-auto w-full tasty-scrollbar relative">
         <table class="w-full text-left border-collapse min-w-[750px]">
             <thead>
                 <tr class="bg-gray-50/80 border-b border-gray-100 text-[10px] font-black tracking-wider text-gray-400 uppercase">
                     <th class="py-5 px-6 w-24 text-center">FOTO</th>
                     <th class="py-5 px-6">KETERANGAN ALASAN DISPLAY</th>
-                    <th class="py-5 px-6 w-36 text-center">MANIPULASI DATA</th>
+                    <th class="py-5 px-6 w-36 text-center sticky right-0 bg-gray-50 z-20 border-l border-gray-100/70 shadow-[-6px_0_10px_rgba(0,0,0,0.015)]">MANIPULASI DATA</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100 text-sm">
                 @forelse($galeri as $item)
-                    <tr class="hover:bg-gray-50/40 transition duration-150">
-                        <td class="py-4 px-6 text-center">
+                    <tr class="hover:bg-gray-50/40 transition duration-150 group">
+                        <td class="py-4 px-6 text-center bg-white">
                             <div class="w-12 h-12 bg-gray-100 rounded-xl overflow-hidden inline-block shadow-inner border border-gray-100">
                                 <img src="/{{ $item->image }}" loading="lazy" class="w-full h-full object-cover select-none pointer-events-none" alt="Asset">
                             </div>
                         </td>
-                        <td class="py-4 px-6">
+                        <td class="py-4 px-6 bg-white">
                             <h4 class="font-black text-gray-950 uppercase text-xs sm:text-sm tracking-wide leading-snug">{{ $item->title }}</h4>
                             <p class="text-gray-400 text-xs mt-1 font-medium truncate max-w-md lg:max-w-2xl">{{ $item->desc }}</p>
                         </td>
-                        <td class="py-4 px-6 text-center whitespace-nowrap">
+                        <td class="py-4 px-6 text-center whitespace-nowrap sticky right-0 bg-white z-10 border-l border-gray-100 shadow-[-6px_0_10px_rgba(0,0,0,0.015)]">
                             <div class="flex items-center justify-center gap-4">
                                 <a href="{{ route('admin.food.edit', $item->id) }}" class="text-xs font-black text-amber-600 hover:text-amber-800 uppercase tracking-wider transition">
                                     EDIT
@@ -62,8 +62,7 @@
                     'Content-Type': 'application/json'
                 }
             })
-            .then(res => res.json())
-            .then(data => {
+            .then(res => res.json())\n            .then(data => {
                 if (data.success) {
                     showAdminToast(data.message, 'success');
                     setTimeout(() => window.location.reload(), 1000);
