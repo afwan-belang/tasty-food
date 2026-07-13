@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('image');             // Tempat menyimpan path file gambar (contoh: storage/foods/namafile.avif)
             $table->string('title');             // Nama makanan atau judul berita
+            $table->string('slug')->unique();
             $table->text('desc');                // Informasi detail makanan atau deskripsi isi berita
             $table->enum('category', ['card', 'news', 'gallery']); // Pembeda letak display komponen di halaman web
             $table->timestamps();                // Otomatis membuat kolom created_at dan updated_at

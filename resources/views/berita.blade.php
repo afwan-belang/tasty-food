@@ -77,7 +77,7 @@
     <div class="max-w-7xl mx-auto">
         
         @if($featuredNews)
-        <div onclick="window.location.href='{{ route('berita.detail', $featuredNews->id) }}'" class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24 bg-white rounded-[24px] p-2 lg:p-4 reveal-on-scroll cursor-pointer group">
+        <div onclick="window.location.href='{{ route('berita.detail', $featuredNews->slug) }}'" class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24 bg-white rounded-[24px] p-2 lg:p-4 reveal-on-scroll cursor-pointer group">
             <div class="w-full h-[240px] sm:h-[400px] rounded-[24px] overflow-hidden shadow-inner bg-gray-50">
                 <img src="{{ asset($featuredNews->image) }}" loading="lazy" class="w-full h-full object-cover tasty-hover-zoom-trigger" alt="Berita Utama Editorial">
             </div>
@@ -100,7 +100,7 @@
                     $step = $loop->index % 4; 
                     $delayClass = $step === 1 ? 'delay-100' : ($step === 2 ? 'delay-200' : ($step === 3 ? 'delay-300' : '')); 
                 @endphp
-                <div onclick="window.location.href='{{ route('berita.detail', $item->id) }}'" class="bg-white rounded-[24px] tasty-premium-shadow tasty-gpu-smooth overflow-hidden flex flex-col group cursor-pointer border border-gray-100/60 reveal-on-scroll {{ $delayClass }}">
+                <div onclick="window.location.href='{{ route('berita.detail', $item->slug) }}'" class="bg-white rounded-[24px] tasty-premium-shadow tasty-gpu-smooth overflow-hidden flex flex-col group cursor-pointer border border-gray-100/60 reveal-on-scroll {{ $delayClass }}">
                     
                     <div class="w-full h-48 bg-gray-50 overflow-hidden">
                         <img src="{{ asset($item->image) }}" loading="lazy" class="w-full h-full object-cover tasty-hover-zoom-trigger" alt="News Feed Media">

@@ -166,9 +166,8 @@
     <h2 class="text-2xl lg:text-3xl font-black mb-16 uppercase text-center tracking-wider text-gray-950 reveal-on-scroll">Berita Kami</h2>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
         
-        <!-- Artikel Utama Besar Sisi Kiri -->
         @if($featuredNews)
-        <div onclick="window.location.href='{{ route('berita.detail', $featuredNews->id) }}' " class="bg-white rounded-[24px] tasty-premium-shadow tasty-gpu-smooth overflow-hidden flex flex-col group cursor-pointer border border-gray-100/60 reveal-on-scroll">
+        <div onclick="window.location.href='{{ route('berita.detail', $featuredNews->slug) }}' " class="bg-white rounded-[24px] tasty-premium-shadow tasty-gpu-smooth overflow-hidden flex flex-col group cursor-pointer border border-gray-100/60 reveal-on-scroll">
             <div class="w-full h-[260px] sm:h-[340px] bg-gray-100 overflow-hidden">
                 <img src="{{ asset($featuredNews->image) }}" loading="lazy" alt="{{ $featuredNews->title }}" class="w-full h-full object-cover tasty-hover-zoom-trigger">
             </div>
@@ -185,11 +184,10 @@
         </div>
         @endif
         
-        <!-- Grid 4 Artikel Kecil Sisi Kanan (Formasi 2x2) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
             @foreach ($otherNews as $item)
                 @php $delayClass = $loop->index === 1 ? 'delay-100' : ($loop->index === 2 ? 'delay-200' : ($loop->index === 3 ? 'delay-300' : '')); @endphp
-                <div onclick="window.location.href='{{ route('berita.detail', $item->id) }}' " class="bg-white rounded-[24px] tasty-premium-shadow tasty-gpu-smooth overflow-hidden flex flex-col group cursor-pointer border border-gray-100/60 reveal-on-scroll {{ $delayClass }}">
+                <div onclick="window.location.href='{{ route('berita.detail', $item->slug) }}' " class="bg-white rounded-[24px] tasty-premium-shadow tasty-gpu-smooth overflow-hidden flex flex-col group cursor-pointer border border-gray-100/60 reveal-on-scroll {{ $delayClass }}">
                     <div class="w-full h-44 bg-gray-100 overflow-hidden">
                         <img src="{{ asset($item->image) }}" loading="lazy" alt="{{ $item->title }}" class="w-full h-full object-cover tasty-hover-zoom-trigger">
                     </div>

@@ -63,9 +63,10 @@ class PageController extends Controller
         return view('kontak');
     }
 
-    public function detailBerita($id)
+    public function detailBerita($slug)
     {
-        $news = Food::where('category', 'news')->findOrFail($id);
+        // Mencari data kuliner yang berkategori 'news' berdasarkan SLUG teks-nya secara dinamis
+        $news = Food::where('category', 'news')->where('slug', $slug)->firstOrFail();
         
         return view('detail-berita', compact('news'));
     }
