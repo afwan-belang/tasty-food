@@ -21,7 +21,30 @@ class CompanySectionSeeder extends Seeder
             ]
         );
 
-        // 2. Komponen Halaman Tentang: Seksi Sejarah
+        // 2. Komponen Seksi Tentang Kami di Halaman Beranda (Home About)
+        CompanySection::updateOrCreate(
+            ['key' => 'home_about'],
+            [
+                'title'    => 'Tentang Kami',
+                'desc'     => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare, augue eu rutrum commodo, dui diam convallis arcu, eget consectetur ex sem eget lacus. Nullam vitae dignissim neque, vel luctus ex. Fusce sit amet viverra ante.',
+                'image_1'  => null,
+                'image_2'  => null
+            ]
+        );
+
+        // ✅ 3. BARU: Komponen Informasi Kontak Halaman Hubungi Kami (Contact Info)
+        CompanySection::updateOrCreate(
+            ['key' => 'contact_info'],
+            [
+                'title'    => 'tastyfood@gmail.com',      // Berfungsi menampung EMAIL
+                'subtitle' => '+62 812 3456 7890',      // Berfungsi menampung PHONE
+                'desc'     => 'Kota Bandung, Jawa Barat', // Berfungsi menampung LOCATION
+                'image_1'  => null,
+                'image_2'  => null
+            ]
+        );
+
+        // 4. Komponen Halaman Tentang: Seksi Sejarah
         CompanySection::updateOrCreate(
             ['key' => 'about_sejarah'],
             [
@@ -32,7 +55,7 @@ class CompanySectionSeeder extends Seeder
             ]
         );
 
-        // 3. Komponen Halaman Tentang: Seksi Visi
+        // 5. Komponen Halaman Tentang: Seksi Visi
         CompanySection::updateOrCreate(
             ['key' => 'about_visi'],
             [
@@ -43,7 +66,7 @@ class CompanySectionSeeder extends Seeder
             ]
         );
 
-        // 4. Komponen Halaman Tentang: Seksi Misi
+        // 6. Komponen Halaman Tentang: Seksi Misi
         CompanySection::updateOrCreate(
             ['key' => 'about_misi'],
             [

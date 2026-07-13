@@ -36,10 +36,8 @@
                                 <a href="{{ route('admin.food.edit', $item->id) }}" class="text-xs font-black text-amber-600 hover:text-amber-800 uppercase tracking-wider transition">
                                     EDIT
                                 </a>
-                                <button onclick="triggerAdminDelete({{ $item->id }})" class="text-xs font-black text-red-500 hover:text-red-700 uppercase tracking-wider transition focus:outline-none cursor-pointer">
-                                    DELETE
-                                </button>
-                            </div>
+                                
+                                </div>
                         </td>
                     </tr>
                 @empty

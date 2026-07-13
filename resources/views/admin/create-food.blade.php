@@ -23,7 +23,6 @@
             <select name="category" required 
                     class="w-full h-12 px-4 rounded-none text-xs font-semibold bg-white border border-gray-300 focus:border-gray-950 focus:outline-none transition cursor-pointer">
                 <option value="" disabled selected>Pilih Kategori Halaman...</option>
-                <option value="card" {{ old('category') === 'card' ? 'selected' : '' }}>Seksi 1 - Card Banner Home</option>
                 <option value="news" {{ old('category') === 'news' ? 'selected' : '' }}>Seksi 2 - Berita Kami</option>
                 <option value="gallery" {{ old('category') === 'gallery' ? 'selected' : '' }}>Seksi 3 - Galeri Portal</option>
             </select>

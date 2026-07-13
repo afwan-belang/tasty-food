@@ -20,8 +20,11 @@ class PageController extends Controller
 
         // Mengambil muatan data CMS khusus seksi Hero Banner Beranda
         $hero = CompanySection::where('key', 'home_hero')->first();
+        
+        // Mengambil muatan data CMS khusus seksi Tentang Kami di Beranda
+        $about = CompanySection::where('key', 'home_about')->first();
 
-        return view('home', compact('foods', 'featuredNews', 'otherNews', 'gallery', 'hero'));
+        return view('home', compact('foods', 'featuredNews', 'otherNews', 'gallery', 'hero', 'about'));
     }
 
     /**
@@ -58,9 +61,15 @@ class PageController extends Controller
         return view('galeri', compact('galleryItems'));
     }
 
+    /**
+     * MENAMPILKAN HALAMAN KONTAK KAMI
+     */
     public function kontak()
     {
-        return view('kontak');
+        // ✅ PERBAIKAN: Menarik data CMS secara dinamis untuk info kontak publik
+        $contact = CompanySection::where('key', 'contact_info')->first();
+
+        return view('kontak', compact('contact'));
     }
 
     public function detailBerita($slug)

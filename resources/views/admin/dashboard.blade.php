@@ -83,7 +83,10 @@
                         <td class="py-4 px-6 text-center whitespace-nowrap sticky right-0 bg-white z-10 border-l border-gray-100 shadow-[-6px_0_10px_rgba(0,0,0,0.015)]">
                             <div class="flex items-center justify-center gap-4">
                                 <a href="{{ route('admin.food.edit', $food->id) }}" class="text-xs font-black text-amber-600 hover:text-amber-800 uppercase tracking-wider transition">EDIT</a>
-                                <button onclick="triggerAdminDelete({{ $food->id }})" class="text-xs font-black text-red-500 hover:text-red-700 uppercase tracking-wider transition focus:outline-none cursor-pointer">DELETE</button>
+                                
+                                @if($food->category !== 'card')
+                                    <button onclick="triggerAdminDelete({{ $food->id }})" class="text-xs font-black text-red-500 hover:text-red-700 uppercase tracking-wider transition focus:outline-none cursor-pointer">DELETE</button>
+                                @endif
                             </div>
                         </td>
                     </tr>
@@ -126,6 +129,52 @@
                         <textarea name="desc" rows="3" class="w-full bg-white border border-gray-300 text-xs p-3 rounded-none focus:outline-none focus:border-gray-950" required>{{ $cmsHero->desc ?? '' }}</textarea>
                     </div>
                     <button type="submit" class="bg-gray-950 text-white px-4 py-2 text-[10px] font-black uppercase tracking-widest transition hover:bg-amber-600 cursor-pointer">SAVE HERO</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="bg-gray-50/50 p-6 rounded-xl border border-gray-100">
+            <span class="text-[9px] font-black tracking-widest text-amber-600 uppercase block mb-1">COMPONENTS SEKSI 1.2</span>
+            <h4 class="text-xs font-black text-gray-950 uppercase mb-4">TENTANG KAMI BERANDA (MID SECTION)</h4>
+            
+            <form action="{{ route('admin.sections.update') }}" method="POST">
+                @csrf
+                <input type="hidden" name="key" value="home_about">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-950 uppercase mb-1">Judul Utama Seksi</label>
+                        <input type="text" name="title" value="{{ $cmsAbout->title ?? '' }}" class="w-full bg-white border border-gray-300 text-xs px-3 py-2 rounded-none focus:outline-none focus:border-gray-950" required>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-950 uppercase mb-1">Narasi Deskripsi Panjang</label>
+                        <textarea name="desc" rows="5" class="w-full bg-white border border-gray-300 text-xs p-3 rounded-none focus:outline-none focus:border-gray-950" required>{{ $cmsAbout->desc ?? '' }}</textarea>
+                    </div>
+                    <button type="submit" class="bg-gray-950 text-white px-4 py-2 text-[10px] font-black uppercase tracking-widest transition hover:bg-amber-600 cursor-pointer">SAVE TENTANG BERANDA</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="bg-gray-50/50 p-6 rounded-xl border border-gray-100">
+            <span class="text-[9px] font-black tracking-widest text-amber-600 uppercase block mb-1">COMPONENTS SEKSI 1.3</span>
+            <h4 class="text-xs font-black text-gray-950 uppercase mb-4">CONTACT INFO REDAKSI MANAGER</h4>
+            
+            <form action="{{ route('admin.sections.update') }}" method="POST">
+                @csrf
+                <input type="hidden" name="key" value="contact_info">
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-950 uppercase mb-1">Email Resmi (e.g. tastyfood@gmail.com)</label>
+                        <input type="text" name="title" value="{{ $cmsContact->title ?? '' }}" class="w-full bg-white border border-gray-300 text-xs px-3 py-2 rounded-none focus:outline-none focus:border-gray-950" required>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-950 uppercase mb-1">Nomor Telepon (e.g. +62 812 3456 7890)</label>
+                        <input type="text" name="subtitle" value="{{ $cmsContact->subtitle ?? '' }}" class="w-full bg-white border border-gray-300 text-xs px-3 py-2 rounded-none focus:outline-none focus:border-gray-950">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-950 uppercase mb-1">Lokasi Wilayah (e.g. Kota Bandung, Jawa Barat)</label>
+                        <textarea name="desc" rows="2" class="w-full bg-white border border-gray-300 text-xs p-3 rounded-none focus:outline-none focus:border-gray-950" required>{{ $cmsContact->desc ?? '' }}</textarea>
+                    </div>
+                    <button type="submit" class="bg-gray-950 text-white px-4 py-2 text-[10px] font-black uppercase tracking-widest transition hover:bg-amber-600 cursor-pointer">SAVE INFO KONTAK</button>
                 </div>
             </form>
         </div>
@@ -192,7 +241,7 @@
             </form>
         </div>
 
-        <div class="bg-gray-50/50 p-6 rounded-xl border border-gray-100">
+        <div class="bg-gray-50/50 p-6 rounded-xl border border-gray-100 col-span-1 md:col-span-2">
             <span class="text-[9px] font-black tracking-widest text-amber-600 uppercase block mb-1">COMPONENTS SEKSI 4</span>
             <h4 class="text-xs font-black text-gray-950 uppercase mb-4">MISI KAMI SECTION PANEL</h4>
             

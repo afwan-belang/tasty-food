@@ -171,7 +171,9 @@
                 </svg>
             </div>
             <h3 class="font-black text-lg text-gray-950 uppercase tracking-wide mb-1">EMAIL</h3>
-            <p class="text-gray-600 text-sm font-medium">tastyfood@gmail.com</p>
+            <p class="text-gray-600 text-sm font-medium">
+                {{ $contact->title ?? 'tastyfood@gmail.com' }}
+            </p>
         </div>
 
         <div class="flex flex-col items-center reveal-on-scroll delay-100">
@@ -181,7 +183,9 @@
                 </svg>
             </div>
             <h3 class="font-black text-lg text-gray-950 uppercase tracking-wide mb-1">PHONE</h3>
-            <p class="text-gray-600 text-sm font-medium">+62 812 3456 7890</p>
+            <p class="text-gray-600 text-sm font-medium">
+                {{ $contact->subtitle ?? '+62 812 3456 7890' }}
+            </p>
         </div>
 
         <div class="flex flex-col items-center reveal-on-scroll delay-200">
@@ -192,7 +196,9 @@
                 </svg>
             </div>
             <h3 class="font-black text-lg text-gray-950 uppercase tracking-wide mb-1">LOCATION</h3>
-            <p class="text-gray-600 text-sm font-medium">Kota Bandung, Jawa Barat</p>
+            <p class="text-gray-600 text-sm font-medium">
+                {{ $contact->desc ?? 'Kota Bandung, Jawa Barat' }}
+            </p>
         </div>
 
     </div>

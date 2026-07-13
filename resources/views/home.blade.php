@@ -132,8 +132,13 @@
 <!-- SEKSI 2: TENTANG KAMI (REDUCE OVERFLOW WHITEPAGE BERDASARKAN DESAIN)      -->
 <!-- ========================================================================= -->
 <section class="py-24 text-center bg-white anim-hero-entry anim-delay-5 select-none">
-    <h2 class="text-2xl lg:text-3xl font-black mb-6 uppercase tracking-wider text-gray-950">Tentang Kami</h2>
-    <p class="text-gray-500 max-w-3xl mx-auto px-6 leading-relaxed text-sm lg:text-base font-normal text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus ornare, augue eu rutrum commodo, dui diam convallis arcu, eget consectetur ex sem eget lacus. Nullam vitae dignissim neque, vel luctus ex. Fusce sit amet viverra ante.</p>
+    <h2 class="text-2xl lg:text-3xl font-black mb-6 uppercase tracking-wider text-gray-950">
+        {{ $about->title ?? 'Tentang Kami' }}
+    </h2>
+    
+    <p class="text-gray-500 max-w-3xl mx-auto px-6 leading-relaxed text-sm lg:text-base font-normal text-center">
+        {!! nl2br(e($about->desc ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...')) !!}
+    </p>
     <div class="w-16 h-[4px] bg-gray-950 mx-auto mt-8"></div>
 </section>
 
