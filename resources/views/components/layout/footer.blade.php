@@ -42,17 +42,17 @@
                 
                 <li class="flex items-center gap-3">
                     <img src="{{ asset('asset/ic_markunread_24px.avif') }}" class="w-[18px] h-[18px] object-contain flex-shrink-0" alt="Email Icon">
-                    <span>tastyfood@gmail.com</span>
+                    <span>{{ $footerContact->title ?? 'tastyfood@gmail.com' }}</span>
                 </li>
                 
                 <li class="flex items-center gap-3">
                     <img src="{{ asset('asset/ic_call_24px.avif') }}" class="w-[18px] h-[18px] object-contain flex-shrink-0" alt="Phone Icon">
-                    <span>+62 812 3456 7890</span>
+                    <span>{{ $footerContact->subtitle ?? '+62 812 3456 7890' }}</span>
                 </li>
                 
                 <li class="flex items-center gap-3">
                     <img src="{{ asset('asset/ic_place_24px.avif') }}" class="w-[18px] h-[18px] object-contain flex-shrink-0" alt="Location Icon">
-                    <span>Kota Bandung, Jawa Barat</span>
+                    <span>{{ $footerContact->desc ?? 'Kota Bandung, Jawa Barat' }}</span>
                 </li>
                 
             </ul>

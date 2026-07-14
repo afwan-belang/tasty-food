@@ -231,7 +231,7 @@
     
     <!-- Tombol Blok Khas Autentik Sesuai Gambar Model -->
     <div class="text-center reveal-on-scroll delay-100">
-        <x-ui.button href="{{ route('galeri') }}" class="rounded-none bg-black text-white hover:bg-gray-900 px-12 py-4 font-black tracking-widest text-xs transition duration-300">
+        <x-ui.button href="{{ route('galeri') }}" class="rounded-none bg-black text-white px-12 py-4 font-black tracking-widest text-xs transition duration-300 hover:bg-white hover:text-gray-950 border border-black">
             LIHAT LEBIH BANYAK
         </x-ui.button>
     </div>

@@ -32,7 +32,7 @@ class CompanySectionSeeder extends Seeder
             ]
         );
 
-        // ✅ 3. BARU: Komponen Informasi Kontak Halaman Hubungi Kami (Contact Info)
+        // ✅ 3. INDUK DATA KONTAK: Menjamin ketersediaan awal baris data pengunci contact_info
         CompanySection::updateOrCreate(
             ['key' => 'contact_info'],
             [

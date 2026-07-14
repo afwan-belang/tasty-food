@@ -25,10 +25,7 @@ class AdminDashboardController extends Controller
         // Menarik muatan data CMS untuk dioperasikan ke komponen Form Control Editor
         $cmsHero    = CompanySection::where('key', 'home_hero')->first();
         $cmsAbout   = CompanySection::where('key', 'home_about')->first();
-        
-        // ✅ TAMBAHAN: Menarik muatan data CMS khusus seksi Informasi Kontak
         $cmsContact = CompanySection::where('key', 'contact_info')->first();
-        
         $cmsSejarah = CompanySection::where('key', 'about_sejarah')->first();
         $cmsVisi    = CompanySection::where('key', 'about_visi')->first();
         $cmsMisi    = CompanySection::where('key', 'about_misi')->first();
@@ -45,7 +42,6 @@ class AdminDashboardController extends Controller
     public function updateSection(Request $request)
     {
         $request->validate([
-            // ✅ PERBAIKAN: Menambahkan 'contact_info' ke dalam daftar putih persetujuan kata kunci
             'key'      => ['required', 'string', 'in:home_hero,home_about,contact_info,about_sejarah,about_visi,about_misi'],
             'title'    => ['required', 'string', 'max:255'],
             'subtitle' => ['nullable', 'string', 'max:255'],

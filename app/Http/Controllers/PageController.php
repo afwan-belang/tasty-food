@@ -66,7 +66,7 @@ class PageController extends Controller
      */
     public function kontak()
     {
-        // ✅ PERBAIKAN: Menarik data CMS secara dinamis untuk info kontak publik
+        // Menarik data CMS secara dinamis untuk info kontak khusus halaman kontak publik
         $contact = CompanySection::where('key', 'contact_info')->first();
 
         return view('kontak', compact('contact'));
