@@ -24,7 +24,11 @@ class PageController extends Controller
         // Mengambil muatan data CMS khusus seksi Tentang Kami di Beranda
         $about = CompanySection::where('key', 'home_about')->first();
 
-        return view('home', compact('foods', 'featuredNews', 'otherNews', 'gallery', 'hero', 'about'));
+        // ✅ TAMBAHAN: Mengambil muatan data CMS khusus Teks Branding & Gambar Tekstur Latar
+        $branding = CompanySection::where('key', 'site_branding')->first();
+        $texture  = CompanySection::where('key', 'home_texture')->first();
+
+        return view('home', compact('foods', 'featuredNews', 'otherNews', 'gallery', 'hero', 'about', 'branding', 'texture'));
     }
 
     /**

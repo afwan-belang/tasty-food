@@ -135,14 +135,15 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         
+        <!-- FORM HERO HOME BANNER + MEDIA IMAGE UPLOAD -->
         <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
-            <form action="{{ route('admin.sections.update') }}" method="POST">
+            <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="key" value="home_hero">
                 <div class="space-y-4">
                     <div class="flex items-center gap-2 mb-2">
                         <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">1</span>
-                        <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">HERO HOME TEXT BANNER</h4>
+                        <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">HERO HOME TEXT & PLATE IMAGE</h4>
                     </div>
                     <div>
                         <label class="block text-[10px] font-black text-gray-950 uppercase mb-1.5 tracking-wide">Subtitle Sorot (e.g. HEALTHY)</label>
@@ -156,9 +157,65 @@
                         <label class="block text-[10px] font-black text-gray-950 uppercase mb-1.5 tracking-wide">Deskripsi Narasi</label>
                         <textarea name="desc" rows="4" class="w-full bg-gray-50/50 border border-gray-300 text-xs p-4 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white transition-all font-semibold resize-none leading-relaxed" required>{{ $cmsHero->desc ?? '' }}</textarea>
                     </div>
+                    <!-- ✅ TAMBAHAN: Slot unggah file gambar piring utama hero beranda -->
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-950 uppercase mb-1.5 tracking-wide">Ganti Gambar Piring Hero Utama</label>
+                        <input type="file" name="image_1" class="text-[10px] w-full block text-gray-500 file:mr-3 file:py-1 file:px-2.5 file:border-0 file:text-[9px] file:font-black file:uppercase file:bg-gray-100 file:text-gray-900 hover:file:bg-amber-500 hover:file:text-gray-950 cursor-pointer">
+                    </div>
                 </div>
                 <button type="submit" class="bg-gray-950 text-white w-full py-3.5 text-[10px] font-black uppercase tracking-widest transition duration-200 hover:bg-amber-500 hover:text-gray-950 cursor-pointer flex items-center justify-center gap-2 mt-5">
-                    <i class="fa-solid fa-floppy-disk"></i> SAVE HERO TEXT
+                    <i class="fa-solid fa-floppy-disk"></i> SAVE HERO CONTENT
+                </button>
+            </form>
+        </div>
+
+        <!-- ✅ BARU - FORM 7: LOGO BRANDING NAVBAR TEXT MANAGER -->
+        <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
+            <form action="{{ route('admin.sections.update') }}" method="POST">
+                @csrf
+                <input type="hidden" name="key" value="site_branding">
+                <input type="hidden" name="desc" value="branding">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">2</span>
+                        <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">LOGO TEXT NAVBAR BRANDING</h4>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-950 uppercase mb-1.5 tracking-wide">Nama Branding Logo (e.g. TASTY FOOD)</label>
+                        <input type="text" name="title" value="{{ $cmsBranding->title ?? 'TASTY FOOD' }}" class="w-full bg-gray-50/50 border border-gray-300 text-xs px-4 py-3 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white transition-all font-semibold" required>
+                    </div>
+                    <div class="bg-gray-50 p-4 border border-gray-100 text-[11px] text-gray-400 leading-relaxed font-medium">
+                        *Mengubah isian teks di atas akan memperbarui nama identitas utama logo tulisan yang tayang pada bilah menu navigasi beranda depan.
+                    </div>
+                </div>
+                <button type="submit" class="bg-gray-950 text-white w-full py-3.5 text-[10px] font-black uppercase tracking-widest transition duration-200 hover:bg-amber-500 hover:text-gray-950 cursor-pointer flex items-center justify-center gap-2 mt-5">
+                    <i class="fa-solid fa-signature"></i> SAVE BRANDING LOGO
+                </button>
+            </form>
+        </div>
+
+        <!-- ✅ BARU - FORM 8: BACKGROUND TEXTURE PICTURE MANAGER -->
+        <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
+            <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="key" value="home_texture">
+                <input type="hidden" name="title" value="texture">
+                <input type="hidden" name="desc" value="texture">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">3</span>
+                        <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">BACKGROUND BANNER TEXTURE (SEKSI 3)</h4>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-950 uppercase mb-1.5 tracking-wide">Upload File Gambar Tekstur Latar Belakang Baru</label>
+                        <input type="file" name="image_1" class="text-[10px] w-full block text-gray-500 file:mr-3 file:py-1 file:px-2.5 file:border-0 file:text-[9px] file:font-black file:uppercase file:bg-gray-100 file:text-gray-900 hover:file:bg-amber-500 hover:file:text-gray-950 cursor-pointer" required>
+                    </div>
+                    <div class="bg-gray-50 p-4 border border-gray-100 text-[11px] text-gray-400 leading-relaxed font-medium">
+                        *Ganti gambar tekstur dasar pola melengkung abu-abu yang membungkus komponen perulangan fluid card beranda depan.
+                    </div>
+                </div>
+                <button type="submit" class="bg-gray-950 text-white w-full py-3.5 text-[10px] font-black uppercase tracking-widest transition duration-200 hover:bg-amber-500 hover:text-gray-950 cursor-pointer flex items-center justify-center gap-2 mt-5">
+                    <i class="fa-solid fa-image"></i> UPLOAD NEW TEXTURE
                 </button>
             </form>
         </div>
@@ -169,7 +226,7 @@
                 <input type="hidden" name="key" value="home_about">
                 <div class="space-y-4">
                     <div class="flex items-center gap-2 mb-2">
-                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">2</span>
+                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">4</span>
                         <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">TENTANG KAMI BERANDA (MID SECTION)</h4>
                     </div>
                     <div>
@@ -178,7 +235,7 @@
                     </div>
                     <div>
                         <label class="block text-[10px] font-black text-gray-950 uppercase mb-1.5 tracking-wide">Narasi Deskripsi Panjang</label>
-                        <textarea name="desc" rows="7" class="w-full bg-gray-50/50 border border-gray-300 text-xs p-4 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white transition-all font-semibold resize-none leading-relaxed" required>{{ $cmsAbout->desc ?? '' }}</textarea>
+                        <textarea name="desc" rows="5" class="w-full bg-gray-50/50 border border-gray-300 text-xs p-4 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white transition-all font-semibold resize-none leading-relaxed" required>{{ $cmsAbout->desc ?? '' }}</textarea>
                     </div>
                 </div>
                 <button type="submit" class="bg-gray-950 text-white w-full py-3.5 text-[10px] font-black uppercase tracking-widest transition duration-200 hover:bg-amber-500 hover:text-gray-950 cursor-pointer flex items-center justify-center gap-2 mt-5">
@@ -193,7 +250,7 @@
                 <input type="hidden" name="key" value="contact_info">
                 <div class="space-y-4">
                     <div class="flex items-center gap-2 mb-2">
-                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">3</span>
+                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">5</span>
                         <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">CONTACT INFO REDAKSI MANAGER</h4>
                     </div>
                     <div>
@@ -221,7 +278,7 @@
                 <input type="hidden" name="key" value="about_sejarah">
                 <div class="space-y-4">
                     <div class="flex items-center gap-2 mb-2">
-                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">4</span>
+                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">6</span>
                         <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">SEJARAH SECTION PANEL</h4>
                     </div>
                     <div>
@@ -255,7 +312,7 @@
                 <input type="hidden" name="key" value="about_visi">
                 <div class="space-y-4">
                     <div class="flex items-center gap-2 mb-2">
-                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">5</span>
+                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">7</span>
                         <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">VISI KAMI SECTION PANEL</h4>
                     </div>
                     <div>
@@ -283,22 +340,22 @@
             </form>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
+        <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between col-span-1 md:col-span-2">
             <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="key" value="about_misi">
                 <div class="space-y-4">
                     <div class="flex items-center gap-2 mb-2">
-                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">6</span>
+                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">8</span>
                         <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">MISI KAMI SECTION PANEL</h4>
                     </div>
                     <div>
                         <label class="block text-[10px] font-black text-gray-950 uppercase mb-1.5 tracking-wide">Judul Utama</label>
-                        <input type="text" name="title" value="{{ $cmsMisi->title ?? '' }}" class="w-full bg-gray-50/50 border border-gray-300 text-xs px-4 py-3 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white transition-all font-semibold" required>
+                        <input type="text" name="title" value="{{ $cmsMisi->title ?? '' }}" class="w-full bg-white border border-gray-300 text-xs px-4 py-3 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white transition-all font-semibold" required>
                     </div>
                     <div>
                         <label class="block text-[10px] font-black text-gray-950 uppercase mb-1.5 tracking-wide">Narasi Pernyataan Misi</label>
-                        <textarea name="desc" rows="3" class="w-full bg-gray-50/50 border border-gray-300 text-xs p-4 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white transition-all font-semibold resize-none leading-relaxed" required>{{ $cmsMisi->desc ?? '' }}</textarea>
+                        <textarea name="desc" rows="3" class="w-full bg-white border border-gray-300 text-xs p-4 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white transition-all font-semibold resize-none leading-relaxed" required>{{ $cmsMisi->desc ?? '' }}</textarea>
                     </div>
                     <div>
                         <label class="block text-[9px] font-black text-gray-400 uppercase mb-1">Upload Foto Lanskap Misi</label>

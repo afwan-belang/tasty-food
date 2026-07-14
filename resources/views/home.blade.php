@@ -72,7 +72,9 @@
 <!-- ========================================================================= -->
 <section class="relative w-full tasty-home-hero flex flex-col overflow-hidden z-10">
     <div class="relative z-20 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-10 flex justify-between md:justify-start items-center gap-16 lg:gap-20 anim-hero-entry">
-        <a href="{{ route('home') }}" class="text-2xl lg:text-3xl font-black tracking-wider uppercase text-gray-950 flex-shrink-0 z-50">TASTY FOOD</a>
+        <a href="{{ route('home') }}" class="text-2xl lg:text-3xl font-black tracking-wider uppercase text-gray-950 flex-shrink-0 z-50">
+            {{ $branding->title ?? 'TASTY FOOD' }}
+        </a>
         
         <div class="hidden md:flex space-x-8 lg:space-x-10 text-xs lg:text-sm font-bold tracking-wider text-gray-900 pt-1 items-center">
             <a href="{{ route('home') }}" class="transition duration-200 {{ request()->routeIs('home') ? 'text-amber-600 border-b-2 border-amber-600 pb-1' : 'hover:text-gray-600' }}">HOME</a>
@@ -85,7 +87,6 @@
         <button id="mobile-menu-btn" class="md:hidden text-gray-950 focus:outline-none z-50 p-1"><svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-7 h-7 transition-transform duration-300"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg></button>
     </div>
 
-    <!-- MOBILE DROPDOWN MENU PANEL RESPONSIF -->
     <div id="mobile-menu" class="fixed top-0 bottom-0 right-0 w-3/4 bg-white/95 backdrop-blur-md shadow-2xl border-l border-gray-100/50 z-40 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col items-center justify-center space-y-8 text-xl font-black tracking-widest text-gray-950 md:hidden p-6">
         <button id="mobile-menu-close" class="absolute top-10 right-6 text-gray-950 focus:outline-none p-1 hover:scale-110 transition duration-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-7 h-7"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button>
         <a href="{{ route('home') }}" class="hover:text-amber-600 transition duration-200">HOME</a>
@@ -95,22 +96,17 @@
         <a href="{{ route('kontak') }}" class="hover:text-amber-600 transition duration-200">KONTAK</a>
     </div>
 
-    <!-- HERO TEXT WRAPPER SINKRONISASI TINGGI LAYAR -->
-    <!-- HERO TEXT WRAPPER SINKRONISASI KONTEN DINAMIS DATABASE -->
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 flex-grow flex flex-col items-start justify-center pt-8 pb-20 md:pb-16">
         <div class="tasty-hero-line mb-8 anim-hero-entry anim-delay-1"></div>
         
-        <!-- Teks Subtitle Dinamis (e.g., HEALTHY) -->
         <h1 class="text-3xl sm:text-4xl lg:text-6xl font-light tracking-wide text-gray-950 uppercase mb-1 anim-hero-entry anim-delay-1">
             {{ $hero->subtitle ?? 'HEALTHY' }}
         </h1>
         
-        <!-- Teks Judul Utama Dinamis (e.g., TASTY FOOD) -->
         <h2 class="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight text-gray-950 uppercase mb-8 anim-hero-entry anim-delay-2 leading-tight">
             {{ $hero->title ?? 'TASTY FOOD' }}
         </h2>
         
-        <!-- Paragraf Deskripsi Dinamis -->
         <p class="text-gray-500 text-sm lg:text-base leading-relaxed max-w-xl mb-10 font-normal anim-hero-entry anim-delay-3 text-justify">
             {{ $hero->desc ?? 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...' }}
         </p>
@@ -122,14 +118,12 @@
         </div>
     </div>
     
-    <!-- Aset Gambar Utama Dinamis Berbasis Database Media Server -->
+    <!-- ✅ GAMBAR PIRING HERO UTAMA: Mengikuti Media File Ungguhan Database Admin -->
     <img src="{{ asset($hero->image_1 ?? 'asset/img-4-2000x2000.avif') }}" class="tasty-hero-plate-exact anim-hero-plate" alt="Main Plate Layout">
-    
-    <!-- PERFORMA MAKSIMAL: Gambar Pertama Dilarang Menggunakan Lazy-Load Agar LCP Score Chrome Sempurna -->
 </section>
 
 <!-- ========================================================================= -->
-<!-- SEKSI 2: TENTANG KAMI (REDUCE OVERFLOW WHITEPAGE BERDASARKAN DESAIN)      -->
+<!-- SEKSI 2: TENTANG KAMI (DINAMIS CMS DATABASE)                               -->
 <!-- ========================================================================= -->
 <section class="py-24 text-center bg-white anim-hero-entry anim-delay-5 select-none">
     <h2 class="text-2xl lg:text-3xl font-black mb-6 uppercase tracking-wider text-gray-950">
@@ -143,13 +137,13 @@
 </section>
 
 <!-- ========================================================================= -->
-<!-- SEKSI 3: FOUR FLOATING FOOD CARDS BANNER PANEL (`rounded-[24px]`)          -->
+<!-- SEKSI 3: FOUR FLOATING FOOD CARDS BANNER PANEL                             -->
 <!-- ========================================================================= -->
 <div class="bg-white py-12 px-0 select-none">
     <section class="relative w-full aspect-none md:aspect-[12/4.9] overflow-visible flex items-center justify-center py-20 lg:py-0">
-        <!-- LAZY LOADING ACTIVE: Menggunakan Latar Belakang Tekstur Khas Group 70 -->
+        <!-- ✅ PERBAIKAN: Latar Belakang Gambar Tekstur Khas Group 70 Sekarang Dinamis Berbasis Upload Media Database -->
         <div class="absolute inset-0 z-0 pointer-events-none select-none reveal-on-scroll">
-            <img src="{{ asset('asset/Group 70@2x.avif') }}" loading="lazy" class="w-full h-full object-cover object-center" alt="Background Master Banner Layout">
+            <img src="{{ asset($texture->image_1 ?? 'asset/Group 70@2x.avif') }}" loading="lazy" class="w-full h-full object-cover object-center" alt="Background Master Banner Layout">
         </div>
         <div class="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-center">
@@ -165,7 +159,7 @@
 </div>
 
 <!-- ========================================================================= -->
-<!-- SEKSI 4: BERITA KAMI (ASIMETRIS LAYOUT FORMATION: 1 BIG LEFT, 4 SMALL RIGHT)-->
+<!-- SEKSI 4: BERITA KAMI                                                      -->
 <!-- ========================================================================= -->
 <section class="py-24 px-6 md:px-12 lg:px-24 bg-gray-50 select-none">
     <h2 class="text-2xl lg:text-3xl font-black mb-16 uppercase text-center tracking-wider text-gray-950 reveal-on-scroll">Berita Kami</h2>
@@ -214,22 +208,20 @@
 </section>
 
 <!-- ========================================================================= -->
-<!-- SEKSI 5: GALERI KAMI (FORMASI 3 KOLOM DESKTOP SESUAI IMAGE SEKSI BAWAH)    -->
+<!-- SEKSI 5: GALERI KAMI                                                      -->
 <!-- ========================================================================= -->
 <section class="py-24 px-6 lg:px-24 bg-white select-none">
     <h2 class="text-2xl lg:text-3xl font-black mb-16 uppercase text-center tracking-wider text-gray-950 reveal-on-scroll">Galeri Kami</h2>
     
-    <!-- Formasi Grid 3 Kolom Sesuai Visual Cetak Biru Jelas HOME.png -->
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-7xl mx-auto mb-16">
         @foreach ($gallery as $item)
-            @php $step = $loop->index % 3; $delayClass = $step === 1 ? 'delay-100' : ($step === 2 ? 'delay-200' : ''); @endphp
+            @php $step = $loop->index % 3; $delayClass = $step === 1 ? 'delay-100' : ($step === 2 ? 'delay-200' : ''); @php
             <div data-id="{{ $item->id }}" onclick="openFoodModal(this.dataset.id)" class="aspect-square bg-gray-50 rounded-[24px] overflow-hidden border border-gray-100/70 tasty-premium-shadow tasty-gpu-smooth relative group cursor-pointer reveal-on-scroll {{ $delayClass }}">
                 <img src="{{ asset($item->image) }}" loading="lazy" alt="Galeri Culinary Tasty Food Showcase" class="w-full h-full object-cover tasty-hover-zoom-trigger select-none pointer-events-none">
             </div>
         @endforeach
     </div>
     
-    <!-- Tombol Blok Khas Autentik Sesuai Gambar Model -->
     <div class="text-center reveal-on-scroll delay-100">
         <x-ui.button href="{{ route('galeri') }}" class="rounded-none bg-black text-white px-12 py-4 font-black tracking-widest text-xs transition duration-300 hover:bg-white hover:text-gray-950 border border-black">
             LIHAT LEBIH BANYAK
@@ -237,7 +229,6 @@
     </div>
 </section>
 
-<!-- ENGINE INTERAKSI DROPDOWN RESPONSIVE NAVBAR PADA PERANGKAT MOBILE -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const menuBtn = document.getElementById('mobile-menu-btn');

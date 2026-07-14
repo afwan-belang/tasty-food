@@ -153,7 +153,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="w-full bg-black text-white hover:bg-neutral-900 font-black uppercase tracking-widest text-sm transition-all duration-300 mt-6 focus:outline-none flex items-center justify-center" style="height: 60px; border-radius: 16px;">
+            <button type="submit" class="w-full bg-black text-white font-black uppercase tracking-widest text-sm transition-all duration-300 mt-6 focus:outline-none flex items-center justify-center hover:bg-white hover:text-gray-950 border border-black cursor-pointer" style="height: 60px; border-radius: 16px;">
                 KIRIM
             </button>
         </form>

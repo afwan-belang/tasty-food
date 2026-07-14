@@ -32,7 +32,7 @@ class CompanySectionSeeder extends Seeder
             ]
         );
 
-        // ✅ 3. INDUK DATA KONTAK: Menjamin ketersediaan awal baris data pengunci contact_info
+        // INDUK DATA KONTAK: Menjamin ketersediaan awal baris data pengunci contact_info
         CompanySection::updateOrCreate(
             ['key' => 'contact_info'],
             [
@@ -44,7 +44,30 @@ class CompanySectionSeeder extends Seeder
             ]
         );
 
-        // 4. Komponen Halaman Tentang: Seksi Sejarah
+        // ✅ 4. BARU: Komponen Pengunci Teks Branding Logo Navbar Beranda
+        CompanySection::updateOrCreate(
+            ['key' => 'site_branding'],
+            [
+                'title'    => 'TASTY FOOD',
+                'subtitle' => null,
+                'desc'     => 'branding',
+                'image_1'  => null,
+                'image_2'  => null
+            ]
+        );
+
+        CompanySection::updateOrCreate(
+            ['key' => 'home_texture'],
+            [
+                'title'    => 'texture',
+                'subtitle' => null,
+                'desc'     => 'texture',
+                'image_1'  => 'asset/Group 70@2x.avif',
+                'image_2'  => null
+            ]
+        );
+
+        // 6. Komponen Halaman Tentang: Seksi Sejarah
         CompanySection::updateOrCreate(
             ['key' => 'about_sejarah'],
             [
@@ -55,7 +78,6 @@ class CompanySectionSeeder extends Seeder
             ]
         );
 
-        // 5. Komponen Halaman Tentang: Seksi Visi
         CompanySection::updateOrCreate(
             ['key' => 'about_visi'],
             [
@@ -66,7 +88,6 @@ class CompanySectionSeeder extends Seeder
             ]
         );
 
-        // 6. Komponen Halaman Tentang: Seksi Misi
         CompanySection::updateOrCreate(
             ['key' => 'about_misi'],
             [

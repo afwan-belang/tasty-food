@@ -30,9 +30,14 @@ class AdminDashboardController extends Controller
         $cmsVisi    = CompanySection::where('key', 'about_visi')->first();
         $cmsMisi    = CompanySection::where('key', 'about_misi')->first();
 
+        // ✅ TAMBAHAN: Menarik data CMS untuk Form Input Logo & Tekstur Latar Beranda
+        $cmsBranding = CompanySection::where('key', 'site_branding')->first();
+        $cmsTexture  = CompanySection::where('key', 'home_texture')->first();
+
         return view('admin.dashboard', compact(
             'totalKonten', 'totalCard', 'totalBerita', 'totalGaleri', 'allFoods',
-            'cmsHero', 'cmsAbout', 'cmsContact', 'cmsSejarah', 'cmsVisi', 'cmsMisi'
+            'cmsHero', 'cmsAbout', 'cmsContact', 'cmsSejarah', 'cmsVisi', 'cmsMisi',
+            'cmsBranding', 'cmsTexture'
         ));
     }
 
@@ -42,10 +47,12 @@ class AdminDashboardController extends Controller
     public function updateSection(Request $request)
     {
         $request->validate([
-            'key'      => ['required', 'string', 'in:home_hero,home_about,contact_info,about_sejarah,about_visi,about_misi'],
+            // ✅ PERBAIKAN: Menambahkan 'site_branding' dan 'home_texture' ke dalam whitelist key
+            'key'      => ['required', 'string', 'in:home_hero,home_about,contact_info,site_branding,home_texture,about_sejarah,about_visi,about_misi'],
             'title'    => ['required', 'string', 'max:255'],
             'subtitle' => ['nullable', 'string', 'max:255'],
-            'desc'     => ['required', 'string'],
+            // ✅ BULLETPROOF FIX: Menggunakan required_unless agar kolom desc tidak wajib jika mengedit logo/tekstur gambar
+            'desc'     => ['required_unless:key,site_branding,home_texture', 'nullable', 'string'],
             'image_1'  => ['nullable', 'file', 'mimes:jpeg,png,jpg,webp,avif', 'max:2048'], 
             'image_2'  => ['nullable', 'file', 'mimes:jpeg,png,jpg,webp,avif', 'max:2048'],
         ]);
@@ -54,7 +61,10 @@ class AdminDashboardController extends Controller
         
         $section->title    = $request->title;
         $section->subtitle = $request->subtitle;
-        $section->desc     = $request->desc;
+        // Hanya update kolom desc jika request memuat data deskripsi murni
+        if ($request->has('desc')) {
+            $section->desc = $request->desc;
+        }
 
         // Manajemen Aset File Gambar ke-1 (Hapus file usang di storage jika ada upload baru)
         if ($request->hasFile('image_1')) {
@@ -76,7 +86,7 @@ class AdminDashboardController extends Controller
 
         $section->save();
 
-        return back()->with('success', 'Narasi materi teks web utama publik berhasil diperbarui secara dinamis!');
+        return back()->with('success', 'Aset materi teks atau gambar utama publik berhasil diperbarui secara dinamis!');
     }
 
     public function card()
