@@ -5,9 +5,14 @@
 @section('admin_content')
 <div class="bg-white border border-gray-100 shadow-sm rounded-2xl overflow-hidden">
     
-    <div class="p-6 sm:p-8 border-b border-gray-100 bg-white">
-        <h3 class="text-sm font-black text-gray-950 uppercase tracking-wider">SEKSI 1: COMPONENT CARD FILTER</h3>
-        <p class="text-xs text-gray-400 font-semibold uppercase tracking-wide mt-1">Menampilkan muatan data khusus penempatan fluid card banner halaman utama.</p>
+    <div class="p-6 sm:p-8 border-b border-gray-100 bg-white flex items-center gap-2.5">
+        <div class="w-8 h-8 bg-blue-50 text-blue-600 flex items-center justify-center rounded-xl">
+            <i class="fa-solid fa-table-cells text-sm"></i>
+        </div>
+        <div>
+            <h3 class="text-sm font-black text-gray-950 uppercase tracking-wider">SEKSI 1: COMPONENT CARD FILTER</h3>
+            <p class="text-xs text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Menampilkan muatan data khusus penempatan fluid card banner halaman utama.</p>
+        </div>
     </div>
 
     <div class="overflow-x-auto w-full tasty-scrollbar relative">
@@ -33,11 +38,10 @@
                         </td>
                         <td class="py-4 px-6 text-center whitespace-nowrap sticky right-0 bg-white z-10 border-l border-gray-100 shadow-[-6px_0_10px_rgba(0,0,0,0.015)]">
                             <div class="flex items-center justify-center gap-4">
-                                <a href="{{ route('admin.food.edit', $item->id) }}" class="text-xs font-black text-amber-600 hover:text-amber-800 uppercase tracking-wider transition">
-                                    EDIT
+                                <a href="{{ route('admin.food.edit', $item->id) }}" class="text-xs font-black text-amber-600 hover:text-amber-800 uppercase tracking-wider transition flex items-center gap-1">
+                                    <i class="fa-solid fa-pen-to-square"></i> EDIT
                                 </a>
-                                
-                                </div>
+                            </div>
                         </td>
                     </tr>
                 @empty
@@ -49,26 +53,4 @@
         </table>
     </div>
 </div>
-
-<script>
-    function triggerAdminDelete(id) {
-        if (confirm('Apakah Anda yakin ingin melenyapkan aset konten card ini secara permanen dari server database?')) {
-            fetch(`/portal-admin/food/${id}`, {
-                method: 'DELETE',
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.success) {
-                    showAdminToast(data.message, 'success');
-                    setTimeout(() => window.location.reload(), 1000);
-                }
-            })
-            .catch(err => showAdminToast('Gagal memproses penghapusan data redaksi.', 'error'));
-        }
-    }
-</script>
 @endsection

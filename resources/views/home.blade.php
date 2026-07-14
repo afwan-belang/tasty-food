@@ -149,7 +149,7 @@
     <section class="relative w-full aspect-none md:aspect-[12/4.9] overflow-visible flex items-center justify-center py-20 lg:py-0">
         <!-- LAZY LOADING ACTIVE: Menggunakan Latar Belakang Tekstur Khas Group 70 -->
         <div class="absolute inset-0 z-0 pointer-events-none select-none reveal-on-scroll">
-            <img src="{{ asset('asset/Group 70.avif') }}" loading="lazy" class="w-full h-full object-cover object-center" alt="Background Master Banner Layout">
+            <img src="{{ asset('asset/Group 70@2x.avif') }}" loading="lazy" class="w-full h-full object-cover object-center" alt="Background Master Banner Layout">
         </div>
         <div class="relative z-10 w-full max-w-6xl mx-auto px-6 md:px-12">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-center">

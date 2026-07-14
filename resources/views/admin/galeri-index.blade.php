@@ -5,9 +5,14 @@
 @section('admin_content')
 <div class="bg-white border border-gray-100 shadow-sm rounded-2xl overflow-hidden">
     
-    <div class="p-6 sm:p-8 border-b border-gray-100 bg-white">
-        <h3 class="text-sm font-black text-gray-950 uppercase tracking-wider">SEKSI 3: FOTO ASSET KULINER</h3>
-        <p class="text-xs text-gray-400 font-semibold uppercase tracking-wide mt-1">Pemantauan visualisasi estetik flat-lay foto kuliner resolusi tinggi yang tayang di pop-up galeri lebar.</p>
+    <div class="p-6 sm:p-8 border-b border-gray-100 bg-white flex items-center gap-2.5">
+        <div class="w-8 h-8 bg-purple-50 text-purple-600 flex items-center justify-center rounded-xl">
+            <i class="fa-solid fa-images text-sm"></i>
+        </div>
+        <div>
+            <h3 class="text-sm font-black text-gray-950 uppercase tracking-wider">SEKSI 3: FOTO ASSET KULINER</h3>
+            <p class="text-xs text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Pemantauan visualisasi estetik flat-lay foto kuliner resolusi tinggi yang tayang di pop-up galeri lebar.</p>
+        </div>
     </div>
 
     <div class="overflow-x-auto w-full tasty-scrollbar relative">
@@ -33,11 +38,11 @@
                         </td>
                         <td class="py-4 px-6 text-center whitespace-nowrap sticky right-0 bg-white z-10 border-l border-gray-100 shadow-[-6px_0_10px_rgba(0,0,0,0.015)]">
                             <div class="flex items-center justify-center gap-4">
-                                <a href="{{ route('admin.food.edit', $item->id) }}" class="text-xs font-black text-amber-600 hover:text-amber-800 uppercase tracking-wider transition">
-                                    EDIT
+                                <a href="{{ route('admin.food.edit', $item->id) }}" class="text-xs font-black text-amber-600 hover:text-amber-800 uppercase tracking-wider transition flex items-center gap-1">
+                                    <i class="fa-solid fa-pen-to-square"></i> EDIT
                                 </a>
-                                <button onclick="triggerAdminDelete({{ $item->id }})" class="text-xs font-black text-red-500 hover:text-red-700 uppercase tracking-wider transition focus:outline-none cursor-pointer">
-                                    DELETE
+                                <button onclick="triggerAdminDelete({{ $item->id }})" class="text-xs font-black text-red-500 hover:text-red-700 uppercase tracking-wider transition focus:outline-none cursor-pointer flex items-center gap-1">
+                                    <i class="fa-solid fa-trash"></i> DELETE
                                 </button>
                             </div>
                         </td>
@@ -62,7 +67,8 @@
                     'Content-Type': 'application/json'
                 }
             })
-            .then(res => res.json())\n            .then(data => {
+            .then(res => res.json())
+            .then(data => {
                 if (data.success) {
                     showAdminToast(data.message, 'success');
                     setTimeout(() => window.location.reload(), 1000);
