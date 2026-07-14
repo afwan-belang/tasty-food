@@ -58,7 +58,7 @@
 </style>
 
 <header class="tasty-sub-header flex flex-col z-10">
-    <img src="{{ asset('asset/Group 70@2x.avif') }}" class="tasty-sub-header-bg" alt="Header Background">
+    <img src="{{ asset($headerContact->image_1 ?? 'asset/Group 70@2x.avif') }}" class="tasty-sub-header-bg" alt="Header Background">
     <div class="tasty-sub-header-overlay"></div>
 
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-8 flex justify-between md:justify-start items-center gap-16 lg:gap-20 anim-sub-entry">

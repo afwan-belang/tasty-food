@@ -24,7 +24,7 @@ class PageController extends Controller
         // Mengambil muatan data CMS khusus seksi Tentang Kami di Beranda
         $about = CompanySection::where('key', 'home_about')->first();
 
-        // ✅ TAMBAHAN: Mengambil muatan data CMS khusus Teks Branding & Gambar Tekstur Latar
+        // Mengambil muatan data CMS khusus Teks Branding & Gambar Tekstur Latar
         $branding = CompanySection::where('key', 'site_branding')->first();
         $texture  = CompanySection::where('key', 'home_texture')->first();
 
@@ -41,7 +41,10 @@ class PageController extends Controller
         $visi    = CompanySection::where('key', 'about_visi')->first();
         $misi    = CompanySection::where('key', 'about_misi')->first();
 
-        return view('tentang', compact('sejarah', 'visi', 'misi'));
+        // ✅ TAMBAHAN: Mengambil background header dinamis halaman Tentang
+        $headerAbout = CompanySection::where('key', 'header_about')->first();
+
+        return view('tentang', compact('sejarah', 'visi', 'misi', 'headerAbout'));
     }
 
     /**
@@ -52,7 +55,10 @@ class PageController extends Controller
         $featuredNews = Food::where('category', 'news')->first();
         $beritaLainnya = Food::where('category', 'news')->skip(1)->take(8)->get();
         
-        return view('berita', compact('featuredNews', 'beritaLainnya'));
+        // ✅ TAMBAHAN: Mengambil background header dinamis halaman Berita
+        $headerNews = CompanySection::where('key', 'header_news')->first();
+        
+        return view('berita', compact('featuredNews', 'beritaLainnya', 'headerNews'));
     }
 
     /**
@@ -62,7 +68,10 @@ class PageController extends Controller
     {
         $galleryItems = Food::where('category', 'gallery')->get();
         
-        return view('galeri', compact('galleryItems'));
+        // ✅ TAMBAHAN: Mengambil background header dinamis halaman Galeri
+        $headerGallery = CompanySection::where('key', 'header_gallery')->first();
+        
+        return view('galeri', compact('galleryItems', 'headerGallery'));
     }
 
     /**
@@ -73,7 +82,10 @@ class PageController extends Controller
         // Menarik data CMS secara dinamis untuk info kontak khusus halaman kontak publik
         $contact = CompanySection::where('key', 'contact_info')->first();
 
-        return view('kontak', compact('contact'));
+        // ✅ TAMBAHAN: Mengambil background header dinamis halaman Kontak
+        $headerContact = CompanySection::where('key', 'header_contact')->first();
+
+        return view('kontak', compact('contact', 'headerContact'));
     }
 
     public function detailBerita($slug)

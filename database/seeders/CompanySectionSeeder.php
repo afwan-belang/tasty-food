@@ -44,7 +44,7 @@ class CompanySectionSeeder extends Seeder
             ]
         );
 
-        // ✅ 4. BARU: Komponen Pengunci Teks Branding Logo Navbar Beranda
+        // 4. Komponen Pengunci Teks Branding Logo Navbar Beranda
         CompanySection::updateOrCreate(
             ['key' => 'site_branding'],
             [
@@ -56,6 +56,7 @@ class CompanySectionSeeder extends Seeder
             ]
         );
 
+        // 5. Komponen Pengunci Gambar Tekstur Latar Belakang (Seksi 3 Beranda)
         CompanySection::updateOrCreate(
             ['key' => 'home_texture'],
             [
@@ -65,6 +66,24 @@ class CompanySectionSeeder extends Seeder
                 'image_1'  => 'asset/Group 70@2x.avif',
                 'image_2'  => null
             ]
+        );
+
+        // ✅ TAMBAHAN: Komponen Cetak Awal Gambar Latar Belakang Sub-Header Publik
+        CompanySection::updateOrCreate(
+            ['key' => 'header_about'],
+            ['title' => 'Header Tentang', 'subtitle' => null, 'desc' => 'header', 'image_1' => 'asset/Group 70@2x.avif', 'image_2' => null]
+        );
+        CompanySection::updateOrCreate(
+            ['key' => 'header_news'],
+            ['title' => 'Header Berita', 'subtitle' => null, 'desc' => 'header', 'image_1' => 'asset/Group 70@2x.avif', 'image_2' => null]
+        );
+        CompanySection::updateOrCreate(
+            ['key' => 'header_gallery'],
+            ['title' => 'Header Galeri', 'subtitle' => null, 'desc' => 'header', 'image_1' => 'asset/Group 70@2x.avif', 'image_2' => null]
+        );
+        CompanySection::updateOrCreate(
+            ['key' => 'header_contact'],
+            ['title' => 'Header Kontak', 'subtitle' => null, 'desc' => 'header', 'image_1' => 'asset/Group 70@2x.avif', 'image_2' => null]
         );
 
         // 6. Komponen Halaman Tentang: Seksi Sejarah
@@ -78,6 +97,7 @@ class CompanySectionSeeder extends Seeder
             ]
         );
 
+        // 7. Komponen Halaman Tentang: Seksi Visi
         CompanySection::updateOrCreate(
             ['key' => 'about_visi'],
             [
@@ -88,6 +108,7 @@ class CompanySectionSeeder extends Seeder
             ]
         );
 
+        // 8. Komponen Halaman Tentang: Seksi Misi
         CompanySection::updateOrCreate(
             ['key' => 'about_misi'],
             [

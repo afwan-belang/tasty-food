@@ -135,7 +135,6 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         
-        <!-- FORM HERO HOME BANNER + MEDIA IMAGE UPLOAD -->
         <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
             <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -157,7 +156,6 @@
                         <label class="block text-[10px] font-black text-gray-950 uppercase mb-1.5 tracking-wide">Deskripsi Narasi</label>
                         <textarea name="desc" rows="4" class="w-full bg-gray-50/50 border border-gray-300 text-xs p-4 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white transition-all font-semibold resize-none leading-relaxed" required>{{ $cmsHero->desc ?? '' }}</textarea>
                     </div>
-                    <!-- ✅ TAMBAHAN: Slot unggah file gambar piring utama hero beranda -->
                     <div>
                         <label class="block text-[10px] font-black text-gray-950 uppercase mb-1.5 tracking-wide">Ganti Gambar Piring Hero Utama</label>
                         <input type="file" name="image_1" class="text-[10px] w-full block text-gray-500 file:mr-3 file:py-1 file:px-2.5 file:border-0 file:text-[9px] file:font-black file:uppercase file:bg-gray-100 file:text-gray-900 hover:file:bg-amber-500 hover:file:text-gray-950 cursor-pointer">
@@ -169,7 +167,6 @@
             </form>
         </div>
 
-        <!-- ✅ BARU - FORM 7: LOGO BRANDING NAVBAR TEXT MANAGER -->
         <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
             <form action="{{ route('admin.sections.update') }}" method="POST">
                 @csrf
@@ -194,7 +191,6 @@
             </form>
         </div>
 
-        <!-- ✅ BARU - FORM 8: BACKGROUND TEXTURE PICTURE MANAGER -->
         <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
             <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -340,7 +336,7 @@
             </form>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between col-span-1 md:col-span-2">
+        <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
             <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="key" value="about_misi">
@@ -366,6 +362,67 @@
                     <i class="fa-solid fa-floppy-disk"></i> SAVE MISI CONTENT
                 </button>
             </form>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between col-span-1 md:col-span-2">
+            <div class="flex items-center gap-2 mb-6 border-b border-gray-100 pb-3">
+                <span class="w-5 h-5 bg-gray-950 text-amber-500 flex items-center justify-center rounded-md text-[10px] font-black"><i class="fa-solid fa-images"></i></span>
+                <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">CMS MANAGEMENT: SUB-PAGES BACKGROUND HEADERS</h4>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data" class="space-y-3 p-4 bg-gray-50 rounded-xl border border-gray-100 flex flex-col justify-between">
+                    @csrf
+                    <input type="hidden" name="key" value="header_about">
+                    <input type="hidden" name="title" value="Header Tentang">
+                    <div>
+                        <span class="text-[9px] font-black text-amber-600 block mb-1 uppercase">HALAMAN 1</span>
+                        <h5 class="text-[10px] font-black text-gray-950 uppercase">HEADER TENTANG KAMI</h5>
+                        <label class="block text-[9px] text-gray-400 font-bold uppercase mt-3 mb-1">Ganti File Gambar</label>
+                        <input type="file" name="image_1" class="text-[9px] w-full block text-gray-400 file:mr-2 file:py-1 file:px-2 file:border-0 file:text-[9px] file:font-black file:bg-white file:text-gray-950 rounded-none border border-gray-200 cursor-pointer" required>
+                    </div>
+                    <button type="submit" class="bg-gray-950 text-white w-full py-2 text-[9px] font-black uppercase tracking-wider transition hover:bg-amber-500 hover:text-gray-950 cursor-pointer mt-2"><i class="fa-solid fa-upload mr-1"></i> SAVE ABOUT HEADER</button>
+                </form>
+
+                <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data" class="space-y-3 p-4 bg-gray-50 rounded-xl border border-gray-100 flex flex-col justify-between">
+                    @csrf
+                    <input type="hidden" name="key" value="header_news">
+                    <input type="hidden" name="title" value="Header Berita">
+                    <div>
+                        <span class="text-[9px] font-black text-amber-600 block mb-1 uppercase">HALAMAN 2</span>
+                        <h5 class="text-[10px] font-black text-gray-950 uppercase">HEADER BERITA KAMI</h5>
+                        <label class="block text-[9px] text-gray-400 font-bold uppercase mt-3 mb-1">Ganti File Gambar</label>
+                        <input type="file" name="image_1" class="text-[9px] w-full block text-gray-400 file:mr-2 file:py-1 file:px-2 file:border-0 file:text-[9px] file:font-black file:bg-white file:text-gray-950 rounded-none border border-gray-200 cursor-pointer" required>
+                    </div>
+                    <button type="submit" class="bg-gray-950 text-white w-full py-2 text-[9px] font-black uppercase tracking-wider transition hover:bg-amber-500 hover:text-gray-950 cursor-pointer mt-2"><i class="fa-solid fa-upload mr-1"></i> SAVE NEWS HEADER</button>
+                </form>
+
+                <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data" class="space-y-3 p-4 bg-gray-50 rounded-xl border border-gray-100 flex flex-col justify-between">
+                    @csrf
+                    <input type="hidden" name="key" value="header_gallery">
+                    <input type="hidden" name="title" value="Header Galeri">
+                    <div>
+                        <span class="text-[9px] font-black text-amber-600 block mb-1 uppercase">HALAMAN 3</span>
+                        <h5 class="text-[10px] font-black text-gray-950 uppercase">HEADER GALERI KAMI</h5>
+                        <label class="block text-[9px] text-gray-400 font-bold uppercase mt-3 mb-1">Ganti File Gambar</label>
+                        <input type="file" name="image_1" class="text-[9px] w-full block text-gray-400 file:mr-2 file:py-1 file:px-2 file:border-0 file:text-[9px] file:font-black file:bg-white file:text-gray-950 rounded-none border border-gray-200 cursor-pointer" required>
+                    </div>
+                    <button type="submit" class="bg-gray-950 text-white w-full py-2 text-[9px] font-black uppercase tracking-wider transition hover:bg-amber-500 hover:text-gray-950 cursor-pointer mt-2"><i class="fa-solid fa-upload mr-1"></i> SAVE GALLERY HEADER</button>
+                </form>
+
+                <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data" class="space-y-3 p-4 bg-gray-50 rounded-xl border border-gray-100 flex flex-col justify-between">
+                    @csrf
+                    <input type="hidden" name="key" value="header_contact">
+                    <input type="hidden" name="title" value="Header Kontak">
+                    <div>
+                        <span class="text-[9px] font-black text-amber-600 block mb-1 uppercase">HALAMAN 4</span>
+                        <h5 class="text-[10px] font-black text-gray-950 uppercase">HEADER KONTAK KAMI</h5>
+                        <label class="block text-[9px] text-gray-400 font-bold uppercase mt-3 mb-1">Ganti File Gambar</label>
+                        <input type="file" name="image_1" class="text-[9px] w-full block text-gray-500 file:mr-2 file:py-1 file:px-2 file:border-0 file:text-[9px] file:font-black file:bg-white file:text-gray-950 rounded-none border border-gray-200 cursor-pointer" required>
+                    </div>
+                    <button type="submit" class="bg-gray-950 text-white w-full py-2 text-[9px] font-black uppercase tracking-wider transition hover:bg-amber-500 hover:text-gray-950 cursor-pointer mt-2"><i class="fa-solid fa-upload mr-1"></i> SAVE CONTACT HEADER</button>
+                </form>
+            </div>
         </div>
 
     </div>

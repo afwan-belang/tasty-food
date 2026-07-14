@@ -30,14 +30,20 @@ class AdminDashboardController extends Controller
         $cmsVisi    = CompanySection::where('key', 'about_visi')->first();
         $cmsMisi    = CompanySection::where('key', 'about_misi')->first();
 
-        // ✅ TAMBAHAN: Menarik data CMS untuk Form Input Logo & Tekstur Latar Beranda
+        // Menarik data CMS untuk Form Input Logo & Tekstur Latar Beranda
         $cmsBranding = CompanySection::where('key', 'site_branding')->first();
         $cmsTexture  = CompanySection::where('key', 'home_texture')->first();
+
+        // ✅ TAMBAHAN: Menarik data CMS 4 Gambar Latar Sub-Header untuk di-render ke Dashboard Form
+        $cmsHAbout   = CompanySection::where('key', 'header_about')->first();
+        $cmsHNews    = CompanySection::where('key', 'header_news')->first();
+        $cmsHGallery = CompanySection::where('key', 'header_gallery')->first();
+        $cmsHContact = CompanySection::where('key', 'header_contact')->first();
 
         return view('admin.dashboard', compact(
             'totalKonten', 'totalCard', 'totalBerita', 'totalGaleri', 'allFoods',
             'cmsHero', 'cmsAbout', 'cmsContact', 'cmsSejarah', 'cmsVisi', 'cmsMisi',
-            'cmsBranding', 'cmsTexture'
+            'cmsBranding', 'cmsTexture', 'cmsHAbout', 'cmsHNews', 'cmsHGallery', 'cmsHContact'
         ));
     }
 
@@ -47,12 +53,12 @@ class AdminDashboardController extends Controller
     public function updateSection(Request $request)
     {
         $request->validate([
-            // ✅ PERBAIKAN: Menambahkan 'site_branding' dan 'home_texture' ke dalam whitelist key
-            'key'      => ['required', 'string', 'in:home_hero,home_about,contact_info,site_branding,home_texture,about_sejarah,about_visi,about_misi'],
+            // ✅ PERBAIKAN: Memasukkan 4 kunci sub-header ke dalam whitelist key pengenalan rute aksi
+            'key'      => ['required', 'string', 'in:home_hero,home_about,contact_info,site_branding,home_texture,header_about,header_news,header_gallery,header_contact,about_sejarah,about_visi,about_misi'],
             'title'    => ['required', 'string', 'max:255'],
             'subtitle' => ['nullable', 'string', 'max:255'],
-            // ✅ BULLETPROOF FIX: Menggunakan required_unless agar kolom desc tidak wajib jika mengedit logo/tekstur gambar
-            'desc'     => ['required_unless:key,site_branding,home_texture', 'nullable', 'string'],
+            // ✅ BULLETPROOF FIX: Mengabaikan keharusan pengisian kolom desc khusus untuk modifikasi logo, tekstur, dan background sub-header
+            'desc'     => ['required_unless:key,site_branding,home_texture,header_about,header_news,header_gallery,header_contact', 'nullable', 'string'],
             'image_1'  => ['nullable', 'file', 'mimes:jpeg,png,jpg,webp,avif', 'max:2048'], 
             'image_2'  => ['nullable', 'file', 'mimes:jpeg,png,jpg,webp,avif', 'max:2048'],
         ]);
@@ -61,7 +67,6 @@ class AdminDashboardController extends Controller
         
         $section->title    = $request->title;
         $section->subtitle = $request->subtitle;
-        // Hanya update kolom desc jika request memuat data deskripsi murni
         if ($request->has('desc')) {
             $section->desc = $request->desc;
         }

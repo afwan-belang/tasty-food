@@ -48,7 +48,7 @@
 </style>
 
 <header class="tasty-sub-header flex flex-col z-10">
-    <img src="{{ asset('asset/Group 70@2x.avif') }}" class="tasty-sub-header-bg" alt="Header Background">
+    <img src="{{ asset($headerAbout->image_1 ?? 'asset/Group 70@2x.avif') }}" class="tasty-sub-header-bg" alt="Header Background">
     <div class="tasty-sub-header-overlay"></div>
 
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-8 flex justify-between md:justify-start items-center gap-16 lg:gap-20 anim-sub-entry">
@@ -87,7 +87,6 @@
 
 <section class="py-24 px-6 lg:px-24 max-w-7xl mx-auto select-none bg-white">
     
-    <!-- SEKSI 1 DINAMIS: SEJARAH (TEKS KIRI, GAMBAR KANAN, DILENGKAPI SCROLL PROTECTION) -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
         <div class="order-1 lg:order-1 manual-reveal">
             <h2 class="text-2xl lg:text-3xl font-black mb-6 uppercase text-gray-950 tracking-wider">
@@ -109,7 +108,6 @@
         </div>
     </div>
 
-    <!-- SEKSI 2 DINAMIS: VISI KAMI -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
         <div class="grid grid-cols-2 gap-4 sm:gap-6 order-2 lg:order-1">
             <div class="tasty-image-container w-full h-[200px] sm:h-[300px] rounded-[24px] border border-gray-100 overflow-hidden tasty-premium-shadow tasty-gpu-smooth reveal-on-scroll">
@@ -131,7 +129,6 @@
         </div>
     </div>
 
-    <!-- SEKSI 3 DINAMIS: MISI KAMI -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <div class="reveal-on-scroll">
             <h2 class="text-2xl lg:text-3xl font-black mb-6 uppercase text-gray-950 tracking-wider">
@@ -149,7 +146,6 @@
     
 </section>
 
-<!-- SCRIPTS ENGINE -->
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const manualElements = document.querySelectorAll('.manual-reveal');
