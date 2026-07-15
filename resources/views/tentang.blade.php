@@ -84,9 +84,7 @@
         <h1 class="text-4xl lg:text-5xl font-black tracking-wide text-white uppercase">TENTANG KAMI</h1>
     </div>
 </header>
-
 <section class="py-24 px-6 lg:px-24 max-w-7xl mx-auto select-none bg-white">
-    
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
         <div class="order-1 lg:order-1 manual-reveal">
             <h2 class="text-2xl lg:text-3xl font-black mb-6 uppercase text-gray-950 tracking-wider">
@@ -143,9 +141,7 @@
             <img src="{{ asset($misi->image_1 ?? 'asset/sanket-shah-SVA7TyHxojY-unsplash.avif') }}" loading="lazy" class="w-full h-full object-cover tasty-hover-zoom-trigger select-none pointer-events-none" alt="Misi Aset">
         </div>
     </div>
-    
 </section>
-
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const manualElements = document.querySelectorAll('.manual-reveal');

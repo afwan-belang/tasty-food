@@ -11,23 +11,39 @@
     }
     .anim-sub-entry { opacity: 0; animation: subPageFadeUp 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
-    /* Efek Smooth Zoom Premium berbasis Hardware Acceleration */
+    /* Efek Smooth Zoom Premium berbasis Hardware Acceleration (Grid Bawah) */
     .tasty-premium-zoom {
         backface-visibility: hidden;
         transform: translateZ(0);
         will-change: transform;
         transition: transform 550ms cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .tasty-zoom-group:hover .tasty-zoom-card {
+    
+    .tasty-zoom-group:hover .tasty-premium-zoom {
         transform: scale(1.05);
     }
 
-    /* Spesifikasi Dimensi Bingkai Carousel Sesuai Desain Image_2a3d2c */
+    /* Spesifikasi Dimensi Bingkai Carousel Sesuai Desain */
     .tasty-carousel-frame {
         position: relative;
         width: 100%;
         aspect-ratio: 16 / 6.5; /* Proporsi horizontal sempurna sesuai gambar contoh */
         min-height: 240px;
+        cursor: default; /* ✅ MEMASTIKAN FRAME UTAMA TETAP MENGGUNAKAN CURSOR ARROW DEFAULT */
+    }
+
+    /* ✅ BARU: ENGINE ANIMASI ZOOM CAROUSEL DAN PROTEKSI CURSOR NON-POINTER */
+    .tasty-carousel-frame .carousel-item img {
+        backface-visibility: hidden;
+        transform: translateZ(0);
+        will-change: transform;
+        transition: transform 750ms cubic-bezier(0.16, 1, 0.3, 1);
+        cursor: default; /* ✅ MENCEGAH CURSOR BERUBAH MENJADI TANGAN (POINTER) SAAT HOVER GAMBAR */
+    }
+
+    /* Memicu efek perbesaran gambar carousel secara elegan saat frame di-hover */
+    .tasty-carousel-frame:hover .carousel-item img {
+        transform: scale(1.04);
     }
 
     /* Efek Bayangan Panah Bulat Presisi */
@@ -79,15 +95,15 @@
         <div class="tasty-carousel-frame w-full rounded-[24px] overflow-hidden shadow-sm relative z-0">
             
             <div class="carousel-item absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out opacity-100 z-10">
-                <img src="{{ asset('asset/ella-olsson-mmnKI8kMxpc-unsplash.avif') }}" class="w-full h-full object-cover object-center select-none pointer-events-none" alt="Featured Food Showcase 1">
+                <img src="{{ asset('asset/ella-olsson-mmnKI8kMxpc-unsplash.avif') }}" class="w-full h-full object-cover object-center select-none" alt="Featured Food Showcase 1">
             </div>
 
             <div class="carousel-item absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out opacity-0 z-0">
-                <img src="{{ asset('asset/luisa-brimble-HvXEbkcXjSk-unsplash.avif') }}" loading="lazy" class="w-full h-full object-cover object-center select-none pointer-events-none" alt="Featured Food Showcase 2">
+                <img src="{{ asset('asset/luisa-brimble-HvXEbkcXjSk-unsplash.avif') }}" loading="lazy" class="w-full h-full object-cover object-center select-none" alt="Featured Food Showcase 2">
             </div>
 
             <div class="carousel-item absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out opacity-0 z-0">
-                <img src="{{ asset('asset/Group 70.avif') }}" loading="lazy" class="w-full h-full object-cover object-center select-none pointer-events-none" alt="Featured Food Showcase 3">
+                <img src="{{ asset('asset/Group 70.avif') }}" loading="lazy" class="w-full h-full object-cover object-center select-none" alt="Featured Food Showcase 3">
             </div>
 
         </div>

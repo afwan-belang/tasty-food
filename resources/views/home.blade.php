@@ -215,7 +215,7 @@
     
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-7xl mx-auto mb-16">
         @foreach ($gallery as $item)
-            @php $step = $loop->index % 3; $delayClass = $step === 1 ? 'delay-100' : ($step === 2 ? 'delay-200' : ''); @php
+            @php $step = $loop->index % 3; $delayClass = $step === 1 ? 'delay-100' : ($step === 2 ? 'delay-200' : ''); @endphp
             <div data-id="{{ $item->id }}" onclick="openFoodModal(this.dataset.id)" class="aspect-square bg-gray-50 rounded-[24px] overflow-hidden border border-gray-100/70 tasty-premium-shadow tasty-gpu-smooth relative group cursor-pointer reveal-on-scroll {{ $delayClass }}">
                 <img src="{{ asset($item->image) }}" loading="lazy" alt="Galeri Culinary Tasty Food Showcase" class="w-full h-full object-cover tasty-hover-zoom-trigger select-none pointer-events-none">
             </div>
