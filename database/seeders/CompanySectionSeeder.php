@@ -56,6 +56,18 @@ class CompanySectionSeeder extends Seeder
             ]
         );
 
+        // ✅ TAMBAHAN BARU: Komponen Pengunci Teks Label Menu Navigasi Utama Publik
+        CompanySection::updateOrCreate(
+            ['key' => 'nav_menu'],
+            [
+                'title'    => 'HOME',                 // Label Menu 1
+                'subtitle' => 'TENTANG',              // Label Menu 2
+                'desc'     => 'BERITA|GALERI|KONTAK', // Label Menu 3, 4, 5 (Dipisah dengan karakter pipe |)
+                'image_1'  => null,
+                'image_2'  => null
+            ]
+        );
+
         // Komponen Pengunci Gambar Tekstur Latar Belakang (Seksi 3 Beranda)
         CompanySection::updateOrCreate(
             ['key' => 'home_texture'],

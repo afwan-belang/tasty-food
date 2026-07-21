@@ -202,11 +202,58 @@
                         <input type="text" name="title" value="{{ $cmsBranding->title ?? 'TASTY FOOD' }}" class="w-full bg-gray-50/50 border border-gray-300 text-xs px-4 py-3 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white transition-all font-semibold" required>
                     </div>
                     <div class="bg-gray-50 p-4 border border-gray-100 text-[11px] text-gray-400 leading-relaxed font-medium">
-                        *Mengubah isian teks di atas akan memperbarui nama identitas utama logo tulisan yang tayang pada bilah menu navigasi di SELURUH HALAMAN publik (Home, Tentang, Berita, Galeri, Kontak).
+                        *Mengubah isian teks di atas akan memperbarui nama identitas utama logo tulisan yang tayang pada bilah menu navigasi di SELURUH HALAMAN publik.
                     </div>
                 </div>
                 <button type="submit" class="bg-gray-950 text-white w-full py-3.5 text-[10px] font-black uppercase tracking-widest transition duration-200 hover:bg-amber-500 hover:text-gray-950 cursor-pointer flex items-center justify-center gap-2 mt-5">
                     <i class="fa-solid fa-signature"></i> SAVE BRANDING LOGO
+                </button>
+            </form>
+        </div>
+
+        <!-- ✅ BARU: FORMULIR CMS EDIT TEKS NAMA-NAMA MENU NAVIGASI PUBLIK -->
+        @php
+            $navDescParts = explode('|', $cmsNav->desc ?? 'BERITA|GALERI|KONTAK');
+            $navBerita = $navDescParts[0] ?? 'BERITA';
+            $navGaleri = $navDescParts[1] ?? 'GALERI';
+            $navKontak = $navDescParts[2] ?? 'KONTAK';
+        @endphp
+        <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between col-span-1 md:col-span-2">
+            <form action="{{ route('admin.sections.update') }}" method="POST">
+                @csrf
+                <input type="hidden" name="key" value="nav_menu">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2 mb-2 border-b border-gray-100 pb-3">
+                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black"><i class="fa-solid fa-list text-xs"></i></span>
+                        <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">NAMA-NAMA MENU NAVIGASI WEBSITE PUBLIK</h4>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                        <div>
+                            <label class="block text-[10px] font-black text-gray-950 uppercase mb-1">Menu 1 (Home)</label>
+                            <input type="text" name="title" value="{{ $cmsNav->title ?? 'HOME' }}" class="w-full bg-gray-50/50 border border-gray-300 text-xs px-3 py-2.5 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white font-bold" required>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black text-gray-950 uppercase mb-1">Menu 2 (Tentang)</label>
+                            <input type="text" name="subtitle" value="{{ $cmsNav->subtitle ?? 'TENTANG' }}" class="w-full bg-gray-50/50 border border-gray-300 text-xs px-3 py-2.5 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white font-bold" required>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black text-gray-950 uppercase mb-1">Menu 3 (Berita)</label>
+                            <input type="text" id="input_nav_berita" value="{{ $navBerita }}" class="w-full bg-gray-50/50 border border-gray-300 text-xs px-3 py-2.5 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white font-bold" required>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black text-gray-950 uppercase mb-1">Menu 4 (Galeri)</label>
+                            <input type="text" id="input_nav_galeri" value="{{ $navGaleri }}" class="w-full bg-gray-50/50 border border-gray-300 text-xs px-3 py-2.5 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white font-bold" required>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-black text-gray-950 uppercase mb-1">Menu 5 (Kontak)</label>
+                            <input type="text" id="input_nav_kontak" value="{{ $navKontak }}" class="w-full bg-gray-50/50 border border-gray-300 text-xs px-3 py-2.5 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white font-bold" required>
+                        </div>
+                    </div>
+                    <!-- Hidden input penampung penggabungan pipe string -->
+                    <input type="hidden" name="desc" id="hidden_nav_desc" value="{{ $cmsNav->desc ?? 'BERITA|GALERI|KONTAK' }}">
+                </div>
+                <button type="submit" onclick="syncNavDesc()" class="bg-gray-950 text-white w-full py-3.5 text-[10px] font-black uppercase tracking-widest transition duration-200 hover:bg-amber-500 hover:text-gray-950 cursor-pointer flex items-center justify-center gap-2 mt-5">
+                    <i class="fa-solid fa-floppy-disk"></i> SAVE NAV MENU LABELS
                 </button>
             </form>
         </div>
@@ -220,7 +267,7 @@
                 <input type="hidden" name="desc" value="texture">
                 <div class="space-y-4">
                     <div class="flex items-center gap-2 mb-2">
-                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">3</span>
+                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">4</span>
                         <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">BACKGROUND BANNER TEXTURE (SEKSI 3)</h4>
                     </div>
                     <div>
@@ -244,7 +291,7 @@
                 <input type="hidden" name="key" value="home_about">
                 <div class="space-y-4">
                     <div class="flex items-center gap-2 mb-2">
-                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">4</span>
+                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">5</span>
                         <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">TENTANG KAMI BERANDA (MID SECTION)</h4>
                     </div>
                     <div>
@@ -266,8 +313,6 @@
 
     <!-- TAB CONTENT 2: HALAMAN TENTANG KAMI (ABOUT US PAGE) -->
     <div id="cms-tab-about" class="cms-tab-content hidden grid grid-cols-1 md:grid-cols-2 gap-8">
-        
-        <!-- FORM SEJARAH SECTION PANEL -->
         <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
             <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -302,7 +347,6 @@
             </form>
         </div>
 
-        <!-- FORM VISI KAMI SECTION PANEL -->
         <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
             <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -337,7 +381,6 @@
             </form>
         </div>
 
-        <!-- FORM MISI KAMI SECTION PANEL -->
         <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between col-span-1 md:col-span-2">
             <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -408,7 +451,6 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- FORM HEADER TENTANG -->
                 <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data" class="space-y-3 p-4 bg-gray-50 rounded-xl border border-gray-100 flex flex-col justify-between">
                     @csrf
                     <input type="hidden" name="key" value="header_about">
@@ -422,7 +464,6 @@
                     <button type="submit" class="bg-gray-950 text-white w-full py-2 text-[9px] font-black uppercase tracking-wider transition hover:bg-amber-500 hover:text-gray-950 cursor-pointer mt-2"><i class="fa-solid fa-upload mr-1"></i> SAVE ABOUT HEADER</button>
                 </form>
 
-                <!-- FORM HEADER BERITA -->
                 <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data" class="space-y-3 p-4 bg-gray-50 rounded-xl border border-gray-100 flex flex-col justify-between">
                     @csrf
                     <input type="hidden" name="key" value="header_news">
@@ -436,7 +477,6 @@
                     <button type="submit" class="bg-gray-950 text-white w-full py-2 text-[9px] font-black uppercase tracking-wider transition hover:bg-amber-500 hover:text-gray-950 cursor-pointer mt-2"><i class="fa-solid fa-upload mr-1"></i> SAVE NEWS HEADER</button>
                 </form>
 
-                <!-- FORM HEADER GALERI -->
                 <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data" class="space-y-3 p-4 bg-gray-50 rounded-xl border border-gray-100 flex flex-col justify-between">
                     @csrf
                     <input type="hidden" name="key" value="header_gallery">
@@ -450,7 +490,6 @@
                     <button type="submit" class="bg-gray-950 text-white w-full py-2 text-[9px] font-black uppercase tracking-wider transition hover:bg-amber-500 hover:text-gray-950 cursor-pointer mt-2"><i class="fa-solid fa-upload mr-1"></i> SAVE GALLERY HEADER</button>
                 </form>
 
-                <!-- FORM HEADER KONTAK -->
                 <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data" class="space-y-3 p-4 bg-gray-50 rounded-xl border border-gray-100 flex flex-col justify-between">
                     @csrf
                     <input type="hidden" name="key" value="header_contact">
@@ -469,7 +508,15 @@
 
 </div>
 
+<!-- SCRIPT INTERAKTIF UNTUK SINKRONISASI STRING PIPE NAV MENU DAN TAB FILTER -->
 <script>
+    function syncNavDesc() {
+        const b = document.getElementById('input_nav_berita').value.trim() || 'BERITA';
+        const g = document.getElementById('input_nav_galeri').value.trim() || 'GALERI';
+        const k = document.getElementById('input_nav_kontak').value.trim() || 'KONTAK';
+        document.getElementById('hidden_nav_desc').value = `${b}|${g}|${k}`;
+    }
+
     function switchCmsTab(activeTab) {
         document.querySelectorAll('.cms-tab-content').forEach(content => {
             content.classList.add('hidden');

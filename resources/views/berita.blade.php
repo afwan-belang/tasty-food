@@ -41,16 +41,17 @@
     <img src="{{ asset($headerNews->image_1 ?? 'asset/Group 70@2x.avif') }}" class="tasty-sub-header-bg" alt="Header Background">
     <div class="tasty-sub-header-overlay"></div>
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-8 flex justify-between md:justify-start items-center gap-16 lg:gap-20 anim-sub-entry">
-        <!-- ✅ PERBAIKAN: Teks Logo Navbar Sub-Header Dinamis Berbasis Global View Composer -->
         <a href="{{ route('home') }}" class="text-2xl font-black tracking-wider uppercase text-white z-50">
             {{ $siteBranding->title ?? 'TASTY FOOD' }}
         </a>
-        <div class="hidden md:flex space-x-8 lg:space-x-10 text-xs lg:text-sm font-bold tracking-wider text-white items-center">
-            <a href="{{ route('home') }}" class="transition duration-200 {{ request()->routeIs('home') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">HOME</a>
-            <a href="{{ route('tentang') }}" class="transition duration-200 {{ request()->routeIs('tentang') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">TENTANG</a>
-            <a href="{{ route('berita') }}" class="transition duration-200 {{ request()->routeIs('berita') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">BERITA</a>
-            <a href="{{ route('galeri') }}" class="transition duration-200 {{ request()->routeIs('galeri') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">GALERI</a>
-            <a href="{{ route('kontak') }}" class="transition duration-200 {{ request()->routeIs('kontak') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">KONTAK</a>
+
+        <!-- ✅ PERBAIKAN: Teks Label Menu Navigasi Sub-Header Berita Kami Desktop Dinamis Database -->
+        <div class="hidden md:flex space-x-8 lg:space-x-10 text-xs lg:text-sm font-bold tracking-wider text-white items-center uppercase">
+            <a href="{{ route('home') }}" class="transition duration-200 {{ request()->routeIs('home') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">{{ $navMenu->home ?? 'HOME' }}</a>
+            <a href="{{ route('tentang') }}" class="transition duration-200 {{ request()->routeIs('tentang') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">{{ $navMenu->tentang ?? 'TENTANG' }}</a>
+            <a href="{{ route('berita') }}" class="transition duration-200 {{ request()->routeIs('berita') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">{{ $navMenu->berita ?? 'BERITA' }}</a>
+            <a href="{{ route('galeri') }}" class="transition duration-200 {{ request()->routeIs('galeri') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">{{ $navMenu->galeri ?? 'GALERI' }}</a>
+            <a href="{{ route('kontak') }}" class="transition duration-200 {{ request()->routeIs('kontak') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">{{ $navMenu->kontak ?? 'KONTAK' }}</a>
         </div>
         <button id="mobile-menu-btn" class="md:hidden text-white focus:outline-none z-50 p-1" aria-label="Toggle Menu">
             <svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-7 h-7 transition-transform duration-300">
@@ -58,17 +59,19 @@
             </svg>
         </button>
     </div>
-    <div id="mobile-menu" class="fixed top-0 bottom-0 right-0 w-3/4 bg-white/95 backdrop-blur-md shadow-2xl border-l border-gray-100/50 z-40 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col items-center justify-center space-y-8 text-xl font-black tracking-widest text-gray-950 md:hidden">
+
+    <!-- ✅ PERBAIKAN: Teks Label Menu Navigasi Sub-Header Berita Kami Mobile Dinamis Database -->
+    <div id="mobile-menu" class="fixed top-0 bottom-0 right-0 w-3/4 bg-white/95 backdrop-blur-md shadow-2xl border-l border-gray-100/50 z-40 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col items-center justify-center space-y-8 text-xl font-black tracking-widest text-gray-950 md:hidden uppercase">
         <button id="mobile-menu-close" class="absolute top-10 right-6 text-gray-950 focus:outline-none p-1 hover:scale-110 transition duration-200" aria-label="Close Menu">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-7 h-7">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
         </button>
-        <a href="{{ route('home') }}" class="hover:text-amber-600 transition duration-200">HOME</a>
-        <a href="{{ route('tentang') }}" class="hover:text-amber-600 transition duration-200">TENTANG</a>
-        <a href="{{ route('berita') }}" class="hover:text-amber-600 transition duration-200">BERITA</a>
-        <a href="{{ route('galeri') }}" class="hover:text-amber-600 transition duration-200">GALERI</a>
-        <a href="{{ route('kontak') }}" class="hover:text-amber-600 transition duration-200">KONTAK</a>
+        <a href="{{ route('home') }}" class="hover:text-amber-600 transition duration-200">{{ $navMenu->home ?? 'HOME' }}</a>
+        <a href="{{ route('tentang') }}" class="hover:text-amber-600 transition duration-200">{{ $navMenu->tentang ?? 'TENTANG' }}</a>
+        <a href="{{ route('berita') }}" class="hover:text-amber-600 transition duration-200">{{ $navMenu->berita ?? 'BERITA' }}</a>
+        <a href="{{ route('galeri') }}" class="hover:text-amber-600 transition duration-200">{{ $navMenu->galeri ?? 'GALERI' }}</a>
+        <a href="{{ route('kontak') }}" class="hover:text-amber-600 transition duration-200">{{ $navMenu->kontak ?? 'KONTAK' }}</a>
     </div>
 
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 flex-grow flex items-center pb-6 anim-sub-entry">

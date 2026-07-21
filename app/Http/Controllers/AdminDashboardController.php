@@ -34,6 +34,9 @@ class AdminDashboardController extends Controller
         $cmsBranding = CompanySection::where('key', 'site_branding')->first();
         $cmsTexture  = CompanySection::where('key', 'home_texture')->first();
 
+        // ✅ TAMBAHAN: Menarik data CMS untuk Label Menu Navigasi Utama
+        $cmsNav = CompanySection::where('key', 'nav_menu')->first();
+
         // Menarik data CMS 4 Gambar Latar Sub-Header untuk di-render ke Dashboard Form
         $cmsHAbout   = CompanySection::where('key', 'header_about')->first();
         $cmsHNews    = CompanySection::where('key', 'header_news')->first();
@@ -43,7 +46,7 @@ class AdminDashboardController extends Controller
         return view('admin.dashboard', compact(
             'totalKonten', 'totalCard', 'totalBerita', 'totalGaleri', 'allFoods',
             'cmsHero', 'cmsAbout', 'cmsContact', 'cmsSejarah', 'cmsVisi', 'cmsMisi',
-            'cmsBranding', 'cmsTexture', 'cmsHAbout', 'cmsHNews', 'cmsHGallery', 'cmsHContact'
+            'cmsBranding', 'cmsTexture', 'cmsNav', 'cmsHAbout', 'cmsHNews', 'cmsHGallery', 'cmsHContact'
         ));
     }
 
@@ -53,7 +56,8 @@ class AdminDashboardController extends Controller
     public function updateSection(Request $request)
     {
         $request->validate([
-            'key'      => ['required', 'string', 'in:home_hero,home_about,contact_info,site_branding,home_texture,header_about,header_news,header_gallery,header_contact,about_sejarah,about_visi,about_misi'],
+            // ✅ PERBAIKAN: Memasukkan 'nav_menu' ke dalam whitelist key pengenalan rute aksi
+            'key'      => ['required', 'string', 'in:home_hero,home_about,contact_info,site_branding,nav_menu,home_texture,header_about,header_news,header_gallery,header_contact,about_sejarah,about_visi,about_misi'],
             'title'    => ['required', 'string', 'max:255'],
             'subtitle' => ['nullable', 'string', 'max:255'],
             'desc'     => ['required_unless:key,site_branding,home_texture,header_about,header_news,header_gallery,header_contact', 'nullable', 'string'],

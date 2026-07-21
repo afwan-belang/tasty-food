@@ -72,29 +72,30 @@
 <!-- ========================================================================= -->
 <section class="relative w-full tasty-home-hero flex flex-col overflow-hidden z-10">
     <div class="relative z-20 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-10 flex justify-between md:justify-start items-center gap-16 lg:gap-20 anim-hero-entry">
-        <!-- ✅ PERBAIKAN: Teks Logo Navbar Utama Dinamis Berbasis Global View Composer -->
         <a href="{{ route('home') }}" class="text-2xl lg:text-3xl font-black tracking-wider uppercase text-gray-950 flex-shrink-0 z-50">
             {{ $siteBranding->title ?? ($branding->title ?? 'TASTY FOOD') }}
         </a>
         
-        <div class="hidden md:flex space-x-8 lg:space-x-10 text-xs lg:text-sm font-bold tracking-wider text-gray-900 pt-1 items-center">
-            <a href="{{ route('home') }}" class="transition duration-200 {{ request()->routeIs('home') ? 'text-amber-600 border-b-2 border-amber-600 pb-1' : 'hover:text-gray-600' }}">HOME</a>
-            <a href="{{ route('tentang') }}" class="transition duration-200 {{ request()->routeIs('tentang') ? 'text-amber-600 border-b-2 border-amber-600 pb-1' : 'hover:text-gray-600' }}">TENTANG</a>
-            <a href="{{ route('berita') }}" class="transition duration-200 {{ request()->routeIs('berita') ? 'text-amber-600 border-b-2 border-amber-600 pb-1' : 'hover:text-gray-600' }}">BERITA</a>
-            <a href="{{ route('galeri') }}" class="transition duration-200 {{ request()->routeIs('galeri') ? 'text-amber-600 border-b-2 border-amber-600 pb-1' : 'hover:text-gray-600' }}">GALERI</a>
-            <a href="{{ route('kontak') }}" class="transition duration-200 {{ request()->routeIs('kontak') ? 'text-amber-600 border-b-2 border-amber-600 pb-1' : 'hover:text-gray-600' }}">KONTAK</a>
+        <!-- ✅ PERBAIKAN: Teks Label Menu Navigasi Beranda Desktop Dinamis Database -->
+        <div class="hidden md:flex space-x-8 lg:space-x-10 text-xs lg:text-sm font-bold tracking-wider text-gray-900 pt-1 items-center uppercase">
+            <a href="{{ route('home') }}" class="transition duration-200 {{ request()->routeIs('home') ? 'text-amber-600 border-b-2 border-amber-600 pb-1' : 'hover:text-gray-600' }}">{{ $navMenu->home ?? 'HOME' }}</a>
+            <a href="{{ route('tentang') }}" class="transition duration-200 {{ request()->routeIs('tentang') ? 'text-amber-600 border-b-2 border-amber-600 pb-1' : 'hover:text-gray-600' }}">{{ $navMenu->tentang ?? 'TENTANG' }}</a>
+            <a href="{{ route('berita') }}" class="transition duration-200 {{ request()->routeIs('berita') ? 'text-amber-600 border-b-2 border-amber-600 pb-1' : 'hover:text-gray-600' }}">{{ $navMenu->berita ?? 'BERITA' }}</a>
+            <a href="{{ route('galeri') }}" class="transition duration-200 {{ request()->routeIs('galeri') ? 'text-amber-600 border-b-2 border-amber-600 pb-1' : 'hover:text-gray-600' }}">{{ $navMenu->galeri ?? 'GALERI' }}</a>
+            <a href="{{ route('kontak') }}" class="transition duration-200 {{ request()->routeIs('kontak') ? 'text-amber-600 border-b-2 border-amber-600 pb-1' : 'hover:text-gray-600' }}">{{ $navMenu->kontak ?? 'KONTAK' }}</a>
         </div>
 
         <button id="mobile-menu-btn" class="md:hidden text-gray-950 focus:outline-none z-50 p-1"><svg id="hamburger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-7 h-7 transition-transform duration-300"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg></button>
     </div>
 
-    <div id="mobile-menu" class="fixed top-0 bottom-0 right-0 w-3/4 bg-white/95 backdrop-blur-md shadow-2xl border-l border-gray-100/50 z-40 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col items-center justify-center space-y-8 text-xl font-black tracking-widest text-gray-950 md:hidden p-6">
+    <!-- ✅ PERBAIKAN: Teks Label Menu Navigasi Beranda Mobile Dinamis Database -->
+    <div id="mobile-menu" class="fixed top-0 bottom-0 right-0 w-3/4 bg-white/95 backdrop-blur-md shadow-2xl border-l border-gray-100/50 z-40 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col items-center justify-center space-y-8 text-xl font-black tracking-widest text-gray-950 md:hidden p-6 uppercase">
         <button id="mobile-menu-close" class="absolute top-10 right-6 text-gray-950 focus:outline-none p-1 hover:scale-110 transition duration-200"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-7 h-7"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg></button>
-        <a href="{{ route('home') }}" class="hover:text-amber-600 transition duration-200">HOME</a>
-        <a href="{{ route('tentang') }}" class="hover:text-amber-600 transition duration-200">TENTANG</a>
-        <a href="{{ route('berita') }}" class="hover:text-amber-600 transition duration-200">BERITA</a>
-        <a href="{{ route('galeri') }}" class="hover:text-amber-600 transition duration-200">GALERI</a>
-        <a href="{{ route('kontak') }}" class="hover:text-amber-600 transition duration-200">KONTAK</a>
+        <a href="{{ route('home') }}" class="hover:text-amber-600 transition duration-200">{{ $navMenu->home ?? 'HOME' }}</a>
+        <a href="{{ route('tentang') }}" class="hover:text-amber-600 transition duration-200">{{ $navMenu->tentang ?? 'TENTANG' }}</a>
+        <a href="{{ route('berita') }}" class="hover:text-amber-600 transition duration-200">{{ $navMenu->berita ?? 'BERITA' }}</a>
+        <a href="{{ route('galeri') }}" class="hover:text-amber-600 transition duration-200">{{ $navMenu->galeri ?? 'GALERI' }}</a>
+        <a href="{{ route('kontak') }}" class="hover:text-amber-600 transition duration-200">{{ $navMenu->kontak ?? 'KONTAK' }}</a>
     </div>
 
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 flex-grow flex flex-col items-start justify-center pt-8 pb-20 md:pb-16">
@@ -214,7 +215,6 @@
     
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-7xl mx-auto mb-16">
         @foreach ($gallery as $item)
-            <!-- ✅ PERBAIKAN DIJAGA PRESIFIKASI: Penutup blade @endphp resmi steril -->
             @php $step = $loop->index % 3; $delayClass = $step === 1 ? 'delay-100' : ($step === 2 ? 'delay-200' : ''); @endphp
             <div data-id="{{ $item->id }}" onclick="openFoodModal(this.dataset.id)" class="aspect-square bg-gray-50 rounded-[24px] overflow-hidden border border-gray-100/70 tasty-premium-shadow tasty-gpu-smooth relative group cursor-pointer reveal-on-scroll {{ $delayClass }}">
                 <img src="{{ asset($item->image) }}" loading="lazy" alt="Galeri Culinary Tasty Food Showcase" class="w-full h-full object-cover tasty-hover-zoom-trigger select-none pointer-events-none">
