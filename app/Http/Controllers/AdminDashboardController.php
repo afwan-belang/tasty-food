@@ -34,7 +34,7 @@ class AdminDashboardController extends Controller
         $cmsBranding = CompanySection::where('key', 'site_branding')->first();
         $cmsTexture  = CompanySection::where('key', 'home_texture')->first();
 
-        // ✅ TAMBAHAN: Menarik data CMS 4 Gambar Latar Sub-Header untuk di-render ke Dashboard Form
+        // Menarik data CMS 4 Gambar Latar Sub-Header untuk di-render ke Dashboard Form
         $cmsHAbout   = CompanySection::where('key', 'header_about')->first();
         $cmsHNews    = CompanySection::where('key', 'header_news')->first();
         $cmsHGallery = CompanySection::where('key', 'header_gallery')->first();
@@ -53,11 +53,9 @@ class AdminDashboardController extends Controller
     public function updateSection(Request $request)
     {
         $request->validate([
-            // ✅ PERBAIKAN: Memasukkan 4 kunci sub-header ke dalam whitelist key pengenalan rute aksi
             'key'      => ['required', 'string', 'in:home_hero,home_about,contact_info,site_branding,home_texture,header_about,header_news,header_gallery,header_contact,about_sejarah,about_visi,about_misi'],
             'title'    => ['required', 'string', 'max:255'],
             'subtitle' => ['nullable', 'string', 'max:255'],
-            // ✅ BULLETPROOF FIX: Mengabaikan keharusan pengisian kolom desc khusus untuk modifikasi logo, tekstur, dan background sub-header
             'desc'     => ['required_unless:key,site_branding,home_texture,header_about,header_news,header_gallery,header_contact', 'nullable', 'string'],
             'image_1'  => ['nullable', 'file', 'mimes:jpeg,png,jpg,webp,avif', 'max:2048'], 
             'image_2'  => ['nullable', 'file', 'mimes:jpeg,png,jpg,webp,avif', 'max:2048'],

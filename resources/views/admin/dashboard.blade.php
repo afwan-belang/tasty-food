@@ -122,19 +122,44 @@
     </div>
 </div>
 
+<!-- ========================================================================= -->
+<!-- 3. UPGRADE UI/UX: TAB/FILTER SYSTEM UNTUK CMS LANDING MANAGER             -->
+<!-- ========================================================================= -->
 <div class="bg-white border border-gray-100 shadow-sm rounded-2xl overflow-hidden p-6 sm:p-8 mb-10">
-    <div class="mb-8 border-b border-gray-100 pb-4 flex items-center gap-2.5">
-        <div class="w-9 h-9 bg-gray-950 text-amber-500 flex items-center justify-center rounded-xl">
-            <i class="fa-solid fa-sliders text-base"></i>
+    <div class="mb-6 border-b border-gray-100 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex items-center gap-2.5">
+            <div class="w-9 h-9 bg-gray-950 text-amber-500 flex items-center justify-center rounded-xl">
+                <i class="fa-solid fa-sliders text-base"></i>
+            </div>
+            <div>
+                <h3 class="text-sm font-black text-gray-950 uppercase tracking-wider">CMS ENGINE: WEB PAGE LANDING MANAGER</h3>
+                <p class="text-xs text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Filter seksi halaman yang ingin Anda edit secara spesifik.</p>
+            </div>
         </div>
-        <div>
-            <h3 class="text-sm font-black text-gray-950 uppercase tracking-wider">CMS ENGINE: WEB PAGE LANDING MANAGER</h3>
-            <p class="text-xs text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Modifikasi konten deskripsi teks hero dan seksi halaman tentang secara langsung.</p>
+
+        <!-- ✅ BARU: SAKLAR TAB FILTER UNTUK SINKRONISASI KEMUDAHAN EDITING -->
+        <div class="flex flex-wrap items-center gap-1.5 bg-gray-100 p-1.5 rounded-xl border border-gray-200/60">
+            <button onclick="switchCmsTab('home')" id="tab-btn-home" class="cms-tab-btn px-4 py-2 text-[10px] font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer bg-gray-950 text-amber-500 shadow-sm">
+                <i class="fa-solid fa-house mr-1"></i> Beranda
+            </button>
+            <button onclick="switchCmsTab('about')" id="tab-btn-about" class="cms-tab-btn px-4 py-2 text-[10px] font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer text-gray-600 hover:text-gray-950 hover:bg-gray-200/60">
+                <i class="fa-solid fa-address-card mr-1"></i> Tentang Kami
+            </button>
+            <button onclick="switchCmsTab('contact')" id="tab-btn-contact" class="cms-tab-btn px-4 py-2 text-[10px] font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer text-gray-600 hover:text-gray-950 hover:bg-gray-200/60">
+                <i class="fa-solid fa-phone mr-1"></i> Kontak Info
+            </button>
+            <button onclick="switchCmsTab('headers')" id="tab-btn-headers" class="cms-tab-btn px-4 py-2 text-[10px] font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer text-gray-600 hover:text-gray-950 hover:bg-gray-200/60">
+                <i class="fa-solid fa-images mr-1"></i> Header Pages
+            </button>
         </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <!-- ========================================================================= -->
+    <!-- TAB CONTENT 1: HALAMAN BERANDA (HOME PAGE)                                 -->
+    <!-- ========================================================================= -->
+    <div id="cms-tab-home" class="cms-tab-content grid grid-cols-1 md:grid-cols-2 gap-8">
         
+        <!-- FORM HERO HOME BANNER + MEDIA IMAGE UPLOAD -->
         <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
             <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -167,6 +192,7 @@
             </form>
         </div>
 
+        <!-- FORM LOGO BRANDING NAVBAR TEXT MANAGER -->
         <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
             <form action="{{ route('admin.sections.update') }}" method="POST">
                 @csrf
@@ -191,6 +217,7 @@
             </form>
         </div>
 
+        <!-- FORM BACKGROUND TEXTURE PICTURE MANAGER -->
         <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
             <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
@@ -216,6 +243,7 @@
             </form>
         </div>
 
+        <!-- FORM TENTANG KAMI BERANDA -->
         <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
             <form action="{{ route('admin.sections.update') }}" method="POST">
                 @csrf
@@ -240,41 +268,21 @@
             </form>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
-            <form action="{{ route('admin.sections.update') }}" method="POST">
-                @csrf
-                <input type="hidden" name="key" value="contact_info">
-                <div class="space-y-4">
-                    <div class="flex items-center gap-2 mb-2">
-                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">5</span>
-                        <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">CONTACT INFO REDAKSI MANAGER</h4>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-black text-gray-950 uppercase mb-1.5 tracking-wide">Email Resmi</label>
-                        <input type="text" name="title" value="{{ $cmsContact->title ?? '' }}" class="w-full bg-gray-50/50 border border-gray-300 text-xs px-4 py-3 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white transition-all font-semibold" required>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-black text-gray-950 uppercase mb-1.5 tracking-wide">Nomor Telepon</label>
-                        <input type="text" name="subtitle" value="{{ $cmsContact->subtitle ?? '' }}" class="w-full bg-gray-50/50 border border-gray-300 text-xs px-4 py-3 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white transition-all font-semibold">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-black text-gray-950 uppercase mb-1.5 tracking-wide">Lokasi Wilayah</label>
-                        <textarea name="desc" rows="3" class="w-full bg-gray-50/50 border border-gray-300 text-xs p-4 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white transition-all font-semibold resize-none leading-relaxed" required>{{ $cmsContact->desc ?? '' }}</textarea>
-                    </div>
-                </div>
-                <button type="submit" class="bg-gray-950 text-white w-full py-3.5 text-[10px] font-black uppercase tracking-widest transition duration-200 hover:bg-amber-500 hover:text-gray-950 cursor-pointer flex items-center justify-center gap-2 mt-5">
-                    <i class="fa-solid fa-floppy-disk"></i> SAVE INFO KONTAK
-                </button>
-            </form>
-        </div>
+    </div>
 
+    <!-- ========================================================================= -->
+    <!-- TAB CONTENT 2: HALAMAN TENTANG KAMI (ABOUT US PAGE)                        -->
+    <!-- ========================================================================= -->
+    <div id="cms-tab-about" class="cms-tab-content hidden grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- FORM SEJARAH SECTION PANEL -->
         <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
             <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="key" value="about_sejarah">
                 <div class="space-y-4">
                     <div class="flex items-center gap-2 mb-2">
-                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">6</span>
+                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">1</span>
                         <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">SEJARAH SECTION PANEL</h4>
                     </div>
                     <div>
@@ -302,13 +310,14 @@
             </form>
         </div>
 
+        <!-- FORM VISI KAMI SECTION PANEL -->
         <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
             <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="key" value="about_visi">
                 <div class="space-y-4">
                     <div class="flex items-center gap-2 mb-2">
-                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">7</span>
+                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">2</span>
                         <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">VISI KAMI SECTION PANEL</h4>
                     </div>
                     <div>
@@ -336,13 +345,14 @@
             </form>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
+        <!-- FORM MISI KAMI SECTION PANEL -->
+        <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between col-span-1 md:col-span-2">
             <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="key" value="about_misi">
                 <div class="space-y-4">
                     <div class="flex items-center gap-2 mb-2">
-                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">8</span>
+                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">3</span>
                         <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">MISI KAMI SECTION PANEL</h4>
                     </div>
                     <div>
@@ -364,13 +374,53 @@
             </form>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between col-span-1 md:col-span-2">
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- TAB CONTENT 3: KONTAK INFO REDAKSI MANAGER                                -->
+    <!-- ========================================================================= -->
+    <div id="cms-tab-contact" class="cms-tab-content hidden">
+        <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between max-w-2xl mx-auto">
+            <form action="{{ route('admin.sections.update') }}" method="POST">
+                @csrf
+                <input type="hidden" name="key" value="contact_info">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-2 mb-2 border-b border-gray-100 pb-3">
+                        <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black"><i class="fa-solid fa-phone text-xs"></i></span>
+                        <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">CONTACT INFO REDAKSI & GLOBAL FOOTER</h4>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-950 uppercase mb-1.5 tracking-wide">Email Resmi</label>
+                        <input type="text" name="title" value="{{ $cmsContact->title ?? '' }}" class="w-full bg-gray-50/50 border border-gray-300 text-xs px-4 py-3 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white transition-all font-semibold" required>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-950 uppercase mb-1.5 tracking-wide">Nomor Telepon</label>
+                        <input type="text" name="subtitle" value="{{ $cmsContact->subtitle ?? '' }}" class="w-full bg-gray-50/50 border border-gray-300 text-xs px-4 py-3 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white transition-all font-semibold">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black text-gray-950 uppercase mb-1.5 tracking-wide">Lokasi Wilayah</label>
+                        <textarea name="desc" rows="3" class="w-full bg-gray-50/50 border border-gray-300 text-xs p-4 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white transition-all font-semibold resize-none leading-relaxed" required>{{ $cmsContact->desc ?? '' }}</textarea>
+                    </div>
+                </div>
+                <button type="submit" class="bg-gray-950 text-white w-full py-3.5 text-[10px] font-black uppercase tracking-widest transition duration-200 hover:bg-amber-500 hover:text-gray-950 cursor-pointer flex items-center justify-center gap-2 mt-6">
+                    <i class="fa-solid fa-floppy-disk"></i> SAVE INFO KONTAK REDAKSI
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ========================================================================= -->
+    <!-- TAB CONTENT 4: SUB-PAGES BACKGROUND HEADERS                                -->
+    <!-- ========================================================================= -->
+    <div id="cms-tab-headers" class="cms-tab-content hidden">
+        <div class="bg-white p-6 rounded-2xl border border-gray-200/80 shadow-sm flex flex-col justify-between">
             <div class="flex items-center gap-2 mb-6 border-b border-gray-100 pb-3">
                 <span class="w-5 h-5 bg-gray-950 text-amber-500 flex items-center justify-center rounded-md text-[10px] font-black"><i class="fa-solid fa-images"></i></span>
                 <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">CMS MANAGEMENT: SUB-PAGES BACKGROUND HEADERS</h4>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- FORM HEADER TENTANG -->
                 <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data" class="space-y-3 p-4 bg-gray-50 rounded-xl border border-gray-100 flex flex-col justify-between">
                     @csrf
                     <input type="hidden" name="key" value="header_about">
@@ -384,6 +434,7 @@
                     <button type="submit" class="bg-gray-950 text-white w-full py-2 text-[9px] font-black uppercase tracking-wider transition hover:bg-amber-500 hover:text-gray-950 cursor-pointer mt-2"><i class="fa-solid fa-upload mr-1"></i> SAVE ABOUT HEADER</button>
                 </form>
 
+                <!-- FORM HEADER BERITA -->
                 <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data" class="space-y-3 p-4 bg-gray-50 rounded-xl border border-gray-100 flex flex-col justify-between">
                     @csrf
                     <input type="hidden" name="key" value="header_news">
@@ -397,6 +448,7 @@
                     <button type="submit" class="bg-gray-950 text-white w-full py-2 text-[9px] font-black uppercase tracking-wider transition hover:bg-amber-500 hover:text-gray-950 cursor-pointer mt-2"><i class="fa-solid fa-upload mr-1"></i> SAVE NEWS HEADER</button>
                 </form>
 
+                <!-- FORM HEADER GALERI -->
                 <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data" class="space-y-3 p-4 bg-gray-50 rounded-xl border border-gray-100 flex flex-col justify-between">
                     @csrf
                     <input type="hidden" name="key" value="header_gallery">
@@ -410,6 +462,7 @@
                     <button type="submit" class="bg-gray-950 text-white w-full py-2 text-[9px] font-black uppercase tracking-wider transition hover:bg-amber-500 hover:text-gray-950 cursor-pointer mt-2"><i class="fa-solid fa-upload mr-1"></i> SAVE GALLERY HEADER</button>
                 </form>
 
+                <!-- FORM HEADER KONTAK -->
                 <form action="{{ route('admin.sections.update') }}" method="POST" enctype="multipart/form-data" class="space-y-3 p-4 bg-gray-50 rounded-xl border border-gray-100 flex flex-col justify-between">
                     @csrf
                     <input type="hidden" name="key" value="header_contact">
@@ -424,11 +477,35 @@
                 </form>
             </div>
         </div>
-
     </div>
+
 </div>
 
+<!-- ✅ ENGINE SCRIPT INTERAKTIF UNTUK PERPINDAHAN TAB FILTER CMS -->
 <script>
+    function switchCmsTab(activeTab) {
+        // Sembunyikan seluruh kontainer tab
+        document.querySelectorAll('.cms-tab-content').forEach(content => {
+            content.classList.add('hidden');
+        });
+
+        // Reset gaya seluruh tombol tab
+        document.querySelectorAll('.cms-tab-btn').forEach(btn => {
+            btn.classList.remove('bg-gray-950', 'text-amber-500', 'shadow-sm');
+            btn.classList.add('text-gray-600', 'hover:text-gray-950', 'hover:bg-gray-200/60');
+        });
+
+        // Tampilkan tab yang dipilih
+        const activeContent = document.getElementById(`cms-tab-${activeTab}`);
+        const activeBtn = document.getElementById(`tab-btn-${activeTab}`);
+
+        if (activeContent && activeBtn) {
+            activeContent.classList.remove('hidden');
+            activeBtn.classList.remove('text-gray-600', 'hover:text-gray-950', 'hover:bg-gray-200/60');
+            activeBtn.classList.add('bg-gray-950', 'text-amber-500', 'shadow-sm');
+        }
+    }
+
     function triggerAdminDelete(id) {
         if (confirm('Apakah Anda yakin ingin melenyapkan aset konten ini secara permanen dari server database?')) {
             fetch(`/portal-admin/food/${id}`, {

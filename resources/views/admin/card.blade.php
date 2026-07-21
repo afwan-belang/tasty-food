@@ -3,15 +3,34 @@
 @section('page_title', 'FOOD CARDS HOME MONITORING')
 
 @section('admin_content')
+
+<!-- ✅ BARU: SUB-NAVBAR PEMISAを行 NAVIGASI LOKAL MANAJEMEN KONTEN -->
+<div class="bg-white border border-gray-100 shadow-sm rounded-2xl p-4 mb-6 flex flex-wrap items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+        <a href="{{ route('admin.card') }}" class="px-4 py-2 bg-amber-500 text-gray-950 text-xs font-black uppercase tracking-wider rounded-xl transition flex items-center gap-2 shadow-sm">
+            <i class="fa-solid fa-table-cells"></i> Card Banner
+        </a>
+        <a href="{{ route('admin.berita') }}" class="px-4 py-2 text-gray-400 hover:text-gray-950 text-xs font-black uppercase tracking-wider rounded-xl transition flex items-center gap-2 hover:bg-gray-50">
+            <i class="fa-solid fa-newspaper"></i> Berita Kami
+        </a>
+        <a href="{{ route('admin.galeri') }}" class="px-4 py-2 text-gray-400 hover:text-gray-950 text-xs font-black uppercase tracking-wider rounded-xl transition flex items-center gap-2 hover:bg-gray-50">
+            <i class="fa-solid fa-images"></i> Galeri Portal
+        </a>
+    </div>
+    <span class="text-[10px] font-black text-amber-600 bg-amber-50 px-3 py-1.5 rounded-full border border-amber-100 uppercase tracking-widest">• READ & UPDATE ONLY</span>
+</div>
+
 <div class="bg-white border border-gray-100 shadow-sm rounded-2xl overflow-hidden">
     
-    <div class="p-6 sm:p-8 border-b border-gray-100 bg-white flex items-center gap-2.5">
-        <div class="w-8 h-8 bg-blue-50 text-blue-600 flex items-center justify-center rounded-xl">
-            <i class="fa-solid fa-table-cells text-sm"></i>
-        </div>
-        <div>
-            <h3 class="text-sm font-black text-gray-950 uppercase tracking-wider">SEKSI 1: COMPONENT CARD FILTER</h3>
-            <p class="text-xs text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Menampilkan muatan data khusus penempatan fluid card banner halaman utama.</p>
+    <div class="p-6 sm:p-8 border-b border-gray-100 bg-white flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+            <div class="w-8 h-8 bg-blue-50 text-blue-600 flex items-center justify-center rounded-xl">
+                <i class="fa-solid fa-table-cells text-sm"></i>
+            </div>
+            <div>
+                <h3 class="text-sm font-black text-gray-950 uppercase tracking-wider">SEKSI 1: COMPONENT CARD BANNER FILTER</h3>
+                <p class="text-xs text-gray-400 font-semibold uppercase tracking-wide mt-0.5">Menampilkan muatan data khusus penempatan fluid card banner halaman utama.</p>
+            </div>
         </div>
     </div>
 

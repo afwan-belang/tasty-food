@@ -3,6 +3,25 @@
 @section('page_title', 'IMAGE PORTFOLIO ASSETS')
 
 @section('admin_content')
+
+<!-- ✅ BARU: SUB-NAVBAR PEMISAを行 NAVIGASI LOKAL MANAJEMEN KONTEN -->
+<div class="bg-white border border-gray-100 shadow-sm rounded-2xl p-4 mb-6 flex flex-wrap items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+        <a href="{{ route('admin.card') }}" class="px-4 py-2 text-gray-400 hover:text-gray-950 text-xs font-black uppercase tracking-wider rounded-xl transition flex items-center gap-2 hover:bg-gray-50">
+            <i class="fa-solid fa-table-cells"></i> Card Banner
+        </a>
+        <a href="{{ route('admin.berita') }}" class="px-4 py-2 text-gray-400 hover:text-gray-950 text-xs font-black uppercase tracking-wider rounded-xl transition flex items-center gap-2 hover:bg-gray-50">
+            <i class="fa-solid fa-newspaper"></i> Berita Kami
+        </a>
+        <a href="{{ route('admin.galeri') }}" class="px-4 py-2 bg-amber-500 text-gray-950 text-xs font-black uppercase tracking-wider rounded-xl transition flex items-center gap-2 shadow-sm">
+            <i class="fa-solid fa-images"></i> Galeri Portal
+        </a>
+    </div>
+    <a href="{{ route('admin.food.create') }}" class="bg-gray-950 text-white px-4 py-2 text-xs font-black uppercase tracking-wider rounded-xl transition hover:bg-amber-500 hover:text-gray-950 flex items-center gap-2">
+        <i class="fa-solid fa-plus"></i> Tambah Foto Galeri
+    </a>
+</div>
+
 <div class="bg-white border border-gray-100 shadow-sm rounded-2xl overflow-hidden">
     
     <div class="p-6 sm:p-8 border-b border-gray-100 bg-white flex items-center gap-2.5">
