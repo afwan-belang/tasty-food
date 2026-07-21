@@ -62,8 +62,9 @@
     <div class="tasty-sub-header-overlay"></div>
 
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-8 flex justify-between md:justify-start items-center gap-16 lg:gap-20 anim-sub-entry">
+        <!-- ✅ PERBAIKAN: Teks Logo Navbar Sub-Header Dinamis Berbasis Global View Composer -->
         <a href="{{ route('home') }}" class="text-2xl font-black tracking-wider uppercase text-white z-50">
-            TASTY FOOD
+            {{ $siteBranding->title ?? 'TASTY FOOD' }}
         </a>
         
         <div class="hidden md:flex space-x-8 lg:space-x-10 text-xs lg:text-sm font-bold tracking-wider text-white">

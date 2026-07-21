@@ -29,16 +29,16 @@
         width: 100%;
         aspect-ratio: 16 / 6.5; /* Proporsi horizontal sempurna sesuai gambar contoh */
         min-height: 240px;
-        cursor: default; /* ✅ MEMASTIKAN FRAME UTAMA TETAP MENGGUNAKAN CURSOR ARROW DEFAULT */
+        cursor: default; /* MEMASTIKAN FRAME UTAMA TETAP MENGGUNAKAN CURSOR ARROW DEFAULT */
     }
 
-    /* ✅ BARU: ENGINE ANIMASI ZOOM CAROUSEL DAN PROTEKSI CURSOR NON-POINTER */
+    /* ENGINE ANIMASI ZOOM CAROUSEL DAN PROTEKSI CURSOR NON-POINTER */
     .tasty-carousel-frame .carousel-item img {
         backface-visibility: hidden;
         transform: translateZ(0);
         will-change: transform;
         transition: transform 750ms cubic-bezier(0.16, 1, 0.3, 1);
-        cursor: default; /* ✅ MENCEGAH CURSOR BERUBAH MENJADI TANGAN (POINTER) SAAT HOVER GAMBAR */
+        cursor: default; /* MENCEGAH CURSOR BERUBAH MENJADI TANGAN (POINTER) SAAT HOVER GAMBAR */
     }
 
     /* Memicu efek perbesaran gambar carousel secara elegan saat frame di-hover */
@@ -56,7 +56,10 @@
     <img src="{{ asset($headerGallery->image_1 ?? 'asset/Group 70@2x.avif') }}" class="tasty-sub-header-bg" alt="Header Background">
     <div class="tasty-sub-header-overlay"></div>
     <div class="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-8 flex justify-between md:justify-start items-center gap-16 lg:gap-20 anim-sub-entry">
-        <a href="{{ route('home') }}" class="text-2xl font-black tracking-wider uppercase text-white z-50">TASTY FOOD</a>
+        <!-- ✅ PERBAIKAN: Teks Logo Navbar Sub-Header Dinamis Berbasis Global View Composer -->
+        <a href="{{ route('home') }}" class="text-2xl font-black tracking-wider uppercase text-white z-50">
+            {{ $siteBranding->title ?? 'TASTY FOOD' }}
+        </a>
         <div class="hidden md:flex space-x-8 lg:space-x-10 text-xs lg:text-sm font-bold tracking-wider text-white items-center">
             <a href="{{ route('home') }}" class="transition duration-200 {{ request()->routeIs('home') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">HOME</a>
             <a href="{{ route('tentang') }}" class="transition duration-200 {{ request()->routeIs('tentang') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">TENTANG</a>

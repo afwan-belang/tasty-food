@@ -44,7 +44,7 @@ class CompanySectionSeeder extends Seeder
             ]
         );
 
-        // 4. Komponen Pengunci Teks Branding Logo Navbar Beranda
+        // Komponen Pengunci Teks Branding Logo Navbar Beranda & Sub-Halaman
         CompanySection::updateOrCreate(
             ['key' => 'site_branding'],
             [
@@ -56,7 +56,7 @@ class CompanySectionSeeder extends Seeder
             ]
         );
 
-        // 5. Komponen Pengunci Gambar Tekstur Latar Belakang (Seksi 3 Beranda)
+        // Komponen Pengunci Gambar Tekstur Latar Belakang (Seksi 3 Beranda)
         CompanySection::updateOrCreate(
             ['key' => 'home_texture'],
             [
@@ -68,7 +68,7 @@ class CompanySectionSeeder extends Seeder
             ]
         );
 
-        // ✅ TAMBAHAN: Komponen Cetak Awal Gambar Latar Belakang Sub-Header Publik
+        // Komponen Cetak Awal Gambar Latar Belakang Sub-Header Publik
         CompanySection::updateOrCreate(
             ['key' => 'header_about'],
             ['title' => 'Header Tentang', 'subtitle' => null, 'desc' => 'header', 'image_1' => 'asset/Group 70@2x.avif', 'image_2' => null]

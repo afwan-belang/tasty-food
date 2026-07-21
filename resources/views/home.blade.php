@@ -72,8 +72,9 @@
 <!-- ========================================================================= -->
 <section class="relative w-full tasty-home-hero flex flex-col overflow-hidden z-10">
     <div class="relative z-20 w-full max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-10 flex justify-between md:justify-start items-center gap-16 lg:gap-20 anim-hero-entry">
+        <!-- ✅ PERBAIKAN: Teks Logo Navbar Utama Dinamis Berbasis Global View Composer -->
         <a href="{{ route('home') }}" class="text-2xl lg:text-3xl font-black tracking-wider uppercase text-gray-950 flex-shrink-0 z-50">
-            {{ $branding->title ?? 'TASTY FOOD' }}
+            {{ $siteBranding->title ?? ($branding->title ?? 'TASTY FOOD') }}
         </a>
         
         <div class="hidden md:flex space-x-8 lg:space-x-10 text-xs lg:text-sm font-bold tracking-wider text-gray-900 pt-1 items-center">
@@ -118,7 +119,6 @@
         </div>
     </div>
     
-    <!-- ✅ GAMBAR PIRING HERO UTAMA: Mengikuti Media File Ungguhan Database Admin -->
     <img src="{{ asset($hero->image_1 ?? 'asset/img-4-2000x2000.avif') }}" class="tasty-hero-plate-exact anim-hero-plate" alt="Main Plate Layout">
 </section>
 
@@ -141,7 +141,6 @@
 <!-- ========================================================================= -->
 <div class="bg-white py-12 px-0 select-none">
     <section class="relative w-full aspect-none md:aspect-[12/4.9] overflow-visible flex items-center justify-center py-20 lg:py-0">
-        <!-- ✅ PERBAIKAN: Latar Belakang Gambar Tekstur Khas Group 70 Sekarang Dinamis Berbasis Upload Media Database -->
         <div class="absolute inset-0 z-0 pointer-events-none select-none reveal-on-scroll">
             <img src="{{ asset($texture->image_1 ?? 'asset/Group 70@2x.avif') }}" loading="lazy" class="w-full h-full object-cover object-center" alt="Background Master Banner Layout">
         </div>
@@ -215,6 +214,7 @@
     
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-7xl mx-auto mb-16">
         @foreach ($gallery as $item)
+            <!-- ✅ PERBAIKAN DIJAGA PRESIFIKASI: Penutup blade @endphp resmi steril -->
             @php $step = $loop->index % 3; $delayClass = $step === 1 ? 'delay-100' : ($step === 2 ? 'delay-200' : ''); @endphp
             <div data-id="{{ $item->id }}" onclick="openFoodModal(this.dataset.id)" class="aspect-square bg-gray-50 rounded-[24px] overflow-hidden border border-gray-100/70 tasty-premium-shadow tasty-gpu-smooth relative group cursor-pointer reveal-on-scroll {{ $delayClass }}">
                 <img src="{{ asset($item->image) }}" loading="lazy" alt="Galeri Culinary Tasty Food Showcase" class="w-full h-full object-cover tasty-hover-zoom-trigger select-none pointer-events-none">

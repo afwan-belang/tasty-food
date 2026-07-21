@@ -122,9 +122,6 @@
     </div>
 </div>
 
-<!-- ========================================================================= -->
-<!-- 3. UPGRADE UI/UX: TAB/FILTER SYSTEM UNTUK CMS LANDING MANAGER             -->
-<!-- ========================================================================= -->
 <div class="bg-white border border-gray-100 shadow-sm rounded-2xl overflow-hidden p-6 sm:p-8 mb-10">
     <div class="mb-6 border-b border-gray-100 pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div class="flex items-center gap-2.5">
@@ -137,7 +134,6 @@
             </div>
         </div>
 
-        <!-- ✅ BARU: SAKLAR TAB FILTER UNTUK SINKRONISASI KEMUDAHAN EDITING -->
         <div class="flex flex-wrap items-center gap-1.5 bg-gray-100 p-1.5 rounded-xl border border-gray-200/60">
             <button onclick="switchCmsTab('home')" id="tab-btn-home" class="cms-tab-btn px-4 py-2 text-[10px] font-black uppercase tracking-wider rounded-lg transition-all cursor-pointer bg-gray-950 text-amber-500 shadow-sm">
                 <i class="fa-solid fa-house mr-1"></i> Beranda
@@ -154,9 +150,7 @@
         </div>
     </div>
 
-    <!-- ========================================================================= -->
-    <!-- TAB CONTENT 1: HALAMAN BERANDA (HOME PAGE)                                 -->
-    <!-- ========================================================================= -->
+    <!-- TAB CONTENT 1: HALAMAN BERANDA (HOME PAGE) -->
     <div id="cms-tab-home" class="cms-tab-content grid grid-cols-1 md:grid-cols-2 gap-8">
         
         <!-- FORM HERO HOME BANNER + MEDIA IMAGE UPLOAD -->
@@ -192,7 +186,7 @@
             </form>
         </div>
 
-        <!-- FORM LOGO BRANDING NAVBAR TEXT MANAGER -->
+        <!-- FORM LOGO BRANDING NAVBAR TEXT MANAGER GLOBAL -->
         <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between">
             <form action="{{ route('admin.sections.update') }}" method="POST">
                 @csrf
@@ -201,14 +195,14 @@
                 <div class="space-y-4">
                     <div class="flex items-center gap-2 mb-2">
                         <span class="w-5 h-5 bg-amber-500 text-gray-950 flex items-center justify-center rounded-md text-[10px] font-black">2</span>
-                        <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">LOGO TEXT NAVBAR BRANDING</h4>
+                        <h4 class="text-xs font-black text-gray-950 uppercase tracking-wide">GLOBAL BRANDING LOGO NAVBAR</h4>
                     </div>
                     <div>
                         <label class="block text-[10px] font-black text-gray-950 uppercase mb-1.5 tracking-wide">Nama Branding Logo (e.g. TASTY FOOD)</label>
                         <input type="text" name="title" value="{{ $cmsBranding->title ?? 'TASTY FOOD' }}" class="w-full bg-gray-50/50 border border-gray-300 text-xs px-4 py-3 rounded-none focus:outline-none focus:border-gray-950 focus:bg-white transition-all font-semibold" required>
                     </div>
                     <div class="bg-gray-50 p-4 border border-gray-100 text-[11px] text-gray-400 leading-relaxed font-medium">
-                        *Mengubah isian teks di atas akan memperbarui nama identitas utama logo tulisan yang tayang pada bilah menu navigasi beranda depan.
+                        *Mengubah isian teks di atas akan memperbarui nama identitas utama logo tulisan yang tayang pada bilah menu navigasi di SELURUH HALAMAN publik (Home, Tentang, Berita, Galeri, Kontak).
                     </div>
                 </div>
                 <button type="submit" class="bg-gray-950 text-white w-full py-3.5 text-[10px] font-black uppercase tracking-widest transition duration-200 hover:bg-amber-500 hover:text-gray-950 cursor-pointer flex items-center justify-center gap-2 mt-5">
@@ -270,9 +264,7 @@
 
     </div>
 
-    <!-- ========================================================================= -->
-    <!-- TAB CONTENT 2: HALAMAN TENTANG KAMI (ABOUT US PAGE)                        -->
-    <!-- ========================================================================= -->
+    <!-- TAB CONTENT 2: HALAMAN TENTANG KAMI (ABOUT US PAGE) -->
     <div id="cms-tab-about" class="cms-tab-content hidden grid grid-cols-1 md:grid-cols-2 gap-8">
         
         <!-- FORM SEJARAH SECTION PANEL -->
@@ -376,9 +368,7 @@
 
     </div>
 
-    <!-- ========================================================================= -->
-    <!-- TAB CONTENT 3: KONTAK INFO REDAKSI MANAGER                                -->
-    <!-- ========================================================================= -->
+    <!-- TAB CONTENT 3: KONTAK INFO REDAKSI MANAGER -->
     <div id="cms-tab-contact" class="cms-tab-content hidden">
         <div class="bg-white p-6 rounded-2xl border border-gray-200/80 hover:border-gray-900/40 transition-all duration-300 shadow-sm flex flex-col justify-between max-w-2xl mx-auto">
             <form action="{{ route('admin.sections.update') }}" method="POST">
@@ -409,9 +399,7 @@
         </div>
     </div>
 
-    <!-- ========================================================================= -->
-    <!-- TAB CONTENT 4: SUB-PAGES BACKGROUND HEADERS                                -->
-    <!-- ========================================================================= -->
+    <!-- TAB CONTENT 4: SUB-PAGES BACKGROUND HEADERS -->
     <div id="cms-tab-headers" class="cms-tab-content hidden">
         <div class="bg-white p-6 rounded-2xl border border-gray-200/80 shadow-sm flex flex-col justify-between">
             <div class="flex items-center gap-2 mb-6 border-b border-gray-100 pb-3">
@@ -481,21 +469,17 @@
 
 </div>
 
-<!-- ✅ ENGINE SCRIPT INTERAKTIF UNTUK PERPINDAHAN TAB FILTER CMS -->
 <script>
     function switchCmsTab(activeTab) {
-        // Sembunyikan seluruh kontainer tab
         document.querySelectorAll('.cms-tab-content').forEach(content => {
             content.classList.add('hidden');
         });
 
-        // Reset gaya seluruh tombol tab
         document.querySelectorAll('.cms-tab-btn').forEach(btn => {
             btn.classList.remove('bg-gray-950', 'text-amber-500', 'shadow-sm');
             btn.classList.add('text-gray-600', 'hover:text-gray-950', 'hover:bg-gray-200/60');
         });
 
-        // Tampilkan tab yang dipilih
         const activeContent = document.getElementById(`cms-tab-${activeTab}`);
         const activeBtn = document.getElementById(`tab-btn-${activeTab}`);
 
