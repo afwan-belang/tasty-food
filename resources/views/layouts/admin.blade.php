@@ -43,6 +43,17 @@
                     <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3.5 px-4 py-3.5 text-xs font-black tracking-wider uppercase transition-all duration-150 {{ request()->routeIs('admin.dashboard') ? 'text-amber-500 border-l-4 border-amber-500 bg-gray-900/60' : 'border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-900/30' }}">
                         <i class="fa-solid fa-chart-pie text-sm {{ request()->routeIs('admin.dashboard') ? 'text-amber-500' : 'text-gray-500' }} w-5"></i> DASHBOARD
                     </a>
+                    
+                    <!-- ✅ NAVIGASI LOKAL SIDEBAR: INBOX PESAN MASUK PENGUNJUNG WITH BADGE -->
+                    <a href="{{ route('admin.messages') }}" class="flex items-center justify-between px-4 py-3.5 text-xs font-black tracking-wider uppercase transition-all duration-150 {{ request()->routeIs('admin.messages*') ? 'text-amber-500 border-l-4 border-amber-500 bg-gray-900/60' : 'border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-900/30' }}">
+                        <div class="flex items-center gap-3.5">
+                            <i class="fa-solid fa-inbox text-sm {{ request()->routeIs('admin.messages*') ? 'text-amber-500' : 'text-gray-500' }} w-5"></i> INBOX PESAN
+                        </div>
+                        @if(isset($unreadMessagesCount) && $unreadMessagesCount > 0)
+                            <span class="bg-amber-500 text-gray-950 font-black text-[9px] px-2 py-0.5 rounded-full uppercase tracking-tight animate-pulse">{{ $unreadMessagesCount }} BARU</span>
+                        @endif
+                    </a>
+
                     <a href="{{ route('admin.card') }}" class="flex items-center gap-3.5 px-4 py-3.5 text-xs font-black tracking-wider uppercase transition-all duration-150 {{ request()->routeIs('admin.card') ? 'text-amber-500 border-l-4 border-amber-500 bg-gray-900/60' : 'border-l-4 border-transparent text-gray-400 hover:text-white hover:bg-gray-900/30' }}">
                         <i class="fa-solid fa-table-cells text-sm {{ request()->routeIs('admin.card') ? 'text-amber-500' : 'text-gray-500' }} w-5"></i> CARD BANNER
                     </a>

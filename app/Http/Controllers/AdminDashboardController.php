@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Food;
-use App\Models\CompanySection; // Memanggil model seksi dinamis baru
+use App\Models\CompanySection; // Memanggil model seksi dinamis
+use App\Models\Message;        // Memanggil model pesan pengunjung
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -34,7 +35,7 @@ class AdminDashboardController extends Controller
         $cmsBranding = CompanySection::where('key', 'site_branding')->first();
         $cmsTexture  = CompanySection::where('key', 'home_texture')->first();
 
-        // ✅ TAMBAHAN: Menarik data CMS untuk Label Menu Navigasi Utama
+        // Menarik data CMS untuk Label Menu Navigasi Utama
         $cmsNav = CompanySection::where('key', 'nav_menu')->first();
 
         // Menarik data CMS 4 Gambar Latar Sub-Header untuk di-render ke Dashboard Form
@@ -56,7 +57,6 @@ class AdminDashboardController extends Controller
     public function updateSection(Request $request)
     {
         $request->validate([
-            // ✅ PERBAIKAN: Memasukkan 'nav_menu' ke dalam whitelist key pengenalan rute aksi
             'key'      => ['required', 'string', 'in:home_hero,home_about,contact_info,site_branding,nav_menu,home_texture,header_about,header_news,header_gallery,header_contact,about_sejarah,about_visi,about_misi'],
             'title'    => ['required', 'string', 'max:255'],
             'subtitle' => ['nullable', 'string', 'max:255'],
@@ -73,7 +73,6 @@ class AdminDashboardController extends Controller
             $section->desc = $request->desc;
         }
 
-        // Manajemen Aset File Gambar ke-1 (Hapus file usang di storage jika ada upload baru)
         if ($request->hasFile('image_1')) {
             if ($section->image_1 && !str_starts_with($section->image_1, 'asset/')) {
                 Storage::disk('public')->delete(str_replace('storage/', '', $section->image_1));
@@ -82,7 +81,6 @@ class AdminDashboardController extends Controller
             $section->image_1 = 'storage/' . $path1;
         }
 
-        // Manajemen Aset File Gambar ke-2 (Hapus file usang di storage jika ada upload baru)
         if ($request->hasFile('image_2')) {
             if ($section->image_2 && !str_starts_with($section->image_2, 'asset/')) {
                 Storage::disk('public')->delete(str_replace('storage/', '', $section->image_2));
@@ -94,6 +92,40 @@ class AdminDashboardController extends Controller
         $section->save();
 
         return back()->with('success', 'Aset materi teks atau gambar utama publik berhasil diperbarui secara dinamis!');
+    }
+
+    /**
+     * ✅ AKSI INBOX: HALAMAN MANAJEMEN INBOX PESAN MASUK PENGUNJUNG
+     */
+    public function messages()
+    {
+        $messages = Message::latest()->get();
+        $totalMessages = Message::count();
+        $unreadMessages = Message::where('is_read', false)->count();
+
+        return view('admin.messages', compact('messages', 'totalMessages', 'unreadMessages'));
+    }
+
+    /**
+     * ✅ AKSI INBOX: TANDAI PESAN SEBAGAI TERBACA VIA AJAX
+     */
+    public function markMessageAsRead($id)
+    {
+        $msg = Message::findOrFail($id);
+        $msg->update(['is_read' => true]);
+
+        return response()->json(['success' => true, 'message' => 'Status pesan berhasil diperbarui menjadi terbaca.']);
+    }
+
+    /**
+     * ✅ AKSI INBOX: HAPUS PESAN PENGUNJUNG VIA AJAX
+     */
+    public function destroyMessage($id)
+    {
+        $msg = Message::findOrFail($id);
+        $msg->delete();
+
+        return response()->json(['success' => true, 'message' => 'Pesan pengunjung berhasil dihapus dari inbox redaksi!']);
     }
 
     public function card()

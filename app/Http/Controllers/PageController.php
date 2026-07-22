@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Food;
-use App\Models\CompanySection; // Memanggil model seksi dinamis baru
+use App\Models\CompanySection; // Memanggil model seksi dinamis
+use App\Models\Message;        // Memanggil model pesan pengunjung
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -18,13 +19,9 @@ class PageController extends Controller
         $otherNews = Food::where('category', 'news')->skip(1)->take(4)->get(); 
         $gallery = Food::where('category', 'gallery')->take(6)->get(); 
 
-        // Mengambil muatan data CMS khusus seksi Hero Banner Beranda
         $hero = CompanySection::where('key', 'home_hero')->first();
-        
-        // Mengambil muatan data CMS khusus seksi Tentang Kami di Beranda
         $about = CompanySection::where('key', 'home_about')->first();
 
-        // Mengambil muatan data CMS khusus Teks Branding & Gambar Tekstur Latar
         $branding = CompanySection::where('key', 'site_branding')->first();
         $texture  = CompanySection::where('key', 'home_texture')->first();
 
@@ -36,12 +33,10 @@ class PageController extends Controller
      */
     public function tentang()
     {
-        // Mengambil muatan data CMS khusus tiga seksi utama halaman tentang kami
         $sejarah = CompanySection::where('key', 'about_sejarah')->first();
         $visi    = CompanySection::where('key', 'about_visi')->first();
         $misi    = CompanySection::where('key', 'about_misi')->first();
 
-        // ✅ TAMBAHAN: Mengambil background header dinamis halaman Tentang
         $headerAbout = CompanySection::where('key', 'header_about')->first();
 
         return view('tentang', compact('sejarah', 'visi', 'misi', 'headerAbout'));
@@ -55,7 +50,6 @@ class PageController extends Controller
         $featuredNews = Food::where('category', 'news')->first();
         $beritaLainnya = Food::where('category', 'news')->skip(1)->take(8)->get();
         
-        // ✅ TAMBAHAN: Mengambil background header dinamis halaman Berita
         $headerNews = CompanySection::where('key', 'header_news')->first();
         
         return view('berita', compact('featuredNews', 'beritaLainnya', 'headerNews'));
@@ -68,7 +62,6 @@ class PageController extends Controller
     {
         $galleryItems = Food::where('category', 'gallery')->get();
         
-        // ✅ TAMBAHAN: Mengambil background header dinamis halaman Galeri
         $headerGallery = CompanySection::where('key', 'header_gallery')->first();
         
         return view('galeri', compact('galleryItems', 'headerGallery'));
@@ -79,18 +72,37 @@ class PageController extends Controller
      */
     public function kontak()
     {
-        // Menarik data CMS secara dinamis untuk info kontak khusus halaman kontak publik
         $contact = CompanySection::where('key', 'contact_info')->first();
-
-        // ✅ TAMBAHAN: Mengambil background header dinamis halaman Kontak
         $headerContact = CompanySection::where('key', 'header_contact')->first();
 
         return view('kontak', compact('contact', 'headerContact'));
     }
 
+    /**
+     * ✅ AKSI SIMPAN FORMULIR PESAN KONTAK PENGUNJUNG KE DATABASE
+     */
+    public function storeContactMessage(Request $request)
+    {
+        $request->validate([
+            'subject' => ['required', 'string', 'max:255'],
+            'name'    => ['required', 'string', 'max:255'],
+            'email'   => ['required', 'email', 'max:255'],
+            'message' => ['required', 'string'],
+        ]);
+
+        Message::create([
+            'subject' => $request->subject,
+            'name'    => $request->name,
+            'email'   => $request->email,
+            'message' => $request->message,
+            'is_read' => false,
+        ]);
+
+        return back()->with('contact_success', 'Terima kasih! Pesan Anda telah berhasil terkirim. Tim redaksi Tasty Food akan segera meninjau dan menghubungi Anda kembali.');
+    }
+
     public function detailBerita($slug)
     {
-        // Mencari data kuliner yang berkategori 'news' berdasarkan SLUG teks-nya secara dinamis
         $news = Food::where('category', 'news')->where('slug', $slug)->firstOrFail();
         
         return view('detail-berita', compact('news'));

@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\CompanySection; // Memanggil model seksi dinamis
+use App\Models\Message;        // Memanggil model pesan pengunjung
 use Illuminate\Support\Facades\View; // Memanggil fasad View Composer global
+use Illuminate\Support\Facades\Schema; // Fasad pengecekan skema database
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,12 +29,11 @@ class AppServiceProvider extends ServiceProvider
             $view->with('footerContact', $footerContact);
         });
 
-        // ✅ REGISTRASI VIEW COMPOSER GLOBAL BRANDING & MENU NAVIGASI: Menyuntikkan data logo & label menu ke seluruh view publik
+        // ✅ REGISTRASI VIEW COMPOSER GLOBAL BRANDING, NAV MENU, & UNREAD INBOX BADGE
         View::composer('*', function ($view) {
             $siteBranding = CompanySection::where('key', 'site_branding')->first();
             $navMenuRecord = CompanySection::where('key', 'nav_menu')->first();
 
-            // Memecah nilai string desc ('BERITA|GALERI|KONTAK') menjadi array terpisah yang aman
             $descParts = explode('|', $navMenuRecord->desc ?? 'BERITA|GALERI|KONTAK');
 
             $navMenu = (object) [
@@ -43,7 +44,12 @@ class AppServiceProvider extends ServiceProvider
                 'kontak'  => $descParts[2] ?? 'KONTAK',
             ];
 
-            $view->with('siteBranding', $siteBranding)->with('navMenu', $navMenu);
+            // Pengecekan aman ketersediaan tabel messages sebelum menghitung badge
+            $unreadMessagesCount = Schema::hasTable('messages') ? Message::where('is_read', false)->count() : 0;
+
+            $view->with('siteBranding', $siteBranding)
+                 ->with('navMenu', $navMenu)
+                 ->with('unreadMessagesCount', $unreadMessagesCount);
         });
     }
 }

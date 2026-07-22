@@ -45,13 +45,11 @@
         }
     }
 
-    /* Kelas utama transisi masuk header */
     .anim-sub-entry {
         opacity: 0;
         animation: subPageFadeUp 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
 
-    /* Jeda waktu untuk teks judul sub-page */
     .anim-sub-delay-1 {
         animation-delay: 150ms;
     }
@@ -66,7 +64,6 @@
             {{ $siteBranding->title ?? 'TASTY FOOD' }}
         </a>
         
-        <!-- ✅ PERBAIKAN: Teks Label Menu Navigasi Sub-Header Kontak Kami Desktop Dinamis Database -->
         <div class="hidden md:flex space-x-8 lg:space-x-10 text-xs lg:text-sm font-bold tracking-wider text-white uppercase">
             <a href="{{ route('home') }}" class="transition duration-200 {{ request()->routeIs('home') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">{{ $navMenu->home ?? 'HOME' }}</a>
             <a href="{{ route('tentang') }}" class="transition duration-200 {{ request()->routeIs('tentang') ? 'border-b-2 border-white pb-1' : 'hover:text-gray-300' }}">{{ $navMenu->tentang ?? 'TENTANG' }}</a>
@@ -82,7 +79,6 @@
         </button>
     </div>
 
-    <!-- ✅ PERBAIKAN: Teks Label Menu Navigasi Sub-Header Kontak Kami Mobile Dinamis Database -->
     <div id="mobile-menu" class="fixed top-0 bottom-0 right-0 w-3/4 bg-white/95 backdrop-blur-md shadow-2xl border-l border-gray-100/50 z-40 transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col items-center justify-center space-y-8 text-xl font-black tracking-widest text-gray-950 md:hidden uppercase">
         <button id="mobile-menu-close" class="absolute top-10 right-6 text-gray-950 focus:outline-none p-1 hover:scale-110 transition duration-200" aria-label="Close Menu">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-7 h-7">
@@ -140,18 +136,19 @@
             KONTAK KAMI
         </h2>
         
-        <form action="#" method="POST" class="w-full reveal-on-scroll delay-100">
+        <!-- ✅ FORMULIR TERHUBUNG DENGAN RUTE POST KONTAK AKSI -->
+        <form action="{{ route('kontak.store') }}" method="POST" class="w-full reveal-on-scroll delay-100">
             @csrf
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
                 <div class="flex flex-col space-y-4 w-full">
-                    <input type="text" name="subject" placeholder="Subject" class="tasty-form-input tasty-input-height w-full px-6 text-sm">
-                    <input type="text" name="name" placeholder="Name" class="tasty-form-input tasty-input-height w-full px-6 text-sm">
-                    <input type="email" name="email" placeholder="Email" class="tasty-form-input tasty-input-height w-full px-6 text-sm">
+                    <input type="text" name="subject" required placeholder="Subject" class="tasty-form-input tasty-input-height w-full px-6 text-sm">
+                    <input type="text" name="name" required placeholder="Name" class="tasty-form-input tasty-input-height w-full px-6 text-sm">
+                    <input type="email" name="email" required placeholder="Email" class="tasty-form-input tasty-input-height w-full px-6 text-sm">
                 </div>
 
                 <div class="w-full">
-                    <textarea name="message" placeholder="Message" class="tasty-form-input tasty-textarea-height w-full px-5 py-4 text-sm resize-none"></textarea>
+                    <textarea name="message" required placeholder="Message" class="tasty-form-input tasty-textarea-height w-full px-5 py-4 text-sm resize-none"></textarea>
                 </div>
             </div>
 
@@ -220,6 +217,9 @@
     </div>
 </section>
 
+<!-- CONTAINER NOTIFIKASI TOAST SUDUT KANAN BAWAH PENGUNJUNG -->
+<div id="public-toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const menuBtn = document.getElementById('mobile-menu-btn');
@@ -254,5 +254,32 @@
             link.addEventListener('click', closeMenu);
         });
     });
+
+    // ✅ ENGINE TOAST NOTIFIKASI MEWAH PENGIRIMAN PESAN SUKSES
+    function showPublicToast(message) {
+        const container = document.getElementById('public-toast-container');
+        const toast = document.createElement('div');
+        toast.className = `transform translate-y-5 opacity-0 transition-all duration-500 pointer-events-auto flex items-start gap-4 p-5 rounded-2xl shadow-2xl bg-gray-950 border border-amber-500/40 text-white min-w-[320px] max-w-md justify-between select-none`;
+        toast.innerHTML = `
+            <div class="flex items-start gap-3">
+                <div class="w-8 h-8 bg-amber-500 text-gray-950 rounded-xl flex items-center justify-center font-black text-sm flex-shrink-0 mt-0.5">⚡</div>
+                <div>
+                    <h4 class="text-xs font-black uppercase text-amber-500 tracking-wider mb-1">PESAN TERKIRIM</h4>
+                    <p class="text-xs text-gray-300 leading-relaxed font-medium">${message}</p>
+                </div>
+            </div>
+            <button onclick="this.parentElement.remove()" class="text-gray-400 hover:text-white font-bold text-sm focus:outline-none cursor-pointer">✕</button>
+        `;
+        container.appendChild(toast);
+        setTimeout(() => toast.classList.remove('translate-y-5', 'opacity-0'), 20);
+        setTimeout(() => {
+            toast.classList.add('translate-y-5', 'opacity-0');
+            setTimeout(() => toast.remove(), 500);
+        }, 6000);
+    }
+
+    @if(session('contact_success'))
+        document.addEventListener('DOMContentLoaded', () => showPublicToast("{{ session('contact_success') }}"));
+    @endif
 </script>
 @endsection
