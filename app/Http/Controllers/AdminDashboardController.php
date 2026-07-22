@@ -95,7 +95,7 @@ class AdminDashboardController extends Controller
     }
 
     /**
-     * ✅ AKSI INBOX: HALAMAN MANAJEMEN INBOX PESAN MASUK PENGUNJUNG
+     * AKSI INBOX: HALAMAN MANAJEMEN INBOX PESAN MASUK PENGUNJUNG
      */
     public function messages()
     {
@@ -107,7 +107,7 @@ class AdminDashboardController extends Controller
     }
 
     /**
-     * ✅ AKSI INBOX: TANDAI PESAN SEBAGAI TERBACA VIA AJAX
+     * AKSI INBOX: TANDAI PESAN SEBAGAI TERBACA VIA AJAX
      */
     public function markMessageAsRead($id)
     {
@@ -118,7 +118,7 @@ class AdminDashboardController extends Controller
     }
 
     /**
-     * ✅ AKSI INBOX: HAPUS PESAN PENGUNJUNG VIA AJAX
+     * AKSI INBOX: HAPUS PESAN PENGUNJUNG VIA AJAX
      */
     public function destroyMessage($id)
     {

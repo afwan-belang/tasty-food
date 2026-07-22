@@ -107,7 +107,7 @@
                 </div>
                 <div>
                     <span class="text-[9px] font-black text-gray-400 uppercase block mb-0.5">Email Kontak</span>
-                    <a href="#" id="modal-email-link" class="font-bold text-amber-600 hover:underline">email@example.com</a>
+                    <a href="#" id="modal-email-link" target="_blank" rel="noopener noreferrer" class="font-bold text-amber-600 hover:underline">email@example.com</a>
                 </div>
             </div>
 
@@ -120,7 +120,7 @@
 
             <div class="flex justify-between items-center pt-2">
                 <span class="text-[10px] text-gray-400 font-bold uppercase" id="modal-date">01 Jan 2026</span>
-                <a href="#" id="modal-reply-btn" target="_blank" class="bg-gray-950 text-white px-5 py-2.5 text-[10px] font-black uppercase tracking-wider rounded-none hover:bg-amber-500 hover:text-gray-950 transition flex items-center gap-1.5">
+                <a href="#" id="modal-reply-btn" target="_blank" rel="noopener noreferrer" class="bg-gray-950 text-white px-5 py-2.5 text-[10px] font-black uppercase tracking-wider rounded-none hover:bg-amber-500 hover:text-gray-950 transition flex items-center gap-1.5">
                     <i class="fa-solid fa-reply"></i> BALAS LEWAT EMAIL
                 </a>
             </div>
@@ -133,10 +133,16 @@
         document.getElementById('modal-subject').innerText = msg.subject;
         document.getElementById('modal-sender').innerText = msg.name;
         document.getElementById('modal-email-link').innerText = msg.email;
-        document.getElementById('modal-email-link').href = `mailto:${msg.email}?subject=RE: ${msg.subject}`;
-        document.getElementById('modal-reply-btn').href = `mailto:${msg.email}?subject=RE: ${msg.subject}`;
         document.getElementById('modal-body').innerText = msg.message;
         document.getElementById('modal-date').innerText = `Diterima: ${new Date(msg.created_at).toLocaleString('id-ID')}`;
+
+        // ✅ INTEGRASI GMAIL WEB COMPOSE DEEP-LINK ENKRIPSI URI DENGAN KUTIPAN PESAN OTOMATIS
+        const replySubject = encodeURIComponent(`RE: ${msg.subject}`);
+        const replyBody = encodeURIComponent(`Halo ${msg.name},\n\nTerima kasih telah menghubungi Tasty Food.\n\n---\nKutipan Pesan Anda Sebelumnya:\n"${msg.message}"\n\nSalam Hangat,\nTim Redaksi Tasty Food`);
+        const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(msg.email)}&su=${replySubject}&body=${replyBody}`;
+
+        document.getElementById('modal-email-link').href = gmailComposeUrl;
+        document.getElementById('modal-reply-btn').href = gmailComposeUrl;
 
         const modal = document.getElementById('message-modal');
         const card = document.getElementById('modal-card');
